@@ -35,13 +35,13 @@ export default function Home() {
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link
-                href="/produits"
+                href="/produits/"
                 className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground shadow-sm transition hover:bg-primary/90"
               >
                 Découvrir les produits
               </Link>
               <Link
-                href="/contact"
+                href="/contact/"
                 className="inline-flex h-11 items-center justify-center rounded-full border bg-card px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted hover:text-foreground"
               >
                 Demander une démo
@@ -62,13 +62,13 @@ export default function Home() {
               <p className="mt-3 text-muted-foreground">{p.tagline}</p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Link
-                  href={`/produits/${p.slug}`}
+                  href={`/produits/${p.slug}/`}
                   className="inline-flex h-10 items-center justify-center rounded-full bg-muted px-4 text-sm font-bold text-foreground transition hover:bg-muted/80"
                 >
                   Voir {p.name}
                 </Link>
                 <Link
-                  href="/contact"
+                  href="/contact/"
                   className="inline-flex h-10 items-center justify-center rounded-full border bg-card px-4 text-sm font-bold text-foreground/80 transition hover:bg-muted hover:text-foreground"
                 >
                   Demander une démo

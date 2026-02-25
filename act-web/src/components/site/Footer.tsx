@@ -14,10 +14,10 @@ export function Footer() {
         </div>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold">
-          <Link className="text-foreground/80 hover:text-foreground" href="/produits">
+          <Link className="text-foreground/80 hover:text-foreground" href="/produits/">
             Produits
           </Link>
-          <Link className="text-foreground/80 hover:text-foreground" href="/contact">
+          <Link className="text-foreground/80 hover:text-foreground" href="/contact/">
             Contact
           </Link>
           <a

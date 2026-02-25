@@ -145,7 +145,7 @@ export default function ProductPage({
         title="Parlons de votre contexte"
         description="Décrivez votre besoin et nous organiserons une démonstration adaptée (parcours, contraintes, objectifs)."
         primary={product.primaryCta}
-        secondary={{ label: "Voir tous les produits", href: "/produits" }}
+        secondary={{ label: "Voir tous les produits", href: "/produits/" }}
       />
     </div>
   );
