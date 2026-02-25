@@ -1,13 +1,20 @@
 import type { Metadata } from "next";
-import { Nunito } from "next/font/google";
+import { Lexend, Montserrat_Alternates } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 
-const nunito = Nunito({
+const lexend = Lexend({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+  weight: ["300", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const montserratAlternates = Montserrat_Alternates({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["600", "800"],
   display: "swap",
 });
 
@@ -53,7 +60,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={`${nunito.variable} antialiased`}>
+      <body className={`${lexend.variable} ${montserratAlternates.variable} antialiased`}>
         <div className="min-h-svh bg-background text-foreground">
           <Header />
           <main>{children}</main>
