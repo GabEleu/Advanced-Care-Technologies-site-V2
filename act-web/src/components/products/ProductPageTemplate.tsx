@@ -155,8 +155,8 @@ export function ProductPageTemplate({ product }: { product: Product }) {
                           <div className="text-3xl font-extrabold tracking-tight">{stat.value}</div>
                         ) : null}
                         <div className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                          {stat.line1}
-                          {stat.line2 ? <><br />{stat.line2}</> : null}
+                          <div>{stat.line1}</div>
+                          {stat.line2 ? <div>{stat.line2}</div> : null}
                         </div>
                       </div>
                     ))}
