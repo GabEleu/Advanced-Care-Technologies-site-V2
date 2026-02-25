@@ -31,14 +31,9 @@ export function Product3DBackdrop({
   });
 
   const x = useTransform(scrollYProgress, [0, 1], [90, -120]);
-  const y = useTransform(scrollYProgress, [0, 1], [90, -90]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1.18, 1.04]);
-  const opacity = useTransform(scrollYProgress, [0, 0.18, 0.85, 1], [0.2, 0.35, 0.3, 0.14]);
-  const blur = useTransform(scrollYProgress, [0, 0.5, 1], ["2px", "8px", "3px"]);
-  const ghostX = useTransform(scrollYProgress, [0, 1], [130, -170]);
-  const ghostY = useTransform(scrollYProgress, [0, 1], [120, -60]);
-  const ghostScale = useTransform(scrollYProgress, [0, 1], [1.24, 1.07]);
-  const ghostOpacity = useTransform(scrollYProgress, [0, 1], [0.08, 0.2]);
+  const y = useTransform(scrollYProgress, [0, 1], [64, -56]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.12, 1.02]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.55, 0.78, 0.72, 0.58]);
 
   const modelStyle = useMemo(
     () =>
@@ -60,16 +55,14 @@ export function Product3DBackdrop({
 
         <motion.div
           style={modelStyle}
-          className="absolute -right-[28vw] top-[4vh] h-[90vh] w-[90vh] min-w-[520px] max-w-[1120px]"
+          className="absolute right-[-8vw] top-[6vh] h-[84vh] w-[84vh] min-w-[460px] max-w-[980px]"
         >
           {createElement("model-viewer", {
             src,
             alt,
             "camera-controls": false,
             "interaction-prompt": "none",
-            "auto-rotate": !reducedMotion,
-            "auto-rotate-delay": 0,
-            "rotation-per-second": "16deg",
+            "auto-rotate": false,
             "camera-orbit": cameraOrbit,
             "camera-target": cameraTarget,
             "field-of-view": reducedMotion ? "36deg" : "28deg",
@@ -84,40 +77,6 @@ export function Product3DBackdrop({
             },
           })}
         </motion.div>
-
-        {!reducedMotion ? (
-          <motion.div
-            style={{
-              x: ghostX,
-              y: ghostY,
-              scale: ghostScale,
-              opacity: ghostOpacity,
-              filter: blur,
-            }}
-            className="absolute -right-[28vw] top-[2vh] h-[90vh] w-[90vh] min-w-[520px] max-w-[1080px]"
-          >
-            {createElement("model-viewer", {
-              src,
-              alt: "",
-              "camera-controls": false,
-              "interaction-prompt": "none",
-              "auto-rotate": true,
-              "auto-rotate-delay": 0,
-              "rotation-per-second": "26deg",
-              "camera-orbit": "76deg 74deg 2.4m",
-              "field-of-view": "22deg",
-              exposure: "1.1",
-              "shadow-intensity": "0",
-              "environment-image": "neutral",
-              style: {
-                display: "block",
-                width: "100%",
-                height: "100%",
-                background: "transparent",
-              },
-            })}
-          </motion.div>
-        ) : null}
       </div>
     </div>
   );
