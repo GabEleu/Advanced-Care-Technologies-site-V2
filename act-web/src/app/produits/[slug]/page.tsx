@@ -13,16 +13,34 @@ import { ProductCTA } from "@/components/products/ProductCTA";
 import { ProductGallery } from "@/components/products/ProductGallery";
 import { ProductPartnerLogos } from "@/components/products/ProductPartnerLogos";
 
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+type PageParams = {
+  slug?: string | string[];
+};
+
+function toProductSlug(params: PageParams): ProductSlug | null {
+  const slug = params.slug;
+  if (typeof slug !== "string") return null;
+  if (slug === "digi-skin" || slug === "digi-feet") return slug;
+  return null;
+}
+
 export function generateStaticParams(): Array<{ slug: ProductSlug }> {
   return products.map((p) => ({ slug: p.slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
 }: {
-  params: { slug: ProductSlug };
-}): Metadata {
-  const product = getProductBySlug(params.slug);
+  params: Promise<PageParams>;
+}): Promise<Metadata> {
+  const resolvedParams = await params;
+  const slug = toProductSlug(resolvedParams);
+  if (!slug) return {};
+
+  const product = getProductBySlug(slug);
   if (!product) return {};
 
   const title = product.seo.title;
@@ -85,12 +103,16 @@ function DigiFeetProblemSection() {
   );
 }
 
-export default function ProductPage({
+export default async function ProductPage({
   params,
 }: {
-  params: { slug: ProductSlug };
+  params: Promise<PageParams>;
 }) {
-  const product = getProductBySlug(params.slug);
+  const resolvedParams = await params;
+  const slug = toProductSlug(resolvedParams);
+  if (!slug) notFound();
+
+  const product = getProductBySlug(slug);
   if (!product) notFound();
 
   return (
