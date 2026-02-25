@@ -11,8 +11,13 @@ const nunito = Nunito({
   display: "swap",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  "https://gabeleu.github.io/Advanced-Care-Technologies-site-V2";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.digiskin-act.fr"),
+  metadataBase: new URL(`${siteUrl.replace(/\/$/, "")}${basePath || ""}/`),
   title: {
     default: "Advanced Care Technologies",
     template: "%s | Advanced Care Technologies",
