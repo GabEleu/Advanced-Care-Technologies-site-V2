@@ -30,6 +30,12 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          static_site_generator: next
+          # Optionnel: si tu ajoutes un secret `PAGES_ENABLEMENT_TOKEN` (PAT ou GitHub App),
+          # l'action peut activer Pages automatiquement si ce n'est pas déjà fait.
+          token: ${{ secrets.PAGES_ENABLEMENT_TOKEN || github.token }}
+          enablement: ${{ secrets.PAGES_ENABLEMENT_TOKEN && 'true' || 'false' }}
 
       - name: Install dependencies
         working-directory: act-web
