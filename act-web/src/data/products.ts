@@ -41,6 +41,46 @@ export type ProductPartnerLogo = {
   href?: string;
 };
 
+export type ProductMission = {
+  title: string;
+  subtitle?: string;
+  cards: string[];
+};
+
+export type ProductStat = {
+  value?: string;
+  line1: string;
+  line2?: string;
+};
+
+export type ProductNumbers = {
+  title: string;
+  stats: ProductStat[];
+  note?: string;
+};
+
+export type ProductTeamMember = {
+  name: string;
+  role: string;
+  qualifications: string;
+  image?: ProductImage;
+};
+
+export type ProductTeam = {
+  title: string;
+  members: ProductTeamMember[];
+  collaborations?: {
+    title: string;
+    logos: ProductPartnerLogo[];
+    note?: string;
+  };
+};
+
+export type ProductDownload = {
+  label: string;
+  href: string;
+};
+
 export type Product = {
   slug: ProductSlug;
   name: string;
@@ -57,6 +97,10 @@ export type Product = {
   howItWorks: ProductStep[];
   features: ProductFeature[];
   audiences: ProductAudience[];
+  mission?: ProductMission;
+  numbers?: ProductNumbers;
+  team?: ProductTeam;
+  downloads?: ProductDownload[];
   security: {
     title: string;
     description: string;
@@ -111,6 +155,30 @@ export const products: Product[] = [
       "Retour haptique non invasif, pensé pour l’usage quotidien",
       "Traitement temps réel et restitution synchronisée",
     ],
+    mission: {
+      title: "Notre mission est d’améliorer la qualité de vie et l’autonomie des patients",
+      subtitle: "Avec Digi’Skin, nous visons à :",
+      cards: ["Restaurer des sensations", "Retrouver l’équilibre", "Éviter douleurs et blessures"],
+    },
+    numbers: {
+      title: "En chiffres",
+      stats: [
+        {
+          line1: "de la population mondiale a",
+          line2: "une atteinte sensitive",
+        },
+        {
+          line1: "des cas associés à",
+          line2: "des douleurs chroniques",
+        },
+        {
+          line1: "Le coût moyen",
+          line2: "par patient",
+        },
+      ],
+      note:
+        "Libellés issus du premier site Digi’Skin. Les valeurs numériques exactes seront ajoutées dès qu’elles sont disponibles.",
+    },
     howItWorks: [
       {
         title: "Capteurs de force intégrés",
@@ -145,6 +213,12 @@ export const products: Product[] = [
           "Retour vibro-tactile multi-zones synchronisé avec les capteurs, pour soutenir la restitution.",
       },
     ],
+    downloads: [
+      {
+        label: "Télécharger le modèle 3D du brassard (GLB)",
+        href: "/legacy/digi-skin/models/BraceletV2.glb",
+      },
+    ],
     audiences: [
       {
         title: "Patients amputés",
@@ -162,6 +236,48 @@ export const products: Product[] = [
           "Pour explorer des intégrations et des usages terrain, avec une approche prudente et documentée.",
       },
     ],
+    team: {
+      title: "À propos de nous",
+      members: [
+        {
+          name: "Gabriel ELEUTERIO",
+          role: "CEO & cofondateur",
+          qualifications:
+            "Ingénieur en Biotechnologie (Sup'Biotech) • ESME - Mastère Spécialisé en Numérique et Biotechnologie (Robotique) • Inventeur de la technologie de restitution sensorielle : Digi'Skin",
+        },
+        {
+          name: "Manon Frajman",
+          role: "COO & cofondatrice",
+          qualifications:
+            "Ingénieure en Biotechnologie (Sup'Biotech) • Product Manager et Clinical Project Manager dans des startups de dispositifs médicaux • Auto-entrepreneur : rédaction de dossiers de financement",
+        },
+        {
+          name: "Edward De Keating - Hart",
+          role: "Chirurgien Orthopédiste & cofondateur",
+          qualifications:
+            "Chirurgien Orthopédiste • Membre de la Société Française de Chirurgie Orthopédique et Traumatologique (SOFCOT) • Membre associé de la Société Française de Chirurgie de la Main (SFCM)",
+        },
+      ],
+      collaborations: {
+        title: "Partenariats et collaborations",
+        logos: [
+          {
+            src: "/legacy/digiskin-legacy/collaborations/hgo-clinique-jules-verne.png",
+            alt: "HGO — Clinique Jules Verne",
+          },
+          {
+            src: "/legacy/digiskin-legacy/collaborations/sofcot.png",
+            alt: "SOFCOT",
+          },
+          {
+            src: "/legacy/digiskin-legacy/collaborations/sfcm.png",
+            alt: "SFCM",
+          },
+        ],
+        note:
+          "Logos affichés à titre indicatif. Ils reflètent un contexte clinique/partenarial et ne constituent pas une allégation médicale.",
+      },
+    },
     security: {
       title: "Sécurité & confidentialité",
       description:
