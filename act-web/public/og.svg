@@ -1,0 +1,56 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3EBDD"/>
+      <stop offset="1" stop-color="#F9F7F2"/>
+    </linearGradient>
+    <radialGradient id="accent" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(380 150) rotate(35) scale(520 320)">
+      <stop stop-color="#F7A05B" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#F7A05B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="purple" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(820 120) rotate(20) scale(600 360)">
+      <stop stop-color="#4634A6" stop-opacity="0.25"/>
+      <stop offset="1" stop-color="#4634A6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="0" y="0" width="1200" height="630" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#accent)"/>
+  <rect width="1200" height="630" fill="url(#purple)"/>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="96" width="1056" height="438" rx="28" fill="white" fill-opacity="0.72"/>
+    <rect x="72.75" y="96.75" width="1054.5" height="436.5" rx="27.25" stroke="#E7DDCF"/>
+  </g>
+
+  <text x="120" y="200" font-family="Nunito, ui-sans-serif, system-ui" font-size="44" font-weight="800" fill="#101048">
+    Advanced Care Technologies
+  </text>
+  <text x="120" y="258" font-family="Nunito, ui-sans-serif, system-ui" font-size="26" font-weight="700" fill="#101048" fill-opacity="0.82">
+    Produits medtech orient�s suivi et indicateurs
+  </text>
+
+  <g>
+    <rect x="120" y="310" width="310" height="110" rx="18" fill="#F3EBDD"/>
+    <text x="150" y="358" font-family="Nunito, ui-sans-serif, system-ui" font-size="28" font-weight="800" fill="#101048">DigiSkin</text>
+    <text x="150" y="392" font-family="Nunito, ui-sans-serif, system-ui" font-size="16" font-weight="700" fill="#101048" fill-opacity="0.65">Suivi " Vues " Historique</text>
+  </g>
+
+  <g>
+    <rect x="470" y="310" width="310" height="110" rx="18" fill="#F3EBDD"/>
+    <text x="500" y="358" font-family="Nunito, ui-sans-serif, system-ui" font-size="28" font-weight="800" fill="#101048">DigiFeet</text>
+    <text x="500" y="392" font-family="Nunito, ui-sans-serif, system-ui" font-size="16" font-weight="700" fill="#101048" fill-opacity="0.65">Semelle " App " Score IA</text>
+  </g>
+
+  <g>
+    <rect x="820" y="310" width="260" height="110" rx="18" fill="#101048"/>
+    <text x="850" y="358" font-family="Nunito, ui-sans-serif, system-ui" font-size="18" font-weight="800" fill="#FFFFFF">Aide au suivi</text>
+    <text x="850" y="388" font-family="Nunito, ui-sans-serif, system-ui" font-size="14" font-weight="700" fill="#FFFFFF" fill-opacity="0.85">
+      Indicateurs ` diagnostic
+    </text>
+  </g>
+</svg>
+
