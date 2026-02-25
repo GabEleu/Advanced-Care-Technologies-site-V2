@@ -30,6 +30,17 @@ export type ProductSEO = {
   description: string;
 };
 
+export type ProductImage = {
+  src: string;
+  alt: string;
+};
+
+export type ProductPartnerLogo = {
+  src: string;
+  alt: string;
+  href?: string;
+};
+
 export type Product = {
   slug: ProductSlug;
   name: string;
@@ -37,6 +48,11 @@ export type Product = {
   pitch: string;
   primaryCta: ProductCTA;
   secondaryCta?: ProductCTA;
+  media?: {
+    heroImage?: ProductImage;
+    gallery?: ProductImage[];
+    partnerLogos?: ProductPartnerLogo[];
+  };
   benefits: string[];
   howItWorks: ProductStep[];
   features: ProductFeature[];
@@ -53,49 +69,80 @@ export const products: Product[] = [
   {
     slug: "digi-skin",
     name: "Digi’Skin",
-    tagline: "Mieux suivre, mieux documenter, avec clarté.",
+    tagline: "Capturer des signaux, structurer le suivi, clarifier les tendances.",
     pitch:
-      "Digi’Skin est une solution conçue pour structurer le suivi et la visualisation d’indicateurs pertinents, dans un cadre rigoureux et professionnel. La présentation est harmonisée pour s’intégrer dans une gamme multi-produits ACT.",
+      "Digi’Skin combine des capteurs portés (au niveau de la main) et une application pour structurer un suivi et visualiser des indicateurs dans le temps. L’objectif est d’offrir une lecture claire et cohérente, dans un cadre professionnel et prudent.",
     primaryCta: { label: "Demander une démo", href: "/contact" },
     secondaryCta: { label: "Voir Digi’Feet", href: "/produits/digi-feet" },
+    media: {
+      heroImage: {
+        src: "/legacy/digi-skin/arm-sensors.png",
+        alt: "Dispositif Digi’Skin (capteurs portés au niveau des doigts et bracelet).",
+      },
+      gallery: [
+        {
+          src: "/legacy/digi-skin/sensor-glove.png",
+          alt: "Prototype de capteurs portés sur la main (Digi’Skin).",
+        },
+        {
+          src: "/legacy/digi-skin/arm-sensors-photo.png",
+          alt: "Dispositif Digi’Skin porté (capteurs doigts + bracelet).",
+        },
+      ],
+      partnerLogos: [
+        {
+          src: "/legacy/partners/clinique-jules-verne.png",
+          alt: "Clinique Jules Verne (Groupe VYV)",
+        },
+        {
+          src: "/legacy/partners/la-tourmaline.png",
+          alt: "La Tourmaline — Centre de Réadaptation et de Rééducation Fonctionnelle",
+        },
+        {
+          src: "/legacy/partners/wilco.png",
+          alt: "WILCO",
+        },
+      ],
+    },
     benefits: [
-      "Structure de suivi claire et cohérente",
-      "Visualisation et historique pour aider au pilotage",
+      "Collecte via capteurs portés, pensée pour un usage réel",
+      "Organisation des données dans une vue cohérente",
+      "Historique et tendances pour aider au suivi",
       "Approche orientée crédibilité clinique",
-      "Intégration simple dans un parcours de démonstration",
+      "Démonstration et intégration facilitées",
     ],
     howItWorks: [
       {
-        title: "Collecte & saisie",
+        title: "Collecte",
         description:
-          "Les informations utiles au suivi sont collectées et/ou renseignées dans un cadre structuré.",
+          "Des capteurs portés collectent des mesures pendant l’utilisation, dans un cadre défini.",
       },
       {
-        title: "Organisation des données",
+        title: "Agrégation",
         description:
-          "Les données sont agrégées pour faciliter la lecture et la continuité du suivi.",
+          "Les données sont organisées et contextualisées pour faciliter la lecture et la continuité du suivi.",
       },
       {
-        title: "Visualisation",
+        title: "Indicateurs & visualisation",
         description:
-          "Des vues synthétiques et un historique permettent une compréhension rapide des tendances.",
+          "Des vues synthétiques, un historique et des tendances permettent une compréhension rapide, sans promesse de diagnostic.",
       },
     ],
     features: [
       {
-        title: "Vues synthétiques",
+        title: "Capteurs portés",
         description:
-          "Accès rapide à l’essentiel via des écrans structurés et hiérarchisés.",
+          "Une instrumentation au plus proche du geste, conçue pour collecter des mesures en conditions réalistes.",
       },
       {
-        title: "Historique",
+        title: "Données structurées",
         description:
-          "Suivi dans le temps pour contextualiser les mesures et faciliter l’échange.",
+          "Organisation des informations pour une lecture plus claire et un partage facilité.",
       },
       {
-        title: "Approche rigoureuse",
+        title: "Vues & tendances",
         description:
-          "Formulations prudentes, centrées sur l’aide au suivi et la documentation.",
+          "Visualisations hiérarchisées et historique pour suivre l’évolution dans le temps.",
       },
     ],
     audiences: [
@@ -103,6 +150,11 @@ export const products: Product[] = [
         title: "Professionnels de santé",
         description:
           "Accès à des vues utiles au suivi et à la discussion, sans promesse de diagnostic.",
+      },
+      {
+        title: "Recherche & innovation",
+        description:
+          "Pour instrumenter, analyser et documenter des signaux dans un cadre méthodologique.",
       },
       {
         title: "Structures",
@@ -119,7 +171,7 @@ export const products: Product[] = [
       {
         question: "À qui s’adresse Digi’Skin ?",
         answer:
-          "Digi’Skin s’adresse à des organisations et professionnels souhaitant structurer un suivi et des indicateurs dans un cadre rigoureux.",
+          "Digi’Skin s’adresse à des équipes (professionnels, structures, recherche) qui souhaitent instrumenter et structurer un suivi via des capteurs portés et des vues d’indicateurs.",
       },
       {
         question: "Digi’Skin pose-t-il un diagnostic ?",
@@ -135,7 +187,7 @@ export const products: Product[] = [
     seo: {
       title: "Digi’Skin",
       description:
-        "Digi’Skin, une solution ACT pour structurer le suivi et la visualisation d’indicateurs, dans un cadre professionnel et prudent.",
+        "Digi’Skin : capteurs portés + application pour structurer un suivi et visualiser des indicateurs dans le temps, dans un cadre professionnel et prudent.",
     },
   },
   {

@@ -10,6 +10,8 @@ import { ProductAudienceGrid } from "@/components/products/ProductAudienceGrid";
 import { ProductSecurity } from "@/components/products/ProductSecurity";
 import { ProductFAQ } from "@/components/products/ProductFAQ";
 import { ProductCTA } from "@/components/products/ProductCTA";
+import { ProductGallery } from "@/components/products/ProductGallery";
+import { ProductPartnerLogos } from "@/components/products/ProductPartnerLogos";
 
 export function generateStaticParams(): Array<{ slug: ProductSlug }> {
   return products.map((p) => ({ slug: p.slug }));
@@ -94,6 +96,22 @@ export default function ProductPage({
   return (
     <div>
       <ProductHero product={product} />
+
+      {product.media?.partnerLogos?.length ? (
+        <ProductPartnerLogos
+          title="Partenaires et terrains d’expérimentation"
+          description="Un ancrage terrain et des collaborations structurantes."
+          logos={product.media.partnerLogos}
+        />
+      ) : null}
+
+      {product.media?.gallery?.length ? (
+        <ProductGallery
+          title="Dispositif et prototypes"
+          description="Quelques visuels issus du premier site Digi’Skin, réintégrés pour étoffer la présentation."
+          images={product.media.gallery}
+        />
+      ) : null}
 
       {product.slug === "digi-feet" ? <DigiFeetProblemSection /> : null}
 
