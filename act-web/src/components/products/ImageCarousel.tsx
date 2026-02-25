@@ -95,11 +95,15 @@ export function ImageCarousel({
               />
             </div>
             <div className="mt-3 text-sm font-bold text-foreground/80">{img.alt}</div>
+            <div className="mt-1 text-xs text-muted-foreground">Ouvrir en grand →</div>
           </a>
         ))}
       </motion.div>
 
       <div className="mt-4 flex items-center justify-between gap-4">
+        <div className="text-xs text-muted-foreground">
+          Vue {current + 1} / {maxIndex + 1}
+        </div>
         <div className="flex items-center gap-2">
           {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
             <button
@@ -120,7 +124,7 @@ export function ImageCarousel({
             type="button"
             onClick={prev}
             disabled={current === 0}
-            className="inline-flex h-9 items-center rounded-full border px-3 text-xs font-bold disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex h-9 items-center rounded-full border px-3 text-xs font-bold transition hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
             aria-label="Image précédente"
           >
             ←
@@ -129,7 +133,7 @@ export function ImageCarousel({
             type="button"
             onClick={next}
             disabled={current >= maxIndex}
-            className="inline-flex h-9 items-center rounded-full border px-3 text-xs font-bold disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex h-9 items-center rounded-full border px-3 text-xs font-bold transition hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
             aria-label="Image suivante"
           >
             →
