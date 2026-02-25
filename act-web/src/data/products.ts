@@ -69,9 +69,9 @@ export const products: Product[] = [
   {
     slug: "digi-skin",
     name: "Digi’Skin",
-    tagline: "Capturer des signaux, structurer le suivi, clarifier les tendances.",
+    tagline: "Retrouver le sens du toucher au niveau de la prothèse.",
     pitch:
-      "Digi’Skin combine des capteurs portés (au niveau de la main) et une application pour structurer un suivi et visualiser des indicateurs dans le temps. L’objectif est d’offrir une lecture claire et cohérente, dans un cadre professionnel et prudent.",
+      "Advanced Care Technologies développe un dispositif non invasif de retour haptique visant à permettre aux personnes amputées de retrouver le sens du toucher au niveau de leur prothèse : Digi’Skin. En restaurant le sens du toucher, Digi’Skin vise à aider le patient à interagir à nouveau avec son environnement.",
     primaryCta: { label: "Demander une démo", href: "/contact/" },
     secondaryCta: { label: "Voir Digi’Feet", href: "/produits/digi-feet/" },
     media: {
@@ -105,78 +105,83 @@ export const products: Product[] = [
       ],
     },
     benefits: [
-      "Collecte via capteurs portés, pensée pour un usage réel",
-      "Organisation des données dans une vue cohérente",
-      "Historique et tendances pour aider au suivi",
-      "Approche orientée crédibilité clinique",
-      "Démonstration et intégration facilitées",
+      "Restaurer des sensations",
+      "Retrouver l’équilibre",
+      "Éviter douleurs et blessures",
+      "Retour haptique non invasif, pensé pour l’usage quotidien",
+      "Traitement temps réel et restitution synchronisée",
     ],
     howItWorks: [
       {
-        title: "Collecte",
+        title: "Capteurs de force intégrés",
         description:
-          "Des capteurs portés collectent des mesures pendant l’utilisation, dans un cadre défini.",
+          "Capteurs de force intégrés, collectant les informations du toucher.",
       },
       {
-        title: "Agrégation",
+        title: "Logiciel temps réel",
         description:
-          "Les données sont organisées et contextualisées pour faciliter la lecture et la continuité du suivi.",
+          "Logiciel transmettant les signaux en temps réel selon le contexte d’utilisation ou le profil sensoriel de l’utilisateur.",
       },
       {
-        title: "Indicateurs & visualisation",
+        title: "Brassard de stimulation",
         description:
-          "Des vues synthétiques, un historique et des tendances permettent une compréhension rapide, sans promesse de diagnostic.",
+          "Brassard de stimulation attaché au bras, délivrant un retour vibro-tactile multi-zones synchronisé avec les capteurs.",
       },
     ],
     features: [
       {
-        title: "Capteurs portés",
+        title: "Capteur haptique",
         description:
-          "Une instrumentation au plus proche du geste, conçue pour collecter des mesures en conditions réalistes.",
+          "Capteur de pression à haute sensibilité, conçu pour une intégration au plus près de l’interaction.",
       },
       {
-        title: "Données structurées",
+        title: "Algorithmes IA",
         description:
-          "Organisation des informations pour une lecture plus claire et un partage facilité.",
+          "Traitement temps réel et reconstruction des stimuli tactiles pour un retour adapté.",
       },
       {
-        title: "Vues & tendances",
+        title: "Brassard de stimulation",
         description:
-          "Visualisations hiérarchisées et historique pour suivre l’évolution dans le temps.",
+          "Retour vibro-tactile multi-zones synchronisé avec les capteurs, pour soutenir la restitution.",
       },
     ],
     audiences: [
       {
-        title: "Professionnels de santé",
+        title: "Patients amputés",
         description:
-          "Accès à des vues utiles au suivi et à la discussion, sans promesse de diagnostic.",
+          "Pour viser un meilleur ressenti lors de l’usage d’une prothèse, dans un cadre d’accompagnement.",
       },
       {
-        title: "Recherche & innovation",
+        title: "Cliniciens & équipes de rééducation",
         description:
-          "Pour instrumenter, analyser et documenter des signaux dans un cadre méthodologique.",
+          "Pour intégrer un dispositif de retour haptique dans des parcours et protocoles (sans promesse de diagnostic).",
       },
       {
-        title: "Structures",
+        title: "Prothésistes & partenaires",
         description:
-          "Support pour organiser un suivi homogène et faciliter le déploiement.",
+          "Pour explorer des intégrations et des usages terrain, avec une approche prudente et documentée.",
       },
     ],
     security: {
       title: "Sécurité & confidentialité",
       description:
-        "ACT conçoit ses produits avec une attention particulière à la confidentialité et à la sécurité des données, selon les bonnes pratiques du domaine.",
+        "ACT conçoit ses produits avec une attention particulière à la confidentialité et à la sécurité des données, selon les bonnes pratiques du domaine. Digi’Skin est présenté comme un dispositif de restitution ; il ne constitue pas un diagnostic.",
     },
     faq: [
       {
         question: "À qui s’adresse Digi’Skin ?",
         answer:
-          "Digi’Skin s’adresse à des équipes (professionnels, structures, recherche) qui souhaitent instrumenter et structurer un suivi via des capteurs portés et des vues d’indicateurs.",
+          "Digi’Skin vise les personnes amputées utilisant une prothèse, ainsi que les équipes qui les accompagnent (clinique, rééducation, partenaires).",
       },
       {
         question: "Digi’Skin pose-t-il un diagnostic ?",
         answer:
           "Non. Les informations affichées visent à aider au suivi et à la documentation ; elles ne remplacent pas l’évaluation clinique.",
+      },
+      {
+        question: "Comment fonctionne Digi’Skin ?",
+        answer:
+          "Digi’Skin combine des capteurs de force, un traitement logiciel en temps réel et un brassard de stimulation pour délivrer un retour haptique synchronisé avec l’interaction.",
       },
       {
         question: "Comment demander une démo ?",
@@ -187,7 +192,7 @@ export const products: Product[] = [
     seo: {
       title: "Digi’Skin",
       description:
-        "Digi’Skin : capteurs portés + application pour structurer un suivi et visualiser des indicateurs dans le temps, dans un cadre professionnel et prudent.",
+        "Digi’Skin : dispositif non invasif de retour haptique visant à permettre aux personnes amputées de retrouver le sens du toucher au niveau de leur prothèse (sans promesse de diagnostic).",
     },
   },
   {

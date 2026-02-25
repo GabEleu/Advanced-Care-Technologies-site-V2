@@ -115,6 +115,43 @@ export default async function ProductPage({
   const product = getProductBySlug(slug);
   if (!product) notFound();
 
+  const featureSection =
+    product.slug === "digi-skin"
+      ? {
+          title: "Notre solution",
+          description: "Une innovation de rupture : un dispositif IoT basé sur l’IA.",
+        }
+      : {
+          title: "Des fonctionnalités conçues pour le suivi",
+          description:
+            "Capteurs, application, indicateurs : chaque brique vise une lecture plus claire et un suivi plus continu.",
+        };
+
+  const howItWorksSection =
+    product.slug === "digi-skin"
+      ? {
+          title: "Comment ça marche ?",
+          description:
+            "Capteurs, traitement et restitution : un parcours en quelques étapes, orienté usage et synchronisation.",
+        }
+      : {
+          title: "De la mesure à la visualisation",
+          description: "Un parcours en quelques étapes, centré sur la lisibilité et l’historique.",
+        };
+
+  const audienceSection =
+    product.slug === "digi-skin"
+      ? {
+          title: "Conçu pour patients et équipes terrain",
+          description:
+            "Patients, cliniciens, partenaires : une approche orientée intégration et usage, sans promesse de diagnostic.",
+        }
+      : {
+          title: "Conçu pour patients, professionnels et structures",
+          description:
+            "Un langage neutre et des vues structurées, pour faciliter le suivi et les échanges.",
+        };
+
   return (
     <div>
       <ProductHero product={product} />
@@ -138,22 +175,22 @@ export default async function ProductPage({
       {product.slug === "digi-feet" ? <DigiFeetProblemSection /> : null}
 
       <ProductFeatureGrid
-        title="Des fonctionnalités conçues pour le suivi"
-        description="Capteurs, application, indicateurs : chaque brique vise une lecture plus claire et un suivi plus continu."
+        title={featureSection.title}
+        description={featureSection.description}
         features={product.features}
       />
 
       <ProductHowItWorks
-        title="De la mesure à la visualisation"
-        description="Un parcours en quelques étapes, centré sur la lisibilité et l’historique."
+        title={howItWorksSection.title}
+        description={howItWorksSection.description}
         steps={product.howItWorks}
       />
 
       <ProductSecurity title={product.security.title} description={product.security.description} />
 
       <ProductAudienceGrid
-        title="Conçu pour patients, professionnels et structures"
-        description="Un langage neutre et des vues structurées, pour faciliter le suivi et les échanges."
+        title={audienceSection.title}
+        description={audienceSection.description}
         audiences={product.audiences}
       />
 
