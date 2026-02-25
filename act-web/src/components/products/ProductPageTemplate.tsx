@@ -15,6 +15,7 @@ import { ProductGallery } from "@/components/products/ProductGallery";
 import { ProductDownloads } from "@/components/products/ProductDownloads";
 import { Reveal } from "@/components/motion/Reveal";
 import { Container } from "@/components/site/Container";
+import { Product3DBackdrop } from "@/components/products/Product3DBackdrop";
 
 function getProblem(slug: ProductSlug) {
   if (slug === "digi-feet") {
@@ -83,6 +84,10 @@ function getSpecs(slug: ProductSlug): ProductSpecItem[] {
 export function ProductPageTemplate({ product }: { product: Product }) {
   const problem = getProblem(product.slug);
   const specs = getSpecs(product.slug);
+  const model3d = product.downloads?.find((item) => item.href.toLowerCase().endsWith(".glb"));
+  const otherDownloads = product.downloads?.filter(
+    (item) => !item.href.toLowerCase().endsWith(".glb"),
+  );
 
   const stickyItems = [
     { id: "probleme", label: "Problème" },
@@ -174,6 +179,8 @@ export function ProductPageTemplate({ product }: { product: Product }) {
         />
       ) : null}
 
+      {model3d ? <Product3DBackdrop src={model3d.href} alt={`Modèle 3D ${product.name}`} /> : null}
+
       <div id="solution" className="scroll-mt-28">
         <Reveal>
           <ProductFeatureGrid
@@ -246,11 +253,11 @@ export function ProductPageTemplate({ product }: { product: Product }) {
         </Reveal>
       </div>
 
-      {product.downloads?.length ? (
+      {otherDownloads?.length ? (
         <ProductDownloads
           title="Ressources"
           description="Ressources associées au produit (si disponibles)."
-          items={product.downloads}
+          items={otherDownloads}
         />
       ) : null}
 
