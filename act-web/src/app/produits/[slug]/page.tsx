@@ -178,8 +178,14 @@ export default async function ProductPage({
 
       {product.media?.gallery?.length ? (
         <ProductGallery
-          title="Dispositif et prototypes"
-          description="Quelques visuels issus du premier site Digi’Skin, réintégrés pour étoffer la présentation."
+          title={
+            product.slug === "digi-skin" ? "Prototypes & extraits" : "Visuels du produit"
+          }
+          description={
+            product.slug === "digi-skin"
+              ? "Photos du dispositif et captures du premier site Digi’Skin, réintégrées pour enrichir la présentation."
+              : "Quelques visuels pour contextualiser le produit."
+          }
           images={product.media.gallery}
         />
       ) : null}

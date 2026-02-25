@@ -74,7 +74,7 @@ export function ProductTeam({
             <h3 className="mt-3 text-2xl font-extrabold tracking-tight md:text-3xl">
               {collaborations.title}
             </h3>
-            <div className="mt-8 grid gap-4 rounded-3xl border bg-card p-6 shadow-sm md:grid-cols-3 md:gap-6 md:p-8">
+            <div className="mt-8 grid grid-cols-2 gap-4 rounded-3xl border bg-card p-6 shadow-sm sm:grid-cols-3 md:gap-6 md:p-8 lg:grid-cols-4">
               {collaborations.logos.map((logo) => (
                 <div
                   key={logo.src}

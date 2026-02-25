@@ -132,6 +132,22 @@ export const products: Product[] = [
           src: "/legacy/digi-skin/arm-sensors-photo.png",
           alt: "Dispositif Digi’Skin porté (capteurs doigts + bracelet).",
         },
+        {
+          src: "/legacy/digiskin-legacy/screens/hero.png",
+          alt: "Capture du premier site — introduction Digi’Skin",
+        },
+        {
+          src: "/legacy/digiskin-legacy/screens/mission-chiffres.png",
+          alt: "Capture du premier site — mission et chiffres",
+        },
+        {
+          src: "/legacy/digiskin-legacy/screens/comment-ca-marche.png",
+          alt: "Capture du premier site — comment ça marche",
+        },
+        {
+          src: "/legacy/digiskin-legacy/screens/a-propos.png",
+          alt: "Capture du premier site — à propos de l’équipe",
+        },
       ],
       partnerLogos: [
         {
@@ -164,20 +180,21 @@ export const products: Product[] = [
       title: "En chiffres",
       stats: [
         {
+          value: "10%",
           line1: "de la population mondiale a",
           line2: "une atteinte sensitive",
         },
         {
+          value: "50%",
           line1: "des cas associés à",
           line2: "des douleurs chroniques",
         },
         {
+          value: "15 k€",
           line1: "Le coût moyen",
           line2: "par patient",
         },
       ],
-      note:
-        "Libellés issus du premier site Digi’Skin. Les valeurs numériques exactes seront ajoutées dès qu’elles sont disponibles.",
     },
     howItWorks: [
       {
@@ -244,29 +261,85 @@ export const products: Product[] = [
           role: "CEO & cofondateur",
           qualifications:
             "Ingénieur en Biotechnologie (Sup'Biotech) • ESME - Mastère Spécialisé en Numérique et Biotechnologie (Robotique) • Inventeur de la technologie de restitution sensorielle : Digi'Skin",
+          image: {
+            src: "/legacy/digiskin-legacy/team/gabriel-eleuterio.png",
+            alt: "Portrait de Gabriel ELEUTERIO",
+          },
         },
         {
           name: "Manon Frajman",
           role: "COO & cofondatrice",
           qualifications:
             "Ingénieure en Biotechnologie (Sup'Biotech) • Product Manager et Clinical Project Manager dans des startups de dispositifs médicaux • Auto-entrepreneur : rédaction de dossiers de financement",
+          image: {
+            src: "/legacy/digiskin-legacy/team/manon-frajman.png",
+            alt: "Portrait de Manon Frajman",
+          },
         },
         {
           name: "Edward De Keating - Hart",
           role: "Chirurgien Orthopédiste & cofondateur",
           qualifications:
             "Chirurgien Orthopédiste • Membre de la Société Française de Chirurgie Orthopédique et Traumatologique (SOFCOT) • Membre associé de la Société Française de Chirurgie de la Main (SFCM)",
+          image: {
+            src: "/legacy/digiskin-legacy/team/edward-de-keating-hart.png",
+            alt: "Portrait de Edward De Keating - Hart",
+          },
         },
       ],
       collaborations: {
-        title: "Partenariats et collaborations",
+        title: "Écosystème, partenariats et soutiens",
         logos: [
           {
-            src: "/legacy/digiskin-legacy/collaborations/hgo-clinique-jules-verne.png",
-            alt: "HGO — Clinique Jules Verne",
+            src: "/legacy/digiskin-legacy/ecosystem/supbiotech.png",
+            alt: "Sup’Biotech",
           },
           {
-            src: "/legacy/digiskin-legacy/collaborations/sofcot.png",
+            src: "/legacy/digiskin-legacy/ecosystem/esme.png",
+            alt: "ESME Engineering School",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/i-stem.png",
+            alt: "I-Stem",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/imt-starter.png",
+            alt: "IMT Starter",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/french-tech-paris-saclay.png",
+            alt: "La French Tech Paris-Saclay",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/la-handitech.png",
+            alt: "La Handitech",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/handilab.png",
+            alt: "Handilab",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/bpifrance.png",
+            alt: "Bpifrance",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/reseau-entreprendre-essonne.png",
+            alt: "Réseau Entreprendre Essonne",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/women-in-tech-france.png",
+            alt: "Women in Tech France",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/airbus-developpement.png",
+            alt: "Airbus Développement",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/vitadx.png",
+            alt: "VitaDX",
+          },
+          {
+            src: "/legacy/digiskin-legacy/ecosystem/sofcot.png",
             alt: "SOFCOT",
           },
           {
