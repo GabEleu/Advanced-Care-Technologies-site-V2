@@ -19,7 +19,7 @@ export function ProductSpecs({
   if (!items.length) return null;
 
   return (
-    <section id={id} className="scroll-mt-28 border-y bg-secondary py-16 md:py-20">
+    <section id={id} className="scroll-mt-28 border-y bg-secondary/70 py-16 backdrop-blur-[1px] md:py-20">
       <Container>
         <div className="grid gap-10 md:grid-cols-12 md:items-start">
           <div className="md:col-span-5">

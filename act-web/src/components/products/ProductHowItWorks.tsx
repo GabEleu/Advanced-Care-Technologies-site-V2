@@ -12,7 +12,7 @@ export function ProductHowItWorks({
   steps: ProductStep[];
 }) {
   return (
-    <section className="border-y bg-secondary py-16 md:py-20">
+    <section className="border-y bg-secondary/70 py-16 backdrop-blur-[1px] md:py-20">
       <ProductSectionHeader eyebrow="Comment ça marche" title={title} description={description} />
       <Container className="mt-10">
         <ol className="grid gap-6 md:grid-cols-2">
