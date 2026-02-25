@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { products } from "@/data/products";
+import { productPath } from "@/lib/productPaths";
 
 export const dynamic = "force-static";
 
@@ -25,11 +26,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: joinUrl(root, "/"), lastModified: new Date() },
     { url: joinUrl(root, "/produits/"), lastModified: new Date() },
+    { url: joinUrl(root, "/technologie/"), lastModified: new Date() },
+    { url: joinUrl(root, "/clinique-ou-validation/"), lastModified: new Date() },
+    { url: joinUrl(root, "/ressources/"), lastModified: new Date() },
+    { url: joinUrl(root, "/a-propos/"), lastModified: new Date() },
     { url: joinUrl(root, "/contact/"), lastModified: new Date() },
+    { url: joinUrl(root, "/legal/"), lastModified: new Date() },
   ];
 
   const productRoutes: MetadataRoute.Sitemap = products.map((p) => ({
-    url: joinUrl(root, `/produits/${p.slug}/`),
+    url: joinUrl(root, productPath(p.slug)),
     lastModified: new Date(),
   }));
 

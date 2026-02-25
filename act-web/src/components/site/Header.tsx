@@ -4,6 +4,7 @@ import { cn } from "@/lib/cn";
 import { Container } from "@/components/site/Container";
 import { Logo } from "@/components/site/Logo";
 import { products } from "@/data/products";
+import { productPath } from "@/lib/productPaths";
 
 function NavLink({
   href,
@@ -47,7 +48,7 @@ export function Header() {
                   {products.map((p) => (
                     <Link
                       key={p.slug}
-                      href={`/produits/${p.slug}/`}
+                      href={productPath(p.slug)}
                       className="block rounded-xl px-3 py-3 transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       <div className="text-sm font-extrabold tracking-tight">
@@ -69,6 +70,10 @@ export function Header() {
                 </div>
               </div>
             </details>
+            <NavLink href="/technologie/">Technologie</NavLink>
+            <NavLink href="/clinique-ou-validation/">Preuves</NavLink>
+            <NavLink href="/ressources/">Ressources</NavLink>
+            <NavLink href="/a-propos/">À propos</NavLink>
             <NavLink href="/contact/">Contact</NavLink>
           </nav>
         </div>
@@ -91,13 +96,40 @@ export function Header() {
               {products.map((p) => (
                 <Link
                   key={p.slug}
-                  href={`/produits/${p.slug}/`}
+                  href={productPath(p.slug)}
                   className="block rounded-xl px-3 py-3 transition hover:bg-muted"
                 >
                   <div className="text-sm font-extrabold tracking-tight">{p.name}</div>
                   <div className="mt-1 text-xs text-muted-foreground">{p.tagline}</div>
                 </Link>
               ))}
+              <div className="mt-2 border-t px-3 py-2 text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+                Explorer
+              </div>
+              <Link
+                href="/technologie/"
+                className="block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted"
+              >
+                Technologie
+              </Link>
+              <Link
+                href="/clinique-ou-validation/"
+                className="block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted"
+              >
+                Preuves
+              </Link>
+              <Link
+                href="/ressources/"
+                className="block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted"
+              >
+                Ressources
+              </Link>
+              <Link
+                href="/a-propos/"
+                className="block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted"
+              >
+                À propos
+              </Link>
               <Link
                 href="/contact/"
                 className="mt-1 block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted"
