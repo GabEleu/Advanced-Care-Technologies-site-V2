@@ -12,6 +12,10 @@ import { ProductFAQ } from "@/components/products/ProductFAQ";
 import { ProductCTA } from "@/components/products/ProductCTA";
 import { ProductGallery } from "@/components/products/ProductGallery";
 import { ProductPartnerLogos } from "@/components/products/ProductPartnerLogos";
+import { ProductMission } from "@/components/products/ProductMission";
+import { ProductNumbers } from "@/components/products/ProductNumbers";
+import { ProductTeam } from "@/components/products/ProductTeam";
+import { ProductDownloads } from "@/components/products/ProductDownloads";
 
 export const dynamic = "force-static";
 export const dynamicParams = false;
@@ -156,6 +160,14 @@ export default async function ProductPage({
     <div>
       <ProductHero product={product} />
 
+      {product.mission ? (
+        <ProductMission
+          title={product.mission.title}
+          subtitle={product.mission.subtitle}
+          cards={product.mission.cards}
+        />
+      ) : null}
+
       {product.media?.partnerLogos?.length ? (
         <ProductPartnerLogos
           title="Partenaires et terrains d’expérimentation"
@@ -180,11 +192,23 @@ export default async function ProductPage({
         features={product.features}
       />
 
+      {product.numbers ? (
+        <ProductNumbers title={product.numbers.title} stats={product.numbers.stats} note={product.numbers.note} />
+      ) : null}
+
       <ProductHowItWorks
         title={howItWorksSection.title}
         description={howItWorksSection.description}
         steps={product.howItWorks}
       />
+
+      {product.downloads?.length ? (
+        <ProductDownloads
+          title="Ressources et démonstration"
+          description="Éléments issus du premier site (modèle 3D) pour compléter la présentation."
+          items={product.downloads}
+        />
+      ) : null}
 
       <ProductSecurity title={product.security.title} description={product.security.description} />
 
@@ -193,6 +217,14 @@ export default async function ProductPage({
         description={audienceSection.description}
         audiences={product.audiences}
       />
+
+      {product.team ? (
+        <ProductTeam
+          title={product.team.title}
+          members={product.team.members}
+          collaborations={product.team.collaborations}
+        />
+      ) : null}
 
       <ProductFAQ
         title="Questions fréquentes"
