@@ -20,7 +20,7 @@ export function ProductSectionHeader({
         {title}
       </h2>
       {description ? (
-        <p className="mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+        <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted-foreground md:text-lg">
           {description}
         </p>
       ) : null}

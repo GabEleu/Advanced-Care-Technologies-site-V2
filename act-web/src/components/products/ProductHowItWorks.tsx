@@ -22,9 +22,9 @@ export function ProductHowItWorks({
                 <div className="flex size-10 items-center justify-center rounded-2xl bg-muted text-sm font-extrabold text-foreground">
                   {idx + 1}
                 </div>
-                <div className="text-lg font-extrabold tracking-tight">{s.title}</div>
+                <div className="text-xl font-bold tracking-tight">{s.title}</div>
               </div>
-              <p className="mt-4 leading-relaxed text-muted-foreground">{s.description}</p>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{s.description}</p>
             </li>
           ))}
         </ol>

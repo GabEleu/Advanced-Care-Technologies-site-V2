@@ -29,12 +29,12 @@ export function ProductProblem({
           </div>
           <div className="md:col-span-7">
             <div className="rounded-3xl border bg-card p-8 shadow-sm">
-              <p className="leading-relaxed text-muted-foreground">{description}</p>
+              <p className="text-base leading-relaxed text-muted-foreground">{description}</p>
               {bullets?.length ? (
                 <ul className="mt-6 grid gap-4 md:grid-cols-2">
                   {bullets.map((b) => (
                     <li key={b} className="rounded-2xl bg-muted p-5">
-                      <div className="text-sm font-extrabold">{b}</div>
+                      <div className="text-base font-bold">{b}</div>
                     </li>
                   ))}
                 </ul>
