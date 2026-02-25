@@ -134,19 +134,19 @@ export const products: Product[] = [
         },
         {
           src: "/legacy/digiskin-legacy/screens/hero.png",
-          alt: "Capture du premier site — introduction Digi’Skin",
+          alt: "Capture — introduction Digi’Skin",
         },
         {
           src: "/legacy/digiskin-legacy/screens/mission-chiffres.png",
-          alt: "Capture du premier site — mission et chiffres",
+          alt: "Capture — mission et chiffres",
         },
         {
           src: "/legacy/digiskin-legacy/screens/comment-ca-marche.png",
-          alt: "Capture du premier site — comment ça marche",
+          alt: "Capture — comment ça marche",
         },
         {
           src: "/legacy/digiskin-legacy/screens/a-propos.png",
-          alt: "Capture du premier site — à propos de l’équipe",
+          alt: "Capture — à propos de l’équipe",
         },
       ],
       partnerLogos: [

@@ -17,8 +17,23 @@ export function Footer() {
           <Link className="text-foreground/80 hover:text-foreground" href="/produits/">
             Produits
           </Link>
+          <Link className="text-foreground/80 hover:text-foreground" href="/technologie/">
+            Technologie
+          </Link>
+          <Link className="text-foreground/80 hover:text-foreground" href="/clinique-ou-validation/">
+            Preuves
+          </Link>
+          <Link className="text-foreground/80 hover:text-foreground" href="/ressources/">
+            Ressources
+          </Link>
+          <Link className="text-foreground/80 hover:text-foreground" href="/a-propos/">
+            À propos
+          </Link>
           <Link className="text-foreground/80 hover:text-foreground" href="/contact/">
             Contact
+          </Link>
+          <Link className="text-foreground/80 hover:text-foreground" href="/legal/">
+            Mentions légales
           </Link>
           <a
             className="text-foreground/80 hover:text-foreground"
