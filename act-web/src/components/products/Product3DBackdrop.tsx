@@ -1,9 +1,7 @@
 "use client";
 
-import { createElement, useEffect, useMemo, useRef, useState } from "react";
+import { createElement, useEffect, useMemo, useState } from "react";
 import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
-
-import { Container } from "@/components/site/Container";
 
 export function Product3DBackdrop({
   src,
@@ -13,28 +11,34 @@ export function Product3DBackdrop({
   alt?: string;
 }) {
   const reducedMotion = useReducedMotion();
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [cameraOrbit, setCameraOrbit] = useState("35deg 72deg 1.65m");
+  const [cameraOrbit, setCameraOrbit] = useState("32deg 78deg 2.15m");
+  const [cameraTarget, setCameraTarget] = useState("0m 0m 0m");
 
   useEffect(() => {
     void import("@google/model-viewer");
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
+  const { scrollYProgress } = useScroll();
 
   useMotionValueEvent(scrollYProgress, "change", (v) => {
     if (reducedMotion) return;
-    const theta = 35 + v * 190; // rotation autour de l'objet
-    const radius = 1.75 - v * 0.55; // zoom progressif
-    setCameraOrbit(`${theta.toFixed(1)}deg 72deg ${radius.toFixed(2)}m`);
+    const theta = 20 + v * 280;
+    const phi = 74 - v * 8;
+    const radius = 2.25 - v * 0.95;
+    const targetY = (v - 0.5) * 0.2;
+    setCameraOrbit(`${theta.toFixed(1)}deg ${phi.toFixed(1)}deg ${radius.toFixed(2)}m`);
+    setCameraTarget(`0m ${targetY.toFixed(2)}m 0m`);
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], [-26, 32]);
-  const y = useTransform(scrollYProgress, [0, 1], [24, -24]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1.02, 1.12]);
+  const x = useTransform(scrollYProgress, [0, 1], [90, -120]);
+  const y = useTransform(scrollYProgress, [0, 1], [90, -90]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.18, 1.04]);
+  const opacity = useTransform(scrollYProgress, [0, 0.18, 0.85, 1], [0.2, 0.35, 0.3, 0.14]);
+  const blur = useTransform(scrollYProgress, [0, 0.5, 1], ["2px", "8px", "3px"]);
+  const ghostX = useTransform(scrollYProgress, [0, 1], [130, -170]);
+  const ghostY = useTransform(scrollYProgress, [0, 1], [120, -60]);
+  const ghostScale = useTransform(scrollYProgress, [0, 1], [1.24, 1.07]);
+  const ghostOpacity = useTransform(scrollYProgress, [0, 1], [0.08, 0.2]);
 
   const modelStyle = useMemo(
     () =>
@@ -44,48 +48,33 @@ export function Product3DBackdrop({
             x,
             y,
             scale,
+            opacity,
           },
-    [reducedMotion, scale, x, y],
+    [opacity, reducedMotion, scale, x, y],
   );
 
   return (
-    <section
-      ref={sectionRef}
-      className="pointer-events-none relative overflow-hidden border-y bg-secondary/70 py-20 md:py-28"
-      aria-label="Fond animé 3D"
-    >
-      <div className="absolute inset-0 -z-10 [background:radial-gradient(60%_60%_at_80%_30%,hsl(var(--accent)/0.25),transparent_60%),radial-gradient(50%_50%_at_20%_70%,hsl(var(--brand-purple)/0.18),transparent_60%)]" />
-      <Container className="relative">
-        <div className="max-w-xl space-y-4">
-          <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
-            Visualisation 3D
-          </div>
-          <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
-            Modèle du brassard intégré dans la page
-          </h2>
-          <p className="text-sm leading-relaxed text-muted-foreground">
-            Le modèle tourne en continu et la caméra évolue au scroll pour créer un effet immersif
-            sans impacter la lisibilité du contenu.
-          </p>
-        </div>
+    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>
+      <div className="sticky top-0 h-svh">
+        <div className="absolute inset-0 [background:radial-gradient(50%_45%_at_78%_38%,hsl(var(--accent)/0.14),transparent_65%),radial-gradient(45%_35%_at_82%_70%,hsl(var(--brand-purple)/0.12),transparent_70%)]" />
 
         <motion.div
           style={modelStyle}
-          className="mx-auto mt-8 h-[320px] w-full max-w-5xl rounded-3xl border bg-card/60 p-2 shadow-sm backdrop-blur md:h-[520px]"
+          className="absolute -right-[24vw] top-[4vh] h-[90vh] w-[90vh] min-w-[520px] max-w-[1080px]"
         >
           {createElement("model-viewer", {
             src,
             alt,
             "camera-controls": false,
-            "disable-pan": true,
-            "disable-tap": true,
             "interaction-prompt": "none",
             "auto-rotate": !reducedMotion,
             "auto-rotate-delay": 0,
-            "rotation-per-second": "22deg",
+            "rotation-per-second": "16deg",
             "camera-orbit": cameraOrbit,
+            "camera-target": cameraTarget,
+            "field-of-view": reducedMotion ? "36deg" : "28deg",
             exposure: "1",
-            "shadow-intensity": "0.85",
+            "shadow-intensity": "0",
             "environment-image": "neutral",
             style: {
               width: "100%",
@@ -94,8 +83,41 @@ export function Product3DBackdrop({
             },
           })}
         </motion.div>
-      </Container>
-    </section>
+
+        {!reducedMotion ? (
+          <motion.div
+            style={{
+              x: ghostX,
+              y: ghostY,
+              scale: ghostScale,
+              opacity: ghostOpacity,
+              filter: blur,
+            }}
+            className="absolute -right-[28vw] top-[2vh] h-[90vh] w-[90vh] min-w-[520px] max-w-[1080px]"
+          >
+            {createElement("model-viewer", {
+              src,
+              alt: "",
+              "camera-controls": false,
+              "interaction-prompt": "none",
+              "auto-rotate": true,
+              "auto-rotate-delay": 0,
+              "rotation-per-second": "26deg",
+              "camera-orbit": "76deg 74deg 2.4m",
+              "field-of-view": "22deg",
+              exposure: "1.1",
+              "shadow-intensity": "0",
+              "environment-image": "neutral",
+              style: {
+                width: "100%",
+                height: "100%",
+                background: "transparent",
+              },
+            })}
+          </motion.div>
+        ) : null}
+      </div>
+    </div>
   );
 }
 

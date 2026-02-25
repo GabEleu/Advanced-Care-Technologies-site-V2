@@ -101,9 +101,11 @@ export function ProductPageTemplate({ product }: { product: Product }) {
   ];
 
   return (
-    <div>
-      <ProductHero product={product} />
-      <ProductStickySubnav items={stickyItems} />
+    <div className="relative isolate">
+      {model3d ? <Product3DBackdrop src={model3d.href} alt={`Modèle 3D ${product.name}`} /> : null}
+      <div className="relative z-10">
+        <ProductHero product={product} />
+        <ProductStickySubnav items={stickyItems} />
 
       <Reveal>
         <ProductProblem
@@ -178,8 +180,6 @@ export function ProductPageTemplate({ product }: { product: Product }) {
           images={product.media.gallery}
         />
       ) : null}
-
-      {model3d ? <Product3DBackdrop src={model3d.href} alt={`Modèle 3D ${product.name}`} /> : null}
 
       <div id="solution" className="scroll-mt-28">
         <Reveal>
@@ -277,6 +277,7 @@ export function ProductPageTemplate({ product }: { product: Product }) {
         primary={product.primaryCta}
         secondary={{ label: "Voir tous les produits", href: "/produits/" }}
       />
+      </div>
     </div>
   );
 }
