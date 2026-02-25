@@ -1,9 +1,10 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 
 import { products } from "@/data/products";
 import { Container } from "@/components/site/Container";
 import { productPath } from "@/lib/productPaths";
+import { ButtonLink } from "@/components/ui/Button";
+import { Card, CardBody } from "@/components/ui/Card";
 
 export const metadata: Metadata = {
   title: "Accueil",
@@ -41,24 +42,15 @@ export default function Home() {
               la clarté, la sécurité et la crédibilité clinique.
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <Link
-                href={productPath("digi-skin")}
-                className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground shadow-sm transition hover:bg-primary/90"
-              >
+              <ButtonLink href={productPath("digi-skin")} variant="primary">
                 Découvrir Digi’Skin
-              </Link>
-              <Link
-                href={productPath("digi-feet")}
-                className="inline-flex h-11 items-center justify-center rounded-full border bg-card px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted hover:text-foreground"
-              >
+              </ButtonLink>
+              <ButtonLink href={productPath("digi-feet")} variant="secondary">
                 Découvrir Digi’Feet
-              </Link>
-              <Link
-                href="/contact/"
-                className="inline-flex h-11 items-center justify-center rounded-full border bg-card px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted hover:text-foreground"
-              >
+              </ButtonLink>
+              <ButtonLink href="/contact/" variant="secondary">
                 Demander une démo
-              </Link>
+              </ButtonLink>
             </div>
           </div>
         </Container>
@@ -80,47 +72,40 @@ export default function Home() {
               </p>
             </div>
             <div className="md:col-span-6 md:justify-self-end">
-              <Link
-                href="/produits/"
-                className="inline-flex h-11 items-center justify-center rounded-full bg-muted px-5 text-sm font-extrabold text-foreground transition hover:bg-muted/80"
-              >
+              <ButtonLink href="/produits/" variant="ghost">
                 Vue d’ensemble →
-              </Link>
+              </ButtonLink>
             </div>
           </div>
 
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {products.map((p) => (
-            <div key={p.slug} className="rounded-3xl border bg-card p-8 shadow-sm">
-              <div className="text-sm font-bold text-muted-foreground">
-                {p.slug === "digi-feet" ? "Nouveau produit" : "Produit"}
-              </div>
-              <h2 className="mt-2 text-3xl font-extrabold tracking-tight">{p.name}</h2>
-              <p className="mt-3 text-muted-foreground">{p.tagline}</p>
-              <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
-                {p.benefits.slice(0, 3).map((b) => (
-                  <li key={b} className="flex gap-3">
-                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-accent" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Link
-                  href={productPath(p.slug)}
-                  className="inline-flex h-10 items-center justify-center rounded-full bg-muted px-4 text-sm font-bold text-foreground transition hover:bg-muted/80"
-                >
-                  Voir {p.name}
-                </Link>
-                <Link
-                  href="/contact/"
-                  className="inline-flex h-10 items-center justify-center rounded-full border bg-card px-4 text-sm font-bold text-foreground/80 transition hover:bg-muted hover:text-foreground"
-                >
-                  Demander une démo
-                </Link>
-              </div>
-            </div>
-          ))}
+            {products.map((p) => (
+              <Card key={p.slug}>
+                <CardBody>
+                  <div className="text-sm font-bold text-muted-foreground">
+                    {p.slug === "digi-feet" ? "Nouveau produit" : "Produit"}
+                  </div>
+                  <h2 className="mt-2 text-3xl font-extrabold tracking-tight">{p.name}</h2>
+                  <p className="mt-3 text-muted-foreground">{p.tagline}</p>
+                  <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
+                    {p.benefits.slice(0, 3).map((b) => (
+                      <li key={b} className="flex gap-3">
+                        <span className="mt-2 size-1.5 shrink-0 rounded-full bg-accent" />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="mt-6 flex flex-wrap items-center gap-3">
+                    <ButtonLink href={productPath(p.slug)} variant="ghost" size="sm">
+                      Voir {p.name}
+                    </ButtonLink>
+                    <ButtonLink href="/contact/" variant="secondary" size="sm">
+                      Demander une démo
+                    </ButtonLink>
+                  </div>
+                </CardBody>
+              </Card>
+            ))}
           </div>
         </Container>
       </section>
@@ -203,18 +188,12 @@ export default function Home() {
                 ))}
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href="/clinique-ou-validation/"
-                  className="inline-flex h-11 items-center justify-center rounded-full bg-muted px-5 text-sm font-extrabold text-foreground transition hover:bg-muted/80"
-                >
+                <ButtonLink href="/clinique-ou-validation/" variant="ghost">
                   Voir notre approche →
-                </Link>
-                <Link
-                  href="/contact/"
-                  className="inline-flex h-11 items-center justify-center rounded-full border bg-card px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted hover:text-foreground"
-                >
+                </ButtonLink>
+                <ButtonLink href="/contact/" variant="secondary">
                   Demander une démo
-                </Link>
+                </ButtonLink>
               </div>
             </div>
           </div>
@@ -237,30 +216,34 @@ export default function Home() {
             </div>
             <div className="md:col-span-7">
               <div className="grid gap-4 sm:grid-cols-2">
-                <Link
+                <ButtonLink
                   href="/technologie/"
-                  className="rounded-3xl border bg-card p-7 text-sm font-extrabold text-foreground/80 shadow-sm transition hover:bg-muted hover:text-foreground"
+                  variant="secondary"
+                  className="justify-start rounded-3xl border bg-card p-7 shadow-sm"
                 >
                   Technologie →
-                </Link>
-                <Link
+                </ButtonLink>
+                <ButtonLink
                   href="/clinique-ou-validation/"
-                  className="rounded-3xl border bg-card p-7 text-sm font-extrabold text-foreground/80 shadow-sm transition hover:bg-muted hover:text-foreground"
+                  variant="secondary"
+                  className="justify-start rounded-3xl border bg-card p-7 shadow-sm"
                 >
                   Preuves & validation →
-                </Link>
-                <Link
+                </ButtonLink>
+                <ButtonLink
                   href="/produits/"
-                  className="rounded-3xl border bg-card p-7 text-sm font-extrabold text-foreground/80 shadow-sm transition hover:bg-muted hover:text-foreground"
+                  variant="secondary"
+                  className="justify-start rounded-3xl border bg-card p-7 shadow-sm"
                 >
                   Voir les produits →
-                </Link>
-                <Link
+                </ButtonLink>
+                <ButtonLink
                   href="/contact/"
-                  className="rounded-3xl border bg-card p-7 text-sm font-extrabold text-foreground/80 shadow-sm transition hover:bg-muted hover:text-foreground"
+                  variant="secondary"
+                  className="justify-start rounded-3xl border bg-card p-7 shadow-sm"
                 >
                   Demander une démo →
-                </Link>
+                </ButtonLink>
               </div>
             </div>
           </div>

@@ -1,10 +1,11 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 
 import { products } from "@/data/products";
 import { Container } from "@/components/site/Container";
 import { productPath } from "@/lib/productPaths";
 import { ProductStickySubnav } from "@/components/products/ProductStickySubnav";
+import { ButtonLink } from "@/components/ui/Button";
+import { Card, CardBody } from "@/components/ui/Card";
 
 export const metadata: Metadata = {
   title: "Produits",
@@ -56,29 +57,25 @@ export default function ProductsPage() {
         <Container>
           <div className="grid gap-6 md:grid-cols-2">
             {products.map((p) => (
-              <div key={p.slug} className="rounded-3xl border bg-card p-8 shadow-sm">
-                <div className="text-sm font-extrabold text-muted-foreground">
-                  {p.slug === "digi-feet" ? "Nouveau produit" : "Produit"}
-                </div>
-                <h2 className="mt-2 text-3xl font-extrabold tracking-tight">{p.name}</h2>
-                <p className="mt-3 text-foreground/80">{p.tagline}</p>
-                <p className="mt-4 leading-relaxed text-muted-foreground">{p.pitch}</p>
+              <Card key={p.slug}>
+                <CardBody>
+                  <div className="text-sm font-extrabold text-muted-foreground">
+                    {p.slug === "digi-feet" ? "Nouveau produit" : "Produit"}
+                  </div>
+                  <h2 className="mt-2 text-3xl font-extrabold tracking-tight">{p.name}</h2>
+                  <p className="mt-3 text-foreground/80">{p.tagline}</p>
+                  <p className="mt-4 leading-relaxed text-muted-foreground">{p.pitch}</p>
 
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
-                  <Link
-                    href={productPath(p.slug)}
-                    className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground shadow-sm transition hover:bg-primary/90"
-                  >
-                    Voir {p.name}
-                  </Link>
-                  <Link
-                    href="/contact/"
-                    className="inline-flex h-11 items-center justify-center rounded-full border bg-card px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted hover:text-foreground"
-                  >
-                    Demander une démo
-                  </Link>
-                </div>
-              </div>
+                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <ButtonLink href={productPath(p.slug)} variant="primary">
+                      Voir {p.name}
+                    </ButtonLink>
+                    <ButtonLink href="/contact/" variant="secondary">
+                      Demander une démo
+                    </ButtonLink>
+                  </div>
+                </CardBody>
+              </Card>
             ))}
           </div>
         </Container>
@@ -143,18 +140,12 @@ export default function ProductsPage() {
                 </div>
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                <Link
-                  href={productPath("digi-skin")}
-                  className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground shadow-sm transition hover:bg-primary/90"
-                >
+                <ButtonLink href={productPath("digi-skin")} variant="primary">
                   Voir Digi’Skin
-                </Link>
-                <Link
-                  href={productPath("digi-feet")}
-                  className="inline-flex h-11 items-center justify-center rounded-full border bg-card px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted hover:text-foreground"
-                >
+                </ButtonLink>
+                <ButtonLink href={productPath("digi-feet")} variant="secondary">
                   Voir Digi’Feet
-                </Link>
+                </ButtonLink>
               </div>
             </div>
           </div>
@@ -179,12 +170,9 @@ export default function ProductsPage() {
                   s’inscrivent dans une même logique de suivi, lisibilité et sécurité.
                 </p>
                 <div className="mt-6">
-                  <Link
-                    href="/technologie/"
-                    className="text-sm font-extrabold text-foreground/80 hover:text-foreground"
-                  >
+                  <ButtonLink href="/technologie/" variant="ghost" size="sm">
                     Découvrir la page Technologie →
-                  </Link>
+                  </ButtonLink>
                 </div>
               </div>
             </div>
@@ -210,18 +198,12 @@ export default function ProductsPage() {
                   communication prudente sur les indicateurs.
                 </p>
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    href="/clinique-ou-validation/"
-                    className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground shadow-sm transition hover:bg-primary/90"
-                  >
+                  <ButtonLink href="/clinique-ou-validation/" variant="primary">
                     Voir l’approche →
-                  </Link>
-                  <Link
-                    href="/contact/"
-                    className="inline-flex h-11 items-center justify-center rounded-full border bg-card px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted hover:text-foreground"
-                  >
+                  </ButtonLink>
+                  <ButtonLink href="/contact/" variant="secondary">
                     Demander une démo
-                  </Link>
+                  </ButtonLink>
                 </div>
               </div>
             </div>
@@ -246,12 +228,9 @@ export default function ProductsPage() {
                   Centraliser ce qui aide à comprendre rapidement (pages, PDF, presse, kit média).
                 </p>
                 <div className="mt-6">
-                  <Link
-                    href="/ressources/"
-                    className="text-sm font-extrabold text-foreground/80 hover:text-foreground"
-                  >
+                  <ButtonLink href="/ressources/" variant="ghost" size="sm">
                     Voir la page Ressources →
-                  </Link>
+                  </ButtonLink>
                 </div>
               </div>
             </div>

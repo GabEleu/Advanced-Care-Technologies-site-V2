@@ -1,8 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+### Prérequis
+- Node.js 20+
+
+### Installer
+
+```bash
+npm install
+```
+
+### Développer
+
+```bash
+npm run dev
+```
+
+Ouvrir `http://localhost:3000`.
+
+### Qualité & build
+
+```bash
+npm run lint
+npm run build
+```
+
+## Stack
+- Next.js 16 (App Router) + TypeScript
+- Tailwind CSS v4
+- Déploiement statique (GitHub Pages) via `output: "export"`
+
+## Typographies
+- Texte courant: **Lexend**
+- Titres (H1–H3): **Montserrat Alternates**
+
+## Navigation
+- Navigation principale: `src/components/site/MainNavigation.tsx`
+  - barre fixe semi-transparente + blur
+  - onglet actif via `usePathname()`
+  - dropdown “Produits” (Digi’Skin / Digi’Feet)
+
+## Produits
+- Données: `src/data/products.ts`
+- Pages:
+  - `src/app/produits/digi-skin/page.tsx`
+  - `src/app/produits/digi-feet/page.tsx`
+- Template partagé: `src/components/products/ProductPageTemplate.tsx`
+- Sticky subnav (ancres + scroll-spy): `src/components/products/ProductStickySubnav.tsx`
+
+## Animations (subtiles, accessibles)
+- Reveal on view: `src/components/motion/Reveal.tsx`
+- Parallax léger sur médias: `src/components/motion/ParallaxMedia.tsx`
+- Respect de `prefers-reduced-motion`
+
+## Design system minimal
+- `src/components/ui/Button.tsx` (variants)
+- `src/components/ui/Card.tsx`
+- `src/components/ui/Section.tsx`
+
+## SEO
+- `src/app/sitemap.ts` + `src/app/robots.ts` (compatibles export statique)
 
 ```bash
 npm run dev

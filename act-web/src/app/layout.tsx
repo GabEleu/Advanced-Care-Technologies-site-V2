@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Lexend, Montserrat_Alternates } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/site/Header";
+import { MainNavigation } from "@/components/site/MainNavigation";
 import { Footer } from "@/components/site/Footer";
 
 const lexend = Lexend({
@@ -62,8 +62,8 @@ export default function RootLayout({
     <html lang="fr">
       <body className={`${lexend.variable} ${montserratAlternates.variable} antialiased`}>
         <div className="min-h-svh bg-background text-foreground">
-          <Header />
-          <main>{children}</main>
+          <MainNavigation />
+          <main className="pt-16">{children}</main>
           <Footer />
         </div>
       </body>

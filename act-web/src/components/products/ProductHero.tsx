@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import type { Product } from "@/data/products";
 import { Container } from "@/components/site/Container";
+import { ParallaxMedia } from "@/components/motion/ParallaxMedia";
 
 export function ProductHero({ product }: { product: Product }) {
   return (
@@ -47,7 +48,7 @@ export function ProductHero({ product }: { product: Product }) {
               {product.media?.heroImage ? (
                 <div className="relative overflow-hidden rounded-3xl border bg-card p-6 shadow-sm">
                   <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_10%,hsl(var(--accent)/0.08),transparent_30%),radial-gradient(circle_at_80%_10%,hsl(var(--brand-purple)/0.08),transparent_30%)]" />
-                  <div className="relative mx-auto aspect-[4/3] w-full max-w-md">
+                  <ParallaxMedia className="relative mx-auto aspect-[4/3] w-full max-w-md">
                     <Image
                       src={product.media.heroImage.src}
                       alt={product.media.heroImage.alt}
@@ -56,7 +57,7 @@ export function ProductHero({ product }: { product: Product }) {
                       priority
                       sizes="(min-width: 768px) 420px, 90vw"
                     />
-                  </div>
+                  </ParallaxMedia>
                 </div>
               ) : null}
 
