@@ -21,6 +21,10 @@ export function ProductStickySubnav({
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
 
   useEffect(() => {
+    setActiveId(items[0]?.id ?? "");
+  }, [items]);
+
+  useEffect(() => {
     if (ids.length === 0) return;
 
     const reduced =
@@ -71,7 +75,26 @@ export function ProductStickySubnav({
 
   return (
     <div className={cn("sticky top-16 z-40 border-b bg-background/85 backdrop-blur", className)}>
-      <Container className="flex items-center gap-2 overflow-x-auto py-3">
+      <Container
+        className="flex items-center gap-2 overflow-x-auto py-3"
+        onKeyDown={(event) => {
+          if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+          const target = event.target as HTMLElement;
+          if (target.tagName !== "A") return;
+          const links = Array.from(target.parentElement?.querySelectorAll("a") ?? []);
+          const index = links.findIndex((link) => link === target);
+          if (index < 0) return;
+          const nextIndex =
+            event.key === "ArrowRight"
+              ? Math.min(index + 1, links.length - 1)
+              : Math.max(index - 1, 0);
+          const nextLink = links[nextIndex] as HTMLAnchorElement | undefined;
+          if (!nextLink) return;
+          event.preventDefault();
+          nextLink.focus();
+        }}
+      >
+        <nav className="flex items-center gap-2" aria-label="Navigation des sections produit">
         {items.map((it) => (
           <a
             key={it.id}
@@ -87,6 +110,7 @@ export function ProductStickySubnav({
             {it.label}
           </a>
         ))}
+        </nav>
       </Container>
     </div>
   );

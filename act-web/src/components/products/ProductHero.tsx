@@ -21,7 +21,10 @@ export function ProductHero({ product }: { product: Product }) {
             <p className="mt-3 text-xl font-bold tracking-tight text-foreground/80 md:text-2xl">
               {product.tagline}
             </p>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
+            <p
+              className="mt-6 line-clamp-3 text-base leading-relaxed text-muted-foreground md:text-lg"
+              title={product.pitch}
+            >
               {product.pitch}
             </p>
 
@@ -59,14 +62,31 @@ export function ProductHero({ product }: { product: Product }) {
                     />
                   </ParallaxMedia>
                 </div>
-              ) : null}
+              ) : (
+                <div className="relative overflow-hidden rounded-3xl border bg-card p-6 shadow-sm">
+                  <div className="absolute inset-0 -z-10 [background:radial-gradient(60%_60%_at_50%_20%,hsl(var(--accent)/0.28),transparent_60%),conic-gradient(from_180deg_at_50%_50%,hsl(var(--brand-purple)/0.2),transparent_35%,hsl(var(--accent)/0.14),transparent_65%,hsl(var(--primary)/0.2),transparent_85%)]" />
+                  <div className="relative flex aspect-[4/3] items-end rounded-2xl border border-foreground/10 bg-background/35 p-6 backdrop-blur-sm">
+                    <div>
+                      <div className="inline-flex size-9 items-center justify-center rounded-full border bg-card/70 text-sm font-extrabold text-foreground/80">
+                        AI
+                      </div>
+                      <div className="mt-4 text-xl font-bold tracking-tight">
+                        Vue synthétique du suivi
+                      </div>
+                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                        Indicateurs et tendances présentés dans une interface claire.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               <div className="rounded-3xl border bg-card p-6 shadow-sm">
                 <div className="text-sm font-extrabold text-foreground/80">
                   Bénéfices clés
                 </div>
                 <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-                  {product.benefits.map((b) => (
+                  {product.benefits.slice(0, 4).map((b) => (
                     <li key={b} className="flex gap-3">
                       <span className="mt-1 size-2 shrink-0 rounded-full bg-accent" />
                       <span>{b}</span>

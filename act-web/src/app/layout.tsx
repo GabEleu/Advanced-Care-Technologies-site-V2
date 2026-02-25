@@ -3,6 +3,7 @@ import { Lexend, Montserrat_Alternates } from "next/font/google";
 import "./globals.css";
 import { MainNavigation } from "@/components/site/MainNavigation";
 import { Footer } from "@/components/site/Footer";
+import { ScrollProgressBar } from "@/components/site/ScrollProgressBar";
 
 const lexend = Lexend({
   variable: "--font-sans",
@@ -63,6 +64,7 @@ export default function RootLayout({
       <body className={`${lexend.variable} ${montserratAlternates.variable} antialiased`}>
         <div className="min-h-svh bg-background text-foreground">
           <MainNavigation />
+          <ScrollProgressBar />
           <main className="pt-16">{children}</main>
           <Footer />
         </div>
