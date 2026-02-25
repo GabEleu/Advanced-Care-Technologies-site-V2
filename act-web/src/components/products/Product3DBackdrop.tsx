@@ -54,13 +54,13 @@ export function Product3DBackdrop({
   );
 
   return (
-    <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden>
-      <div className="sticky top-0 h-svh">
+    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
+      <div className="h-svh">
         <div className="absolute inset-0 [background:radial-gradient(50%_45%_at_78%_38%,hsl(var(--accent)/0.14),transparent_65%),radial-gradient(45%_35%_at_82%_70%,hsl(var(--brand-purple)/0.12),transparent_70%)]" />
 
         <motion.div
           style={modelStyle}
-          className="absolute -right-[24vw] top-[4vh] h-[90vh] w-[90vh] min-w-[520px] max-w-[1080px]"
+          className="absolute -right-[28vw] top-[4vh] h-[90vh] w-[90vh] min-w-[520px] max-w-[1120px]"
         >
           {createElement("model-viewer", {
             src,
@@ -77,6 +77,7 @@ export function Product3DBackdrop({
             "shadow-intensity": "0",
             "environment-image": "neutral",
             style: {
+              display: "block",
               width: "100%",
               height: "100%",
               background: "transparent",
@@ -109,6 +110,7 @@ export function Product3DBackdrop({
               "shadow-intensity": "0",
               "environment-image": "neutral",
               style: {
+                display: "block",
                 width: "100%",
                 height: "100%",
                 background: "transparent",
