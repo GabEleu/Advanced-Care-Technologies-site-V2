@@ -13,6 +13,7 @@ import { ProductCTA } from "@/components/products/ProductCTA";
 import { ProductStickySubnav } from "@/components/products/ProductStickySubnav";
 import { ProductGallery } from "@/components/products/ProductGallery";
 import { ProductDownloads } from "@/components/products/ProductDownloads";
+import { Reveal } from "@/components/motion/Reveal";
 
 function getProblem(slug: ProductSlug) {
   if (slug === "digi-feet") {
@@ -98,13 +99,15 @@ export function ProductPageTemplate({ product }: { product: Product }) {
       <ProductHero product={product} />
       <ProductStickySubnav items={stickyItems} />
 
-      <ProductProblem
-        id="probleme"
-        title={problem.title}
-        description={problem.description}
-        bullets={problem.bullets}
-        note={problem.note}
-      />
+      <Reveal>
+        <ProductProblem
+          id="probleme"
+          title={problem.title}
+          description={problem.description}
+          bullets={problem.bullets}
+          note={problem.note}
+        />
+      </Reveal>
 
       {product.media?.gallery?.length ? (
         <ProductGallery
@@ -115,61 +118,75 @@ export function ProductPageTemplate({ product }: { product: Product }) {
       ) : null}
 
       <div id="solution" className="scroll-mt-28">
-        <ProductFeatureGrid
-          title="La solution"
-          description="Une architecture produit pensée pour transformer des signaux en informations lisibles."
-          features={product.features}
-        />
+        <Reveal>
+          <ProductFeatureGrid
+            title="La solution"
+            description="Une architecture produit pensée pour transformer des signaux en informations lisibles."
+            features={product.features}
+          />
+        </Reveal>
       </div>
 
       <div id="fonctionnement" className="scroll-mt-28">
-        <ProductHowItWorks
-          title="Comment ça marche ?"
-          description="Un parcours en quelques étapes, centré sur la lisibilité et l’intégration."
-          steps={product.howItWorks}
-        />
+        <Reveal>
+          <ProductHowItWorks
+            title="Comment ça marche ?"
+            description="Un parcours en quelques étapes, centré sur la lisibilité et l’intégration."
+            steps={product.howItWorks}
+          />
+        </Reveal>
       </div>
 
-      <ProductValueProps
-        id="benefices"
-        title="Bénéfices clés"
-        description="Des bénéfices orientés usage et suivi."
-        items={product.benefits}
-      />
+      <Reveal>
+        <ProductValueProps
+          id="benefices"
+          title="Bénéfices clés"
+          description="Des bénéfices orientés usage et suivi."
+          items={product.benefits}
+        />
+      </Reveal>
 
-      <ProductSpecs
-        id="specs"
-        title="Vue d’ensemble"
-        description="Informations descriptives pour comprendre les briques et le positionnement."
-        items={specs}
-      />
+      <Reveal>
+        <ProductSpecs
+          id="specs"
+          title="Vue d’ensemble"
+          description="Informations descriptives pour comprendre les briques et le positionnement."
+          items={specs}
+        />
+      </Reveal>
 
       <div id="preuves" className="scroll-mt-28">
-        {product.media?.partnerLogos?.length ? (
-          <ProductPartnerLogos
-            title="Partenaires et terrains"
-            description="Un ancrage terrain et des collaborations structurantes."
-            logos={product.media.partnerLogos}
-          />
-        ) : null}
+        <Reveal>
+          <>
+            {product.media?.partnerLogos?.length ? (
+              <ProductPartnerLogos
+                title="Partenaires et terrains"
+                description="Un ancrage terrain et des collaborations structurantes."
+                logos={product.media.partnerLogos}
+              />
+            ) : null}
 
-        {product.team?.collaborations?.logos?.length ? (
-          <ProductPartnerLogos
-            title="Écosystème"
-            description="Acteurs, soutiens et réseaux associés au projet."
-            logos={product.team.collaborations.logos}
-          />
-        ) : null}
+            {product.team?.collaborations?.logos?.length ? (
+              <ProductPartnerLogos
+                title="Écosystème"
+                description="Acteurs, soutiens et réseaux associés au projet."
+                logos={product.team.collaborations.logos}
+              />
+            ) : null}
 
-        <ProductSecurity title={product.security.title} description={product.security.description} />
+            <ProductSecurity title={product.security.title} description={product.security.description} />
+          </>
+        </Reveal>
       </div>
 
       <div id="pour-qui" className="scroll-mt-28">
-        <ProductAudienceGrid
-          title="Pour qui ?"
-          description="Patients, professionnels et structures : des vues adaptées à chaque contexte."
-          audiences={product.audiences}
-        />
+        <Reveal>
+          <ProductAudienceGrid
+            title="Pour qui ?"
+            description="Patients, professionnels et structures : des vues adaptées à chaque contexte."
+            audiences={product.audiences}
+          />
+        </Reveal>
       </div>
 
       {product.downloads?.length ? (
@@ -181,11 +198,13 @@ export function ProductPageTemplate({ product }: { product: Product }) {
       ) : null}
 
       <div id="faq" className="scroll-mt-28">
-        <ProductFAQ
-          title="Questions fréquentes"
-          description="Réponses courtes, précises et prudentes."
-          items={product.faq}
-        />
+        <Reveal>
+          <ProductFAQ
+            title="Questions fréquentes"
+            description="Réponses courtes, précises et prudentes."
+            items={product.faq}
+          />
+        </Reveal>
       </div>
 
       <ProductCTA

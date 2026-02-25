@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+
 import { Container } from "@/components/site/Container";
 import { cn } from "@/lib/cn";
 
@@ -13,6 +17,56 @@ export function ProductStickySubnav({
   items: StickyNavItem[];
   className?: string;
 }) {
+  const ids = useMemo(() => items.map((i) => i.id), [items]);
+  const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
+
+  useEffect(() => {
+    if (ids.length === 0) return;
+
+    const reduced =
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+
+    const visible = new Map<string, number>();
+
+    const pickActive = () => {
+      let bestId = activeId;
+      let bestRatio = -1;
+      for (const [id, ratio] of visible.entries()) {
+        if (ratio > bestRatio) {
+          bestRatio = ratio;
+          bestId = id;
+        }
+      }
+      if (bestId && bestId !== activeId) setActiveId(bestId);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          const id = (e.target as HTMLElement).id;
+          if (!id) continue;
+          if (e.isIntersecting) visible.set(id, e.intersectionRatio);
+          else visible.delete(id);
+        }
+        if (!reduced) requestAnimationFrame(pickActive);
+        else pickActive();
+      },
+      {
+        root: null,
+        rootMargin: "-30% 0px -55% 0px",
+        threshold: [0, 0.15, 0.3, 0.6, 0.9],
+      },
+    );
+
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el) io.observe(el);
+    }
+
+    return () => io.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ids.join("|")]);
+
   if (!items.length) return null;
 
   return (
@@ -22,7 +76,13 @@ export function ProductStickySubnav({
           <a
             key={it.id}
             href={`#${it.id}`}
-            className="whitespace-nowrap rounded-full border bg-card px-4 py-2 text-xs font-extrabold text-foreground/80 shadow-sm transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            aria-current={activeId === it.id ? "location" : undefined}
+            className={cn(
+              "whitespace-nowrap rounded-full border bg-card px-4 py-2 text-xs font-extrabold shadow-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+              activeId === it.id
+                ? "border-foreground/30 bg-muted text-foreground"
+                : "text-foreground/80 hover:bg-muted hover:text-foreground",
+            )}
           >
             {it.label}
           </a>
