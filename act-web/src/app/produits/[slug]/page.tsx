@@ -1,0 +1,135 @@
+import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
+import { getProductBySlug, products, type ProductSlug } from "@/data/products";
+import { Container } from "@/components/site/Container";
+import { ProductHero } from "@/components/products/ProductHero";
+import { ProductHowItWorks } from "@/components/products/ProductHowItWorks";
+import { ProductFeatureGrid } from "@/components/products/ProductFeatureGrid";
+import { ProductAudienceGrid } from "@/components/products/ProductAudienceGrid";
+import { ProductSecurity } from "@/components/products/ProductSecurity";
+import { ProductFAQ } from "@/components/products/ProductFAQ";
+import { ProductCTA } from "@/components/products/ProductCTA";
+
+export function generateStaticParams(): Array<{ slug: ProductSlug }> {
+  return products.map((p) => ({ slug: p.slug }));
+}
+
+export function generateMetadata({
+  params,
+}: {
+  params: { slug: ProductSlug };
+}): Metadata {
+  const product = getProductBySlug(params.slug);
+  if (!product) return {};
+
+  const title = product.seo.title;
+  const description = product.seo.description;
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "website",
+    },
+  };
+}
+
+function DigiFeetProblemSection() {
+  return (
+    <section className="py-16 md:py-20">
+      <Container>
+        <div className="grid gap-10 md:grid-cols-12 md:items-start">
+          <div className="md:col-span-5">
+            <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+              Enjeux
+            </div>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+              Un suivi prudent, dans un contexte à risque.
+            </h2>
+          </div>
+          <div className="md:col-span-7">
+            <div className="rounded-3xl border bg-card p-8 shadow-sm">
+              <p className="leading-relaxed text-muted-foreground">
+                Chez les personnes diabétiques, la santé du pied nécessite une attention
+                particulière. Digi’Feet vise à faciliter le suivi dans le temps grâce à des mesures
+                issues de capteurs et à des données cliniques renseignées, présentées sous forme
+                d’indicateurs lisibles.
+              </p>
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="rounded-2xl bg-muted p-5">
+                  <div className="text-sm font-extrabold">Continuité</div>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    Aider à suivre l’évolution et les tendances sans se limiter à un instant T.
+                  </div>
+                </div>
+                <div className="rounded-2xl bg-muted p-5">
+                  <div className="text-sm font-extrabold">Lecture unifiée</div>
+                  <div className="mt-2 text-sm text-muted-foreground">
+                    Rassembler mesures et données cliniques dans une vue cohérente.
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 rounded-2xl border bg-background p-5 text-xs leading-relaxed text-muted-foreground">
+                Digi’Feet n’a pas vocation à réaliser un diagnostic. Les indicateurs et le score
+                sont conçus comme une aide au suivi et à la visualisation.
+              </div>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+export default function ProductPage({
+  params,
+}: {
+  params: { slug: ProductSlug };
+}) {
+  const product = getProductBySlug(params.slug);
+  if (!product) notFound();
+
+  return (
+    <div>
+      <ProductHero product={product} />
+
+      {product.slug === "digi-feet" ? <DigiFeetProblemSection /> : null}
+
+      <ProductFeatureGrid
+        title="Des fonctionnalités conçues pour le suivi"
+        description="Capteurs, application, indicateurs : chaque brique vise une lecture plus claire et un suivi plus continu."
+        features={product.features}
+      />
+
+      <ProductHowItWorks
+        title="De la mesure à la visualisation"
+        description="Un parcours en quelques étapes, centré sur la lisibilité et l’historique."
+        steps={product.howItWorks}
+      />
+
+      <ProductSecurity title={product.security.title} description={product.security.description} />
+
+      <ProductAudienceGrid
+        title="Conçu pour patients, professionnels et structures"
+        description="Un langage neutre et des vues structurées, pour faciliter le suivi et les échanges."
+        audiences={product.audiences}
+      />
+
+      <ProductFAQ
+        title="Questions fréquentes"
+        description="Réponses courtes, précises et prudentes."
+        items={product.faq}
+      />
+
+      <ProductCTA
+        title="Parlons de votre contexte"
+        description="Décrivez votre besoin et nous organiserons une démonstration adaptée (parcours, contraintes, objectifs)."
+        primary={product.primaryCta}
+        secondary={{ label: "Voir tous les produits", href: "/produits" }}
+      />
+    </div>
+  );
+}
+
