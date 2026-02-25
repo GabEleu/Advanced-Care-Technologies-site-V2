@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import type { Product } from "@/data/products";
 import { Container } from "@/components/site/Container";
@@ -42,21 +43,39 @@ export function ProductHero({ product }: { product: Product }) {
           </div>
 
           <div className="md:col-span-5">
-            <div className="rounded-3xl border bg-card p-6 shadow-sm">
-              <div className="text-sm font-extrabold text-foreground/80">
-                Bénéfices clés
-              </div>
-              <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
-                {product.benefits.map((b) => (
-                  <li key={b} className="flex gap-3">
-                    <span className="mt-1 size-2 shrink-0 rounded-full bg-accent" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 rounded-2xl bg-muted p-4 text-xs text-muted-foreground">
-                Les informations présentées visent à aider au suivi. Elles ne constituent pas un
-                diagnostic.
+            <div className="space-y-6">
+              {product.media?.heroImage ? (
+                <div className="relative overflow-hidden rounded-3xl border bg-card p-6 shadow-sm">
+                  <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_20%_10%,hsl(var(--accent)/0.08),transparent_30%),radial-gradient(circle_at_80%_10%,hsl(var(--brand-purple)/0.08),transparent_30%)]" />
+                  <div className="relative mx-auto aspect-[4/3] w-full max-w-md">
+                    <Image
+                      src={product.media.heroImage.src}
+                      alt={product.media.heroImage.alt}
+                      fill
+                      className="object-contain"
+                      priority
+                      sizes="(min-width: 768px) 420px, 90vw"
+                    />
+                  </div>
+                </div>
+              ) : null}
+
+              <div className="rounded-3xl border bg-card p-6 shadow-sm">
+                <div className="text-sm font-extrabold text-foreground/80">
+                  Bénéfices clés
+                </div>
+                <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+                  {product.benefits.map((b) => (
+                    <li key={b} className="flex gap-3">
+                      <span className="mt-1 size-2 shrink-0 rounded-full bg-accent" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-6 rounded-2xl bg-muted p-4 text-xs text-muted-foreground">
+                  Les informations présentées visent à aider au suivi. Elles ne constituent pas un
+                  diagnostic.
+                </div>
               </div>
             </div>
           </div>
