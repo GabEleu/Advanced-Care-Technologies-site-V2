@@ -51,13 +51,13 @@ export default function ProductsPage() {
 
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <Link
-                    href={`/produits/${p.slug}`}
+                    href={`/produits/${p.slug}/`}
                     className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground shadow-sm transition hover:bg-primary/90"
                   >
                     Voir {p.name}
                   </Link>
                   <Link
-                    href="/contact"
+                    href="/contact/"
                     className="inline-flex h-11 items-center justify-center rounded-full border bg-card px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted hover:text-foreground"
                   >
                     Demander une démo

@@ -47,7 +47,7 @@ export function Header() {
                   {products.map((p) => (
                     <Link
                       key={p.slug}
-                      href={`/produits/${p.slug}`}
+                      href={`/produits/${p.slug}/`}
                       className="block rounded-xl px-3 py-3 transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       <div className="text-sm font-extrabold tracking-tight">
@@ -61,7 +61,7 @@ export function Header() {
                 </div>
                 <div className="mt-2 border-t px-3 py-2">
                   <Link
-                    href="/produits"
+                    href="/produits/"
                     className="text-xs font-extrabold text-foreground/80 hover:text-foreground"
                   >
                     Voir tous les produits →
@@ -69,7 +69,7 @@ export function Header() {
                 </div>
               </div>
             </details>
-            <NavLink href="/contact">Contact</NavLink>
+            <NavLink href="/contact/">Contact</NavLink>
           </nav>
         </div>
 
@@ -91,7 +91,7 @@ export function Header() {
               {products.map((p) => (
                 <Link
                   key={p.slug}
-                  href={`/produits/${p.slug}`}
+                  href={`/produits/${p.slug}/`}
                   className="block rounded-xl px-3 py-3 transition hover:bg-muted"
                 >
                   <div className="text-sm font-extrabold tracking-tight">{p.name}</div>
@@ -99,14 +99,14 @@ export function Header() {
                 </Link>
               ))}
               <Link
-                href="/contact"
+                href="/contact/"
                 className="mt-1 block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted"
               >
                 Contact
               </Link>
               <div className="mt-2 border-t p-2">
                 <Link
-                  href="/contact"
+                  href="/contact/"
                   className="inline-flex h-10 w-full items-center justify-center rounded-full bg-primary px-4 text-sm font-extrabold text-primary-foreground shadow-sm transition hover:bg-primary/90"
                 >
                   Demander une démo
@@ -115,7 +115,7 @@ export function Header() {
             </div>
           </details>
           <Link
-            href="/contact"
+            href="/contact/"
             className="hidden h-10 items-center justify-center rounded-full bg-primary px-4 text-sm font-bold text-primary-foreground shadow-sm transition hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background sm:inline-flex"
           >
             Demander une démo

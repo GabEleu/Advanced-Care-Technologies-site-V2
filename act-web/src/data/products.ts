@@ -72,8 +72,8 @@ export const products: Product[] = [
     tagline: "Capturer des signaux, structurer le suivi, clarifier les tendances.",
     pitch:
       "Digi’Skin combine des capteurs portés (au niveau de la main) et une application pour structurer un suivi et visualiser des indicateurs dans le temps. L’objectif est d’offrir une lecture claire et cohérente, dans un cadre professionnel et prudent.",
-    primaryCta: { label: "Demander une démo", href: "/contact" },
-    secondaryCta: { label: "Voir Digi’Feet", href: "/produits/digi-feet" },
+    primaryCta: { label: "Demander une démo", href: "/contact/" },
+    secondaryCta: { label: "Voir Digi’Feet", href: "/produits/digi-feet/" },
     media: {
       heroImage: {
         src: "/legacy/digi-skin/arm-sensors.png",
@@ -196,8 +196,8 @@ export const products: Product[] = [
     tagline: "Surveiller la santé du pied, prévenir les complications.",
     pitch:
       "Digi’Feet combine une semelle connectée et une application pour suivre l’état de santé des pieds chez les personnes diabétiques. Les capteurs embarqués et les données cliniques permettent une vision personnalisée et un score de santé du pied calculé par une IA développée en interne.",
-    primaryCta: { label: "Demander une démo", href: "/contact" },
-    secondaryCta: { label: "Voir les produits", href: "/produits" },
+    primaryCta: { label: "Demander une démo", href: "/contact/" },
+    secondaryCta: { label: "Voir les produits", href: "/produits/" },
     benefits: [
       "Suivi continu et personnalisé du pied",
       "Données capteurs + données cliniques dans une vue unifiée",
