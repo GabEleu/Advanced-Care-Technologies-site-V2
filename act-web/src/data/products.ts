@@ -132,22 +132,6 @@ export const products: Product[] = [
           src: "/legacy/digi-skin/arm-sensors-photo.png",
           alt: "Dispositif Digi’Skin porté (capteurs doigts + bracelet).",
         },
-        {
-          src: "/legacy/digiskin-legacy/screens/hero.png",
-          alt: "Capture — introduction Digi’Skin",
-        },
-        {
-          src: "/legacy/digiskin-legacy/screens/mission-chiffres.png",
-          alt: "Capture — mission et chiffres",
-        },
-        {
-          src: "/legacy/digiskin-legacy/screens/comment-ca-marche.png",
-          alt: "Capture — comment ça marche",
-        },
-        {
-          src: "/legacy/digiskin-legacy/screens/a-propos.png",
-          alt: "Capture — à propos de l’équipe",
-        },
       ],
       partnerLogos: [
         {

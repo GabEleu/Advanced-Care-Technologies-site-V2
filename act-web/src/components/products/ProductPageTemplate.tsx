@@ -14,6 +14,7 @@ import { ProductStickySubnav } from "@/components/products/ProductStickySubnav";
 import { ProductGallery } from "@/components/products/ProductGallery";
 import { ProductDownloads } from "@/components/products/ProductDownloads";
 import { Reveal } from "@/components/motion/Reveal";
+import { Container } from "@/components/site/Container";
 
 function getProblem(slug: ProductSlug) {
   if (slug === "digi-feet") {
@@ -108,6 +109,62 @@ export function ProductPageTemplate({ product }: { product: Product }) {
           note={problem.note}
         />
       </Reveal>
+
+      {product.mission || product.numbers ? (
+        <section className="scroll-mt-28 border-y bg-secondary py-16 md:py-20">
+          <Container>
+            <div className="grid gap-10 md:grid-cols-12 md:items-start">
+              {product.mission ? (
+                <div className="md:col-span-7">
+                  <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+                    Mission
+                  </div>
+                  <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+                    {product.mission.title}
+                  </h2>
+                  {product.mission.subtitle ? (
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                      {product.mission.subtitle}
+                    </p>
+                  ) : null}
+                  <div className="mt-6 grid gap-4 sm:grid-cols-3">
+                    {product.mission.cards.map((card) => (
+                      <div key={card} className="rounded-2xl border bg-card p-5 text-sm font-bold">
+                        {card}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+              {product.numbers ? (
+                <div className="md:col-span-5">
+                  <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+                    {product.numbers.title}
+                  </div>
+                  <div className="mt-4 grid gap-3">
+                    {product.numbers.stats.map((stat) => (
+                      <div key={`${stat.value || stat.line1}-${stat.line2 || ""}`} className="rounded-2xl border bg-card p-5">
+                        {stat.value ? (
+                          <div className="text-3xl font-extrabold tracking-tight">{stat.value}</div>
+                        ) : null}
+                        <div className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                          {stat.line1}
+                          {stat.line2 ? <><br />{stat.line2}</> : null}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  {product.numbers.note ? (
+                    <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+                      {product.numbers.note}
+                    </p>
+                  ) : null}
+                </div>
+              ) : null}
+            </div>
+          </Container>
+        </section>
+      ) : null}
 
       {product.media?.gallery?.length ? (
         <ProductGallery
