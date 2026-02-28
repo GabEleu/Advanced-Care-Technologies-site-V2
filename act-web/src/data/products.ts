@@ -125,12 +125,20 @@ export const products: Product[] = [
       },
       gallery: [
         {
-          src: "/legacy/digi-skin/sensor-glove.png",
-          alt: "Prototype de capteurs portés sur la main (Digi’Skin).",
+          src: "/legacy/digiskin-legacy/photos/prototype-main-table.png",
+          alt: "Prototype Digi’Skin posé sur table — vue d’ensemble du dispositif.",
         },
         {
-          src: "/legacy/digi-skin/arm-sensors-photo.png",
-          alt: "Dispositif Digi’Skin porté (capteurs doigts + bracelet).",
+          src: "/legacy/digiskin-legacy/photos/bracelet-poignet-zoom.png",
+          alt: "Zoom sur le boîtier bracelet porté au poignet.",
+        },
+        {
+          src: "/legacy/digiskin-legacy/photos/capteur-bracelet-seul.png",
+          alt: "Capteur embarqué sur bracelet élastique — vue détaillée.",
+        },
+        {
+          src: "/legacy/digiskin-legacy/photos/prototype-vue-laterale.png",
+          alt: "Vue latérale du prototype Digi’Skin avec capteurs de doigts.",
         },
       ],
       partnerLogos: [

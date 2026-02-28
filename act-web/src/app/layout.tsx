@@ -4,6 +4,7 @@ import "./globals.css";
 import { MainNavigation } from "@/components/site/MainNavigation";
 import { Footer } from "@/components/site/Footer";
 import { ScrollProgressBar } from "@/components/site/ScrollProgressBar";
+import { LanguageWrapper } from "@/components/site/LanguageWrapper";
 
 const lexend = Lexend({
   variable: "--font-sans",
@@ -62,12 +63,14 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={`${lexend.variable} ${montserratAlternates.variable} antialiased`}>
-        <div className="min-h-svh bg-background text-foreground">
-          <MainNavigation />
-          <ScrollProgressBar />
-          <main className="pt-16">{children}</main>
-          <Footer />
-        </div>
+        <LanguageWrapper>
+          <div className="min-h-svh bg-background text-foreground">
+            <MainNavigation />
+            <ScrollProgressBar />
+            <main className="pt-16">{children}</main>
+            <Footer />
+          </div>
+        </LanguageWrapper>
       </body>
     </html>
   );

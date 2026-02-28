@@ -16,6 +16,7 @@ import { ProductDownloads } from "@/components/products/ProductDownloads";
 import { Reveal } from "@/components/motion/Reveal";
 import { Container } from "@/components/site/Container";
 import { Product3DBackdrop } from "@/components/products/Product3DBackdrop";
+import { SlotCounter } from "@/components/ui/SlotCounter";
 
 function getProblem(slug: ProductSlug) {
   if (slug === "digi-feet") {
@@ -152,7 +153,9 @@ export function ProductPageTemplate({ product }: { product: Product }) {
                     {product.numbers.stats.map((stat) => (
                       <div key={`${stat.value || stat.line1}-${stat.line2 || ""}`} className="rounded-2xl border bg-card p-5">
                         {stat.value ? (
-                          <div className="text-3xl font-extrabold tracking-tight">{stat.value}</div>
+                          <div className="text-3xl font-extrabold tracking-tight">
+                            <SlotCounter value={stat.value} />
+                          </div>
                         ) : null}
                         <div className="mt-2 text-sm leading-relaxed text-muted-foreground">
                           <div>{stat.line1}</div>

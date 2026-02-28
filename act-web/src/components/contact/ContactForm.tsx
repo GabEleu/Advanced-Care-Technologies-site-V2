@@ -1,27 +1,31 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function ContactForm() {
+  const { t } = useLanguage();
+  const f = t.contactForm;
+
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [organization, setOrganization] = useState("");
   const [message, setMessage] = useState("");
 
   const mailtoHref = useMemo(() => {
-    const subject = encodeURIComponent("Demande de démo — Advanced Care Technologies");
+    const subject = encodeURIComponent(`${f.mailSubject}`);
     const body = encodeURIComponent(
       [
-        `Nom : ${fullName || "-"}`,
-        `Email : ${email || "-"}`,
-        `Organisation : ${organization || "-"}`,
+        `${f.mailName} : ${fullName || "-"}`,
+        `${f.mailEmail} : ${email || "-"}`,
+        `${f.mailOrg} : ${organization || "-"}`,
         "",
-        "Message :",
+        `${f.mailMessage} :`,
         message || "-",
       ].join("\n"),
     );
     return `mailto:contact@advancedcaretechnologies.fr?subject=${subject}&body=${body}`;
-  }, [email, fullName, message, organization]);
+  }, [email, fullName, message, organization, f]);
 
   return (
     <form
@@ -33,7 +37,7 @@ export function ContactForm() {
     >
       <div className="grid gap-4 md:grid-cols-2">
         <label className="space-y-2 text-sm font-bold">
-          <span>Nom</span>
+          <span>{f.name}</span>
           <input
             className="h-11 w-full rounded-2xl border bg-background px-4 text-sm outline-none ring-ring focus:ring-2"
             value={fullName}
@@ -42,7 +46,7 @@ export function ContactForm() {
           />
         </label>
         <label className="space-y-2 text-sm font-bold">
-          <span>Email</span>
+          <span>{f.email}</span>
           <input
             className="h-11 w-full rounded-2xl border bg-background px-4 text-sm outline-none ring-ring focus:ring-2"
             value={email}
@@ -54,7 +58,7 @@ export function ContactForm() {
         </label>
       </div>
       <label className="space-y-2 text-sm font-bold">
-        <span>Organisation</span>
+        <span>{f.organization}</span>
         <input
           className="h-11 w-full rounded-2xl border bg-background px-4 text-sm outline-none ring-ring focus:ring-2"
           value={organization}
@@ -63,7 +67,7 @@ export function ContactForm() {
         />
       </label>
       <label className="space-y-2 text-sm font-bold">
-        <span>Message</span>
+        <span>{f.message}</span>
         <textarea
           className="min-h-32 w-full rounded-2xl border bg-background px-4 py-3 text-sm outline-none ring-ring focus:ring-2"
           value={message}
@@ -77,20 +81,17 @@ export function ContactForm() {
           type="submit"
           className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground shadow-sm transition hover:bg-primary/90"
         >
-          Envoyer la demande
+          {f.submit}
         </button>
         <a
           className="text-sm font-bold text-foreground/80 hover:text-foreground"
           href={mailtoHref}
         >
-          Ou écrire directement par email
+          {f.emailLink}
         </a>
       </div>
 
-      <div className="text-xs leading-relaxed text-muted-foreground">
-        En cliquant sur “Envoyer la demande”, votre client email s’ouvrira avec un message prérempli.
-      </div>
+      <div className="text-xs leading-relaxed text-muted-foreground">{f.hint}</div>
     </form>
   );
 }
-
