@@ -55,7 +55,7 @@ export function ImageCarousel({
       role="region"
       aria-label={label}
       tabIndex={0}
-      className="rounded-3xl border bg-card p-4 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       onKeyDown={(e) => {
         if (e.key === "ArrowRight") {
           e.preventDefault();
@@ -83,9 +83,9 @@ export function ImageCarousel({
             href={img.src}
             target="_blank"
             rel="noreferrer"
-            className="group block rounded-2xl border bg-background p-3 transition hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="group block overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-muted">
+            <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-muted">
               <Image
                 src={img.src}
                 alt={img.alt}
@@ -93,16 +93,17 @@ export function ImageCarousel({
                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
                 sizes="(min-width: 768px) 45vw, 92vw"
               />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-4 pb-3 pt-8">
+                <div className="text-sm font-semibold text-white">{img.alt}</div>
+              </div>
             </div>
-            <div className="mt-3 text-sm font-bold text-foreground/80">{img.alt}</div>
-            <div className="mt-1 text-xs text-muted-foreground">Ouvrir en grand →</div>
           </a>
         ))}
       </motion.div>
 
       <div className="mt-4 flex items-center justify-between gap-4">
         <div className="text-xs text-muted-foreground">
-          Vue {current + 1} / {maxIndex + 1}
+          {current + 1} / {maxIndex + 1}
         </div>
         <div className="flex items-center gap-2">
           {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
@@ -111,8 +112,8 @@ export function ImageCarousel({
               type="button"
               onClick={() => goTo(idx)}
               className={cn(
-                "h-2.5 w-2.5 rounded-full transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                idx === current ? "bg-foreground" : "bg-muted-foreground/40",
+                "h-2 w-2 rounded-full transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                idx === current ? "bg-foreground scale-125" : "bg-muted-foreground/40",
               )}
               aria-label={`Aller à la vue ${idx + 1}`}
               aria-current={idx === current ? "true" : undefined}
@@ -124,7 +125,7 @@ export function ImageCarousel({
             type="button"
             onClick={prev}
             disabled={current === 0}
-              className="inline-flex h-9 items-center rounded-full border px-3 text-xs font-bold transition hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
+            className="inline-flex h-9 items-center rounded-full border px-3 text-xs font-bold transition hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
             aria-label="Image précédente"
           >
             ←
@@ -133,7 +134,7 @@ export function ImageCarousel({
             type="button"
             onClick={next}
             disabled={current >= maxIndex}
-              className="inline-flex h-9 items-center rounded-full border px-3 text-xs font-bold transition hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
+            className="inline-flex h-9 items-center rounded-full border px-3 text-xs font-bold transition hover:bg-muted disabled:cursor-not-allowed disabled:opacity-40"
             aria-label="Image suivante"
           >
             →

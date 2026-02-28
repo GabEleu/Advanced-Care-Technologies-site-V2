@@ -37,7 +37,7 @@ export function ScrollProgressBar() {
       className="pointer-events-none fixed right-2 top-20 z-[45] hidden h-[calc(100svh-6rem)] w-1 rounded-full bg-muted/70 md:block"
     >
       <div
-        className="absolute bottom-0 left-0 w-full rounded-full bg-primary transition-[height] duration-150"
+        className="absolute top-0 left-0 w-full rounded-full bg-primary transition-[height] duration-150"
         style={{ height: `${progress}%` }}
       />
     </div>

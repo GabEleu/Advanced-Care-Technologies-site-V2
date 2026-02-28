@@ -1,39 +1,40 @@
-import Link from "next/link";
+"use client";
 
-import { Container } from "@/components/site/Container";
+import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function Footer() {
+  const { lang, t } = useLanguage();
+
   return (
     <footer className="border-t bg-background">
-      <Container className="flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto w-full max-w-6xl px-6 md:px-8 flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between">
         <div className="space-y-1">
           <div className="text-sm font-bold">Advanced Care Technologies</div>
-          <div className="text-sm text-muted-foreground">
-            Solutions medtech de suivi et d’aide à la décision (sans diagnostic).
-          </div>
+          <div className="text-sm text-muted-foreground">{t.footer.tagline}</div>
         </div>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm font-semibold">
           <Link className="text-foreground/80 hover:text-foreground" href="/produits/">
-            Produits
+            {t.nav.products}
           </Link>
           <Link className="text-foreground/80 hover:text-foreground" href="/technologie/">
-            Technologie
+            {t.nav.technology}
           </Link>
           <Link className="text-foreground/80 hover:text-foreground" href="/clinique-ou-validation/">
-            Preuves
+            {t.nav.evidence}
           </Link>
           <Link className="text-foreground/80 hover:text-foreground" href="/ressources/">
-            Ressources
+            {t.nav.resources}
           </Link>
           <Link className="text-foreground/80 hover:text-foreground" href="/a-propos/">
-            À propos
+            {lang === "en" ? "About" : "À propos"}
           </Link>
           <Link className="text-foreground/80 hover:text-foreground" href="/contact/">
-            Contact
+            {t.nav.contact}
           </Link>
           <Link className="text-foreground/80 hover:text-foreground" href="/legal/">
-            Mentions légales
+            {t.footer.legal}
           </Link>
           <a
             className="text-foreground/80 hover:text-foreground"
@@ -42,8 +43,7 @@ export function Footer() {
             contact@advancedcaretechnologies.fr
           </a>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }
-

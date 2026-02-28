@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { ProductPageTemplate } from "@/components/products/ProductPageTemplate";
+import { DigiFeetScrollytelling } from "@/components/products/DigiFeetScrollytelling";
 import { getProductBySlug } from "@/data/products";
 
 const product = getProductBySlug("digi-feet");
@@ -19,6 +19,5 @@ export const metadata: Metadata = product
 
 export default function DigiFeetPage() {
   if (!product) return null;
-  return <ProductPageTemplate product={product} />;
+  return <DigiFeetScrollytelling product={product} />;
 }
-
