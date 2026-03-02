@@ -70,7 +70,6 @@ export function Header() {
                 </div>
               </div>
             </details>
-            <NavLink href="/technologie/">Technologie</NavLink>
             <NavLink href="/clinique-ou-validation/">Preuves</NavLink>
             <NavLink href="/ressources/">Ressources</NavLink>
             <NavLink href="/a-propos/">À propos</NavLink>
@@ -106,12 +105,6 @@ export function Header() {
               <div className="mt-2 border-t px-3 py-2 text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
                 Explorer
               </div>
-              <Link
-                href="/technologie/"
-                className="block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted"
-              >
-                Technologie
-              </Link>
               <Link
                 href="/clinique-ou-validation/"
                 className="block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted"

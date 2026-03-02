@@ -61,7 +61,6 @@ export function MainNavigation() {
   const links = [
     { href: "/", label: t.nav.home },
     { href: "/produits/", label: t.nav.products },
-    { href: "/technologie/", label: t.nav.technology },
     { href: "/clinique-ou-validation/", label: t.nav.evidence },
     { href: "/ressources/", label: t.nav.resources },
     { href: "/contact/", label: t.nav.contact },

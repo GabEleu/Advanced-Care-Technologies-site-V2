@@ -23,57 +23,122 @@ export const translations = {
       legal: "Mentions légales",
     },
     home: {
-      badge: "Medtech • Suivi • Données & indicateurs",
-      heroTitle: "Une technologie au service du suivi, sans sur-promettre.",
+      /* Hero */
+      badge: "Medtech • Innovation • Impact humain",
+      heroTitle: "La technologie au service de la santé.",
+      heroSubtitle: "Redonner une vie pleine de possibilités et de sensations.",
       heroDesc:
-        "Advanced Care Technologies conçoit des solutions combinant capteurs, applications et indicateurs pour aider au suivi et à la prise de décision. Notre approche privilégie la clarté, la sécurité et la crédibilité clinique.",
+        "Chez Advanced Care Technologies, la technologie s'efface derrière l'utilité médicale. Nous unissons ingénierie de pointe et sensibilité utilisateur pour concevoir des dispositifs qui redonnent aux personnes le contrôle de leur corps et de leur vie.",
+      heroImageAlt: "Patient retrouvant le sens du toucher grâce à Digi'Skin",
       cta1: "Découvrir Digi'Skin",
       cta2: "Découvrir Digi'Feet",
-      cta3: "Demander une démo",
-      productsEyebrow: "Nos produits",
-      productsTitle: "Deux produits, une même exigence.",
-      productsDesc:
-        "Des pages dédiées, des sections scannables, et des CTA cohérents pour faciliter la prise de contact.",
-      productsOverview: "Vue d'ensemble →",
-      productBadge: "Produit",
-      newProductBadge: "Nouveau produit",
-      seeProduct: "Voir",
-      demo: "Demander une démo",
-      whyEyebrow: "Pourquoi ACT",
-      whyTitle: "Clarté produit et crédibilité medtech.",
-      whyDesc: "Une approche orientée usage, sécurité et communication prudente.",
-      whyCards: [
+      cta3: "Nous contacter",
+      /* Solutions */
+      solutionsEyebrow: "Nos solutions",
+      solutionsTitle: "Deux dispositifs, une mission.",
+      solutionsDesc: "Des technologies non invasives qui s'intègrent dans la vie quotidienne pour restituer ce que la maladie ou le handicap ont altéré.",
+      discoverBtn: "Découvrir",
+      digiSkinShort: "Dispositif non invasif de retour haptique qui restitue le sens du toucher aux personnes amputées, grâce à un brassard de stimulation vibro-tactile.",
+      digiFeetShort: "Semelle connectée et application dédiée pour le suivi de la santé du pied des personnes diabétiques, avec score indicatif par IA.",
+      /* Digi'Skin */
+      digiSkinEyebrow: "Produit phare",
+      digiSkinTitle: "Digi'Skin — Le sens du toucher, restauré.",
+      digiSkinDesc:
+        "Digi'Skin est un dispositif non invasif qui restitue le sens du toucher pour les personnes amputées. Des capteurs de force intégrés dans la prothèse captent les interactions avec l'environnement, un traitement logiciel en temps réel encode ces données, et un brassard de stimulation vibro-tactile transmet les sensations au membre résiduel.",
+      digiSkinBenefits: [
+        "Restaurer des sensations naturelles au quotidien",
+        "Retrouver l'équilibre et la confiance dans le geste",
+        "Prévenir douleurs fantômes et blessures par manque de retour sensoriel",
+      ],
+      digiSkinFeaturesTitle: "Caractéristiques clés",
+      digiSkinFeatures: [
         {
-          title: "R&D interne",
-          desc: "Capteurs, traitement et indicateurs pensés comme un ensemble cohérent.",
+          label: "Capteur haptique",
+          desc: "Mesure fine des forces de contact intégrée dans la prothèse, sans modification invasive.",
         },
         {
-          title: "Approche terrain",
-          desc: "Itérations guidées par l'intégration et les retours d'usage.",
+          label: "Algorithmes d'IA",
+          desc: "Traitement temps réel pour encoder et adapter la stimulation aux gestes de l'utilisateur.",
         },
         {
-          title: "Design centré patient",
-          desc: "Interfaces scannables, langage neutre, historique et contexte.",
-        },
-        {
-          title: "Sécurité",
-          desc: "Bonnes pratiques de confidentialité et de minimisation des données.",
+          label: "Brassard de stimulation",
+          desc: "Stimulation vibro-tactile précise sur le membre résiduel pour recréer le retour sensoriel.",
         },
       ],
-      disclaimer:
-        "Les produits et indicateurs présentés visent à aider au suivi. Ils ne constituent pas un diagnostic et ne remplacent pas une évaluation clinique.",
-      proofEyebrow: "Preuves & confiance",
-      proofTitle: "Partenaires et écosystème.",
-      proofDesc: "Logos affichés à titre indicatif, reflétant un contexte projet/partenarial.",
-      seeApproach: "Voir notre approche →",
-      resourcesEyebrow: "Ressources",
-      resourcesTitle: "Approfondir, puis contacter.",
-      resourcesDesc:
-        "Technologie, preuves, pages produits : tout est structuré pour une lecture rapide.",
+      digiSkinCta: "Voir Digi'Skin →",
+      /* Digi'Feet */
+      digiFeetEyebrow: "Nouveau produit",
+      digiFeetTitle: "Digi'Feet — La santé du pied, sous contrôle.",
+      digiFeetDesc:
+        "Digi'Feet est une semelle connectée accompagnée d'une application dédiée pour le suivi de la santé du pied des personnes diabétiques. Les capteurs embarqués combinent mesures physiologiques et données cliniques pour générer, grâce à une IA interne, un score de santé et des indicateurs de suivi personnalisés.",
+      digiFeetFeatures: [
+        {
+          label: "Semelle instrumentée",
+          desc: "Capteurs de pression et de température intégrés pour une mesure continue et discrète.",
+        },
+        {
+          label: "Application & tableau de bord",
+          desc: "Interface patient et vue praticien pour visualiser l'évolution dans le temps.",
+        },
+        {
+          label: "Score indicatif par IA",
+          desc: "Modèle embarqué qui synthétise les données en un indicateur de santé compréhensible.",
+        },
+        {
+          label: "Données unifiées",
+          desc: "Fusion des mesures capteurs et des données cliniques pour un suivi global et cohérent.",
+        },
+      ],
+      digiFeetCta: "Voir Digi'Feet →",
+      /* Principes */
+      principlesEyebrow: "Notre approche",
+      principlesTitle: "Quatre principes qui guident chaque décision.",
+      principles: [
+        {
+          title: "Technologie au service de la santé",
+          desc: "Chaque choix technique est justifié par un bénéfice concret pour l'utilisateur ou le praticien.",
+        },
+        {
+          title: "Sobriété technologique",
+          desc: "Nous privilégions la simplicité d'usage et l'intégration dans les parcours de soins existants.",
+        },
+        {
+          title: "Restauration des sensations",
+          desc: "Notre mission fondatrice : rendre aux personnes des capacités sensorielles et motrices perdues.",
+        },
+        {
+          title: "Professionnalisme & humanité",
+          desc: "Rigueur clinique et bienveillance sont indissociables dans notre façon de concevoir et de communiquer.",
+        },
+      ],
+      /* Équipe */
+      teamEyebrow: "L'équipe",
+      teamTitle: "Pluridisciplinaire par conception.",
+      teamDesc:
+        "Notre équipe réunit ingénieurs, cliniciens et experts en robotique, convaincus qu'une technologie médicale réussie naît du dialogue entre disciplines. Chaque profil apporte une perspective essentielle au service de nos utilisateurs.",
+      teamMembers: [
+        {
+          name: "Gabriel Eleuterio",
+          role: "Cofondateur — Ingénierie & systèmes embarqués",
+        },
+        {
+          name: "Manon Frajman",
+          role: "Cofondatrice — Design & expérience utilisateur",
+        },
+        {
+          name: "Edward De Keating-Hart",
+          role: "Cofondateur — Stratégie & développement clinique",
+        },
+      ],
+      /* CTA final */
+      ctaTitle: "Repoussons ensemble les frontières de la technologie médicale.",
+      ctaDesc:
+        "Vous partagez notre conviction que la technologie peut rendre sa dignité à chaque personne ? Rejoignez-nous — que vous soyez clinicien, partenaire industriel ou investisseur.",
+      ctaJoin: "Nous rejoindre",
+      ctaSecondary: "Voir nos produits",
+      /* Clés conservées pour compatibilité avec d'autres pages */
       techLink: "Technologie →",
       proofLink: "Preuves & validation →",
-      productsLink: "Voir les produits →",
-      demoLink: "Demander une démo →",
     },
     productsPage: {
       badge: "Produits",
@@ -93,7 +158,7 @@ export const translations = {
       rows: [
         ["Indicateur principal", "Retour haptique non invasif", "Score santé du pied (IA)"],
         ["Population cible", "Personnes amputées (MS)", "Personnes diabétiques"],
-        ["Capteurs", "Force, pression (gant)", "Pression, température (semelle)"],
+        ["Capteurs", "Combinaison de capteurs", "Combinaison de capteurs"],
         ["Application", "Logiciel temps réel", "App + dashboard"],
         ["Stade", "Prototype avancé", "En développement"],
       ],
@@ -390,57 +455,122 @@ export const translations = {
       legal: "Legal notices",
     },
     home: {
-      badge: "Medtech • Follow-up • Data & indicators",
-      heroTitle: "Technology in the service of follow-up, without over-promising.",
+      /* Hero */
+      badge: "Medtech • Innovation • Human impact",
+      heroTitle: "Technology in the service of health.",
+      heroSubtitle: "Restoring human autonomy and dignity.",
       heroDesc:
-        "Advanced Care Technologies designs solutions combining sensors, applications and indicators to support monitoring and decision-making. Our approach prioritizes clarity, safety and clinical credibility.",
+        "At Advanced Care Technologies, technology steps back to serve medical utility. We combine cutting-edge engineering with user sensitivity to design devices that give people back control of their bodies and their lives.",
+      heroImageAlt: "Patient regaining the sense of touch with Digi'Skin",
       cta1: "Discover Digi'Skin",
       cta2: "Discover Digi'Feet",
-      cta3: "Request a Demo",
-      productsEyebrow: "Our products",
-      productsTitle: "Two products, one standard of excellence.",
-      productsDesc:
-        "Dedicated pages, scannable sections, and coherent CTAs to facilitate contact.",
-      productsOverview: "Overview →",
-      productBadge: "Product",
-      newProductBadge: "New product",
-      seeProduct: "View",
-      demo: "Request a Demo",
-      whyEyebrow: "Why ACT",
-      whyTitle: "Product clarity and medtech credibility.",
-      whyDesc: "An approach focused on use, safety and cautious communication.",
-      whyCards: [
+      cta3: "Contact us",
+      /* Solutions */
+      solutionsEyebrow: "Our solutions",
+      solutionsTitle: "Two devices, one mission.",
+      solutionsDesc: "Non-invasive technologies that integrate into everyday life to restore what illness or disability has altered.",
+      discoverBtn: "Discover",
+      digiSkinShort: "Non-invasive haptic feedback device that restores the sense of touch for amputees, via a vibro-tactile stimulation bracelet.",
+      digiFeetShort: "Connected insole and dedicated app for monitoring foot health in diabetic patients, with an AI-based health score.",
+      /* Digi'Skin */
+      digiSkinEyebrow: "Flagship product",
+      digiSkinTitle: "Digi'Skin — The sense of touch, restored.",
+      digiSkinDesc:
+        "Digi'Skin is a non-invasive device that restores the sense of touch for amputees. Force sensors integrated into the prosthesis capture interactions with the environment, real-time software processing encodes the data, and a vibro-tactile stimulation bracelet transmits sensations to the residual limb.",
+      digiSkinBenefits: [
+        "Restore natural sensations in everyday life",
+        "Regain balance and confidence in movement",
+        "Prevent phantom pain and injuries caused by lack of sensory feedback",
+      ],
+      digiSkinFeaturesTitle: "Key features",
+      digiSkinFeatures: [
         {
-          title: "In-house R&D",
-          desc: "Sensors, processing and indicators designed as a coherent whole.",
+          label: "Haptic sensor",
+          desc: "Fine contact force measurement integrated into the prosthesis, without invasive modification.",
         },
         {
-          title: "Field approach",
-          desc: "Iterations guided by integration and real-world usage feedback.",
+          label: "AI algorithms",
+          desc: "Real-time processing to encode and adapt stimulation to the user's gestures.",
         },
         {
-          title: "Patient-centered design",
-          desc: "Scannable interfaces, neutral language, history and context.",
-        },
-        {
-          title: "Security",
-          desc: "Best practices in data privacy and minimization.",
+          label: "Stimulation bracelet",
+          desc: "Precise vibro-tactile stimulation on the residual limb to recreate sensory feedback.",
         },
       ],
-      disclaimer:
-        "The products and indicators presented aim to support monitoring. They do not constitute a diagnosis and do not replace a clinical evaluation.",
-      proofEyebrow: "Evidence & trust",
-      proofTitle: "Partners and ecosystem.",
-      proofDesc: "Logos shown for reference, reflecting a project/partnership context.",
-      seeApproach: "View our approach →",
-      resourcesEyebrow: "Resources",
-      resourcesTitle: "Go deeper, then contact us.",
-      resourcesDesc:
-        "Technology, evidence, product pages: everything is structured for quick reading.",
+      digiSkinCta: "See Digi'Skin →",
+      /* Digi'Feet */
+      digiFeetEyebrow: "New product",
+      digiFeetTitle: "Digi'Feet — Foot health, under control.",
+      digiFeetDesc:
+        "Digi'Feet is a connected insole with a dedicated app for monitoring the foot health of diabetic patients. Onboard sensors combine physiological measurements with clinical data to generate, via an internal AI, a health score and personalised tracking indicators.",
+      digiFeetFeatures: [
+        {
+          label: "Instrumented insole",
+          desc: "Integrated pressure and temperature sensors for continuous, discreet measurement.",
+        },
+        {
+          label: "App & dashboard",
+          desc: "Patient interface and practitioner view to visualise progress over time.",
+        },
+        {
+          label: "AI health score",
+          desc: "An embedded model that synthesises data into a clear, understandable health indicator.",
+        },
+        {
+          label: "Unified data",
+          desc: "Fusion of sensor readings and clinical data for comprehensive, coherent monitoring.",
+        },
+      ],
+      digiFeetCta: "See Digi'Feet →",
+      /* Principles */
+      principlesEyebrow: "Our approach",
+      principlesTitle: "Four principles that guide every decision.",
+      principles: [
+        {
+          title: "Technology in the service of health",
+          desc: "Every technical choice is justified by a tangible benefit for the user or practitioner.",
+        },
+        {
+          title: "Technological restraint",
+          desc: "We favour ease of use and seamless integration into existing care pathways.",
+        },
+        {
+          title: "Restoring sensation",
+          desc: "Our founding mission: giving people back sensory and motor abilities they have lost.",
+        },
+        {
+          title: "Professionalism & humanity",
+          desc: "Clinical rigour and compassion are inseparable in how we design and communicate.",
+        },
+      ],
+      /* Team */
+      teamEyebrow: "The team",
+      teamTitle: "Multidisciplinary by design.",
+      teamDesc:
+        "Our team brings together engineers, clinicians and robotics experts, united by the conviction that successful medical technology is born from cross-disciplinary dialogue. Every profile contributes an essential perspective in service of our users.",
+      teamMembers: [
+        {
+          name: "Gabriel Eleuterio",
+          role: "Co-founder — Engineering & embedded systems",
+        },
+        {
+          name: "Manon Frajman",
+          role: "Co-founder — Design & user experience",
+        },
+        {
+          name: "Edward De Keating-Hart",
+          role: "Co-founder — Strategy & clinical development",
+        },
+      ],
+      /* Final CTA */
+      ctaTitle: "Let's push the boundaries of medical technology together.",
+      ctaDesc:
+        "Do you share our belief that technology can restore dignity to every person? Join us — whether you are a clinician, industrial partner, or investor.",
+      ctaJoin: "Join us",
+      ctaSecondary: "See our products",
+      /* Keys kept for compatibility with other pages */
       techLink: "Technology →",
       proofLink: "Evidence & validation →",
-      productsLink: "View products →",
-      demoLink: "Request a demo →",
     },
     productsPage: {
       badge: "Products",
@@ -460,7 +590,7 @@ export const translations = {
       rows: [
         ["Main indicator", "Non-invasive haptic feedback", "Foot health score (AI)"],
         ["Target population", "Amputees (upper limb)", "People with diabetes"],
-        ["Sensors", "Force, pressure (glove)", "Pressure, temperature (insole)"],
+        ["Sensors", "Sensor combination", "Sensor combination"],
         ["Application", "Real-time software", "App + dashboard"],
         ["Stage", "Advanced prototype", "In development"],
       ],

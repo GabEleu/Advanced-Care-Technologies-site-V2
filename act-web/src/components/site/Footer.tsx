@@ -18,9 +18,6 @@ export function Footer() {
           <Link className="text-foreground/80 hover:text-foreground" href="/produits/">
             {t.nav.products}
           </Link>
-          <Link className="text-foreground/80 hover:text-foreground" href="/technologie/">
-            {t.nav.technology}
-          </Link>
           <Link className="text-foreground/80 hover:text-foreground" href="/clinique-ou-validation/">
             {t.nav.evidence}
           </Link>
@@ -38,9 +35,9 @@ export function Footer() {
           </Link>
           <a
             className="text-foreground/80 hover:text-foreground"
-            href="mailto:contact@advancedcaretechnologies.fr"
+            href="mailto:gabriel.eleuterio@digiskin-act.fr"
           >
-            contact@advancedcaretechnologies.fr
+            gabriel.eleuterio@digiskin-act.fr
           </a>
         </div>
       </div>

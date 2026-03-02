@@ -24,7 +24,7 @@ export function ContactForm() {
         message || "-",
       ].join("\n"),
     );
-    return `mailto:contact@advancedcaretechnologies.fr?subject=${subject}&body=${body}`;
+    return `mailto:gabriel.eleuterio@digiskin-act.fr?subject=${subject}&body=${body}`;
   }, [email, fullName, message, organization, f]);
 
   return (

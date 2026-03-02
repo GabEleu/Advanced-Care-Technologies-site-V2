@@ -38,9 +38,9 @@ export function ContactContent() {
                     <span className="font-bold text-foreground/80">{c.emailLabel}</span>{" "}
                     <a
                       className="font-bold text-foreground/80 hover:text-foreground"
-                      href="mailto:contact@advancedcaretechnologies.fr"
+                      href="mailto:gabriel.eleuterio@digiskin-act.fr"
                     >
-                      contact@advancedcaretechnologies.fr
+                      gabriel.eleuterio@digiskin-act.fr
                     </a>
                   </div>
                   <div className="text-xs leading-relaxed">{c.disclaimer}</div>
