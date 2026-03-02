@@ -9,6 +9,9 @@ import { ParallaxMedia } from "@/components/motion/ParallaxMedia";
 import { HomePrinciplesScrollytelling } from "@/components/home/HomePrinciplesScrollytelling";
 import { useLanguage } from "@/context/LanguageContext";
 import { productPath } from "@/lib/productPaths";
+import { ProductTeam } from "../products/ProductTeam";
+import { getProductBySlug } from "@/data/products";
+import { ProductTeamforhome } from "../products/ProductTeamforhome";
 
 /* ─── Product card ───────────────────────────────────────────────── */
 
@@ -95,15 +98,17 @@ function TeamCard({
 /* ─── Main page ──────────────────────────────────────────────────── */
 
 const TEAM_IMAGES = [
-  "/images/team/gabriel-eleuterio.png",
-  "/images/team/manon-frajman.png",
-  "/images/team/edward-de-keating-hart.png",
+  "/legacy/digiskin-legacy/team/gabriel-eleuterio.png",
+  "/legacy/digiskin-legacy/team/manon-frajman.png",
+  "/legacy/digiskin-legacy/team/edward-de-keating-hart.png",
 ];
 
 export function HomeContent() {
   const { t } = useLanguage();
   const h = t.home;
-
+ 
+  const digiSkin = getProductBySlug("digi-skin");
+  const team = digiSkin?.team;
   return (
     <div className="relative">
 
@@ -209,36 +214,28 @@ export function HomeContent() {
       {/* ── 3. Qui nous sommes / Équipe ─────────────────────────── */}
       <section id="equipe" className="scroll-mt-28 border-y bg-secondary py-16 md:py-24">
         <Container>
-          <div className="grid gap-12 md:grid-cols-2 md:items-center">
-            {/* Texte gauche */}
-            <div>
-              <Reveal>
-                <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
-                  {h.teamEyebrow}
-                </div>
-                <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
-                  {h.teamTitle}
-                </h2>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  {h.teamDesc}
-                </p>
-              </Reveal>
+          <div className="grid gap-12 md:grid-cols-1 md:items-center">
+          {team && (
+        <section className="border-t py-16 md:py-20">
+          <Container>
+            <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+              {h.teamEyebrow}
             </div>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+              {h.teamTitle}
+            </h2>
+            <div className="mt-10">
+              <ProductTeamforhome
+                title={team.title}
+                members={team.members}
+                collaborations={team.collaborations}
+              />
+            </div>
+          </Container>
+        </section>
+      )}
+            
 
-            {/* Portraits droite avec parallax */}
-            <ParallaxMedia>
-              <div className="grid grid-cols-3 gap-4">
-                {h.teamMembers.map((m, i) => (
-                  <Reveal key={m.name} delay={i * 0.1}>
-                    <TeamCard
-                      name={m.name}
-                      role={m.role}
-                      imageSrc={TEAM_IMAGES[i] ?? "/images/team/gabriel-eleuterio.png"}
-                    />
-                  </Reveal>
-                ))}
-              </div>
-            </ParallaxMedia>
           </div>
         </Container>
       </section>

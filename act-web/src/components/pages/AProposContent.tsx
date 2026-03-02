@@ -79,18 +79,7 @@ export function AProposContent() {
         </section>
       )}
 
-      {team?.collaborations && (
-        <section className="border-t py-16 md:py-20">
-          <Container>
-            <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
-              {ab.ecoEyebrow}
-            </div>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
-              {team.collaborations.title}
-            </h2>
-          </Container>
-        </section>
-      )}
+   
     </div>
   );
 }

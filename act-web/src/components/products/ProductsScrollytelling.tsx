@@ -289,7 +289,24 @@ function TechPipelineSVG() {
             animate={{ r: [30, 36, 30], opacity: [0.4, 0, 0.4] }}
             transition={{ duration: 2.5, repeat: Infinity, delay: i * 0.5 }}
           />
-          <text x={node.x} y="76" textAnchor="middle" fill="currentColor" fontSize="7.5" fontWeight="bold" letterSpacing="0.5">{node.label}</text>
+          <text
+              x={node.x}
+              y="72"
+              textAnchor="middle"
+              fill="currentColor"
+              fontSize="7.5"
+              fontWeight="bold"
+              letterSpacing="0.5"
+            >
+              {node.label === "IA & Indicateurs" ? (
+                <>
+                  <tspan x={node.x} dy="0">IA &</tspan>
+                  <tspan x={node.x} dy="9">Indicateurs</tspan>
+                </>
+              ) : (
+                node.label
+              )}
+            </text>
           <text x={node.x} y="88" textAnchor="middle" fill="currentColor" fillOpacity="0.4" fontSize="6.5">{node.sublabel}</text>
         </motion.g>
       ))}

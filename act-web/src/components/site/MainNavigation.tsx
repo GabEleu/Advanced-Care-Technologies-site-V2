@@ -64,6 +64,7 @@ export function MainNavigation() {
     { href: "/clinique-ou-validation/", label: t.nav.evidence },
     { href: "/ressources/", label: t.nav.resources },
     { href: "/contact/", label: t.nav.contact },
+    { href: "/a-propos/", label: t.about.badge }
   ] as const;
 
   return (
@@ -76,19 +77,19 @@ export function MainNavigation() {
               {t.nav.home}
             </NavLink>
 
-            <details className="group relative">
-              <summary
-                className={cn(
-                  "relative list-none rounded-lg px-3 py-2 text-sm font-semibold text-foreground/80 transition hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background [&::-webkit-details-marker]:hidden",
-                  pathname.startsWith("/produits") && "text-foreground",
-                )}
-              >
+            <div className="group relative">
+            <div
+  className={cn(
+    "relative cursor-pointer rounded-lg px-3 py-2 text-sm font-semibold text-foreground/80 transition hover:bg-muted hover:text-foreground",
+    pathname.startsWith("/produits") && "text-foreground",
+  )}
+>
                 {t.nav.products}
                 {pathname.startsWith("/produits") ? (
                   <span className="absolute inset-x-3 -bottom-1 h-0.5 rounded-full bg-foreground/70" />
                 ) : null}
-              </summary>
-              <div className="absolute left-0 top-full mt-2 w-80 rounded-2xl border bg-card p-2 shadow-lg">
+              </div>
+              <div className="absolute left-0 top-full mt-2 w-80 rounded-2xl border bg-card p-2 shadow-lg opacity-0 invisible translate-y-2 transition-all duration-200 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0">
                 <div className="px-3 py-2 text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
                   {t.nav.range}
                 </div>
@@ -115,7 +116,7 @@ export function MainNavigation() {
                   </Link>
                 </div>
               </div>
-            </details>
+            </div>
 
             {links
               .filter((l) => l.href !== "/" && l.href !== "/produits/")
@@ -142,7 +143,7 @@ export function MainNavigation() {
 
           {/* Mobile menu */}
           <details className="relative md:hidden">
-            <summary className="list-none rounded-full border bg-card px-4 py-2 text-sm font-extrabold text-foreground/80 shadow-sm transition hover:bg-muted hover:text-foreground [&::-webkit-details-marker]:hidden">
+            <summary className="list-none rounded-full border bg-card px-4 py-2 text-sm font-extrabold text-foreground/80 shadow-sm transition hover:bg-muted hover:text-foreground ">
               {t.nav.menu}
             </summary>
             <div className="absolute right-0 top-full mt-2 w-[92vw] max-w-sm rounded-2xl border bg-card p-2 shadow-lg">
