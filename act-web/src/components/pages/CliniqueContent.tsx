@@ -13,6 +13,8 @@ export function CliniqueContent() {
   const digiSkin = getProductBySlug("digi-skin");
   const partnerLogos = digiSkin?.media?.partnerLogos ?? [];
 
+  
+
   return (
     <div>
       <section className="border-b">
@@ -73,40 +75,64 @@ export function CliniqueContent() {
         </Container>
       </section>
 
+      
       {partnerLogos.length > 0 && (
-        <section className="border-y bg-secondary py-16 md:py-20">
-          <Container>
-            <div className="grid gap-10 md:grid-cols-12 md:items-start">
-              <div className="md:col-span-5">
-                <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
-                  {ev.partnersEyebrow}
+  <section className="border-y bg-secondary py-16 md:py-20">
+    <Container>
+      <div className="grid gap-10 md:grid-cols-12 md:items-start">
+        
+        {/* Texte gauche */}
+        <div className="md:col-span-5">
+          <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+            {ev.partnersEyebrow}
+          </div>
+          <h2 className="mt-3 text-2xl font-extrabold tracking-tight md:text-3xl">
+            {ev.partnersTitle}
+          </h2>
+          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+            {ev.partnersDesc}
+          </p>
+        </div>
+
+        {/* Cards droite */}
+        <div className="md:col-span-7">
+          <div className="grid gap-6 sm:grid-cols-2">
+            {partnerLogos.map((logo) => (
+              <div
+                key={logo.src}
+                className="rounded-3xl border bg-card p-6 shadow-sm transition hover:shadow-md"
+              >
+                {/* Logo */}
+                <div className="relative mx-auto h-12 w-36">
+                  <Image
+                    src={logo.src}
+                    alt={logo.alt}
+                    fill
+                    className="object-contain"
+                    sizes="144px"
+                  />
                 </div>
-                <h2 className="mt-3 text-2xl font-extrabold tracking-tight md:text-3xl">
-                  {ev.partnersTitle}
-                </h2>
-                <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-                  {ev.partnersDesc}
-                </p>
+
+                {/* Photo */}
+                {logo.placeImage && (
+                  <div className="relative mt-6 h-36 w-full overflow-hidden rounded-2xl">
+                    <Image
+                      src={logo.placeImage}
+                      alt={`${logo.alt} location`}
+                      fill
+                      className="object-cover transition duration-500 hover:scale-105"
+                    />
+                  </div>
+                )}
               </div>
-              <div className="md:col-span-7">
-                <div className="flex flex-wrap items-center gap-6">
-                  {partnerLogos.map((logo) => (
-                    <div key={logo.src} className="relative h-10 w-32">
-                      <Image
-                        src={logo.src}
-                        alt={logo.alt}
-                        fill
-                        className="object-contain opacity-70 transition hover:opacity-100"
-                        sizes="128px"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </Container>
-        </section>
-      )}
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </Container>
+  </section>
+)}
 
       <section className="py-16 md:py-20">
         <Container>

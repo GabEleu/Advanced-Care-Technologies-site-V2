@@ -266,7 +266,7 @@ export const translations = {
         },
         {
           label: "Formulation prudente",
-          desc: "chaque texte est relu pour éviter toute allégation médicale non démontrée.",
+          desc: "chaque texte est relu pour éviter toute allégation médicale .",
         },
         {
           label: "Données",
@@ -304,7 +304,7 @@ export const translations = {
     resources: {
       badge: "Ressources",
       title: "Tout au même endroit.",
-      desc: "Liens utiles pour comprendre nos produits, notre approche technologique et notre démarche de validation. Des ressources additionnelles (PDF, presse, kit média) peuvent être ajoutées à mesure qu'elles sont disponibles.",
+      desc: "Liens utiles pour comprendre nos produits, notre approche technologique et notre démarche de validation. ",
       productsEyebrow: "Produits",
       productsTitle: "Pages produits détaillées",
       overviewLink: "Vue d'ensemble des produits →",
@@ -315,7 +315,7 @@ export const translations = {
       contactEyebrow: "Contact",
       contactTitle: "Besoin d'un échange rapide ?",
       contactDesc:
-        "Décris ton contexte (patient, équipe clinique, partenaire, structure) et nous organiserons une démonstration adaptée.",
+        "Décrivez votre contexte (patient, équipe clinique, partenaire, structure) et nous organiserons une démonstration adaptée.",
       demo: "Demander une démo",
     },
     contact: {
@@ -433,6 +433,58 @@ export const translations = {
         "Conçu pour s'intégrer dans les parcours de soins existants",
       ],
       forWho: "Pour qui ?",
+    },
+    legal: {
+      badge: "Mentions légales",
+      badgeconf: "Confidentialité",
+      back: "← Retour à l'accueil",
+      effective: "En vigueur à partir du 30/07/2025",
+    
+      intro:
+        "Les présentes mentions légales ont pour objet de définir les conditions dans lesquelles Advanced Care Technologies met à disposition le site et ses services, ainsi que les conditions d'accès et d'utilisation des services par l'Utilisateur. Les Conditions Générales d'Utilisation sont disponibles sur le site sous la rubrique « CGU ».",
+    
+      articles: [
+        {
+          title: "Article 1 : Informations légales",
+          content:
+            "Le site https://digiskin-act.fr est édité par Advanced Care Technologies, au capital social de 10 000 euros, immatriculée au RCS de Versailles sous le numéro 983264292, dont le siège social est situé au 7 RUE DU BOIS LAINE, 78790 COURGENT, France. Adresse e-mail : gabriel.eleuterio@digiskin-act.fr. Le Directeur de la publication est : ELEUTERIO Gabriel, en qualité de CEO de Advanced Care Technologies. Conformément aux articles 6-III et 19 de la Loi « Confiance dans l'Économie Numérique », il est porté à la connaissance des utilisateurs et visiteurs du site les présentes mentions légales.",
+        },
+        {
+          title: "Article 2 : Accès au site",
+          content:
+            "Le site https://digiskin-act.fr donne accès gratuitement à l'Utilisateur aux services suivants : une présentation de l'entreprise et des informations sur une solution médicale.",
+        },
+        {
+          title: "Article 3 : Collecte des données",
+          content:
+            "Le site assure à l'Utilisateur une collecte et un traitement d'informations personnelles dans le respect de la vie privée conformément à la loi n°78-17 du 6 janvier 1978 relative à l'informatique, aux fichiers et aux libertés. Les données peuvent être conservées pendant une durée maximale de 5 ans après la visite de l'Utilisateur sur le site. Ces données peuvent permettre une prise de décision automatisée, prévenir la fraude ou répondre à des obligations réglementaires. Conformément à la loi « informatique et libertés » du 6 janvier 1978 modifiée, l'Utilisateur dispose d'un droit d'accès, de rectification, de suppression et d'opposition à ses données personnelles. Pour exercer ce droit, l'Utilisateur peut envoyer un message à : gabriel.eleuterio@digiskin-act.fr.",
+        },
+        {
+          title: "Article 4 : Propriété intellectuelle",
+          content:
+            "Les marques, logos, signes ainsi que tous les contenus du site font l'objet d'une protection par le Code de la propriété intellectuelle. La marque Advanced Care Technologies est une marque déposée. Toute reproduction ou exploitation partielle ou totale est interdite sans autorisation préalable.",
+        },
+        {
+          title: "Article 5 : Responsabilité",
+          content:
+            "Les informations publiées sur le site sont réputées fiables mais sont fournies à titre indicatif et sans valeur contractuelle. Le site ne peut être tenu responsable d'erreurs, d'omissions ou de dommages liés à son utilisation.",
+        },
+        {
+          title: "Article 6 : Liens hypertextes",
+          content:
+            "Des liens hypertextes peuvent être présents sur le site. Advanced Care Technologies n'exerce aucun contrôle sur les pages externes et décline toute responsabilité quant à leur contenu.",
+        },
+        {
+          title: "Article 7 : Cookies",
+          content:
+            "Lors de la navigation, des cookies peuvent être installés sur le navigateur de l'Utilisateur. Ils sont nécessaires au bon fonctionnement du site et à l'amélioration de l'expérience utilisateur. L'Utilisateur peut gérer son consentement.",
+        },
+        {
+          title: "Article 8 : Droit applicable et juridiction",
+          content:
+            "La législation française s'applique. En cas de litige, les tribunaux français seront seuls compétents.",
+        },
+      ],
     },
   },
 
@@ -736,7 +788,7 @@ export const translations = {
     resources: {
       badge: "Resources",
       title: "Everything in one place.",
-      desc: "Useful links to understand our products, our technological approach and our validation process. Additional resources (PDF, press, media kit) may be added as they become available.",
+      desc: "Useful links to understand our products, our technological approach and our validation process. ",
       productsEyebrow: "Products",
       productsTitle: "Detailed product pages",
       overviewLink: "Products overview →",
@@ -866,6 +918,62 @@ export const translations = {
       ],
       forWho: "For whom?",
     },
+
+    legal: {
+      badge: "Legal Notice",
+      badgeconf: "Confidentiality",
+      back: "← Back to home",
+      effective: "Effective as of 30/07/2025",
+    
+      intro:
+        "These legal notices define the conditions under which Advanced Care Technologies provides access to its website and services, as well as the terms of use by the User. The General Terms of Use are available under the “CGU” section of the website.",
+    
+      articles: [
+        {
+          title: "Article 1: Legal information",
+          content:
+            "The website https://digiskin-act.fr is published by Advanced Care Technologies, with a share capital of €10,000, registered with the Versailles Trade and Companies Register under number 983264292, with its registered office located at 7 RUE DU BOIS LAINE, 78790 COURGENT, France. Email: gabriel.eleuterio@digiskin-act.fr. The Publication Director is ELEUTERIO Gabriel, acting as CEO of Advanced Care Technologies. In accordance with Articles 6-III and 19 of the French Law on Confidence in the Digital Economy, these legal notices are brought to the attention of users.",
+        },
+        {
+          title: "Article 2: Website access",
+          content:
+            "The website https://digiskin-act.fr provides Users with free access to the following services: company presentation and information about a medical solution.",
+        },
+        {
+          title: "Article 3: Data collection",
+          content:
+            "The website collects and processes personal data in compliance with French Law No. 78-17 of 6 January 1978 relating to data processing, files and freedoms. Data may be retained for up to 5 years after the User’s visit. In accordance with applicable regulations, Users have the right to access, rectify, delete and oppose their personal data by contacting: gabriel.eleuterio@digiskin-act.fr.",
+        },
+        {
+          title: "Article 4: Intellectual property",
+          content:
+            "All trademarks, logos and content on the website are protected under intellectual property law. The Advanced Care Technologies trademark is registered. Any reproduction or use without prior authorization is strictly prohibited.",
+        },
+        {
+          title: "Article 5: Liability",
+          content:
+            "The information published on the website is deemed reliable but is provided for informational purposes only and has no contractual value. The website cannot be held liable for errors, omissions, or damages resulting from its use.",
+        },
+        {
+          title: "Article 6: Hyperlinks",
+          content:
+            "Hyperlinks may be present on the website. Advanced Care Technologies has no control over external pages and cannot be held responsible for their content.",
+        },
+        {
+          title: "Article 7: Cookies",
+          content:
+            "During browsing, cookies may be installed on the User’s browser. They are necessary for proper website functioning and improving user experience. Users may manage their consent preferences.",
+        },
+        {
+          title: "Article 8: Applicable law and jurisdiction",
+          content:
+            "French law applies. In the event of a dispute, French courts shall have exclusive jurisdiction.",
+        },
+      ],
+    },
+
+   
+
   },
 } as const;
 

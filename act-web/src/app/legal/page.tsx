@@ -1,35 +1,33 @@
+
+"use client";
 import type { Metadata } from "next";
 
 import { Container } from "@/components/site/Container";
 
-export const metadata: Metadata = {
-  title: "Mentions légales",
-  description:
-    "Mentions légales et informations de confidentialité d’Advanced Care Technologies.",
-  openGraph: {
-    title: "Mentions légales | Advanced Care Technologies",
-    description:
-      "Mentions légales et informations de confidentialité d’Advanced Care Technologies.",
-    type: "website",
-  },
-};
+import { useLanguage } from "@/context/LanguageContext";
+import { productTranslationsEn } from "@/lib/i18n/translations";
+
+
 
 export default function LegalPage() {
+  const { t } = useLanguage();
+  const l = t.legal;
+
   return (
     <div>
       <section className="border-b">
         <Container className="py-16 md:py-20">
           <div className="max-w-3xl">
             <div className="inline-flex w-fit items-center rounded-full border bg-card px-3 py-1 text-xs font-extrabold text-foreground/80 shadow-sm">
-              Legal
+              {l.badge}
             </div>
+
             <h1 className="mt-4 text-4xl font-extrabold tracking-tight md:text-6xl">
-              Mentions légales & confidentialité
+              {l.badge}
             </h1>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground md:text-xl">
-              Cette page fournit des informations générales. Elle peut être complétée avec les
-              éléments légaux (raison sociale, adresse, directeur de publication, hébergeur, etc.)
-              et une politique de confidentialité détaillée.
+
+            <p className="mt-4 text-sm text-muted-foreground">
+              {l.effective}
             </p>
           </div>
         </Container>
@@ -37,40 +35,50 @@ export default function LegalPage() {
 
       <section className="py-16 md:py-20">
         <Container>
-          <div className="grid gap-6 md:grid-cols-2">
+          
+          <div className="grid gap-6 md:grid-cols-1">
             <div className="rounded-3xl border bg-card p-8 shadow-sm">
-              <h2 className="text-2xl font-extrabold tracking-tight">Mentions légales</h2>
-              <div className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
-                <p>
-                  <span className="font-bold text-foreground/80">Éditeur</span> : Advanced Care
-                  Technologies (à compléter : forme juridique, capital, adresse, RCS/SIRET).
-                </p>
-                <p>
-                  <span className="font-bold text-foreground/80">Directeur de publication</span> :
-                  à compléter.
-                </p>
-                <p>
-                  <span className="font-bold text-foreground/80">Hébergement</span> : GitHub Pages
-                  (GitHub, Inc.).
-                </p>
+            <h2 className="text-2xl font-extrabold tracking-tight">
+                {t.footer.legal}
+              </h2>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {l.intro}
+              </p>
+
+              <div className="mt-8 space-y-8">
+                {l.articles.map((article, index) => (
+                  <div key={index}>
+                    <h2 className="text-lg font-bold text-foreground">
+                      {article.title}
+                    </h2>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {article.content}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="rounded-3xl border bg-card p-8 shadow-sm">
-              <h2 className="text-2xl font-extrabold tracking-tight">Confidentialité</h2>
+              <h2 className="text-2xl font-extrabold tracking-tight">
+                {l.badgeconf}
+              </h2>
+
               <div className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
                 <p>
-                  Nous appliquons des bonnes pratiques de minimisation et de sécurité des données.
-                  Les informations affichées sur ce site ont une vocation informative.
+                  {t.lang === "fr"
+                    ? "Nous appliquons des bonnes pratiques de minimisation et de sécurité des données. Les informations affichées sur ce site ont une vocation informative."
+                    : "We apply data minimisation and security best practices. The information displayed on this website is provided for informational purposes only."}
                 </p>
+
                 <p>
-                  <span className="font-bold text-foreground/80">Données de contact</span> : si vous
-                  nous écrivez, vos informations sont utilisées uniquement pour répondre à votre
-                  demande.
-                </p>
-                <p>
-                  <span className="font-bold text-foreground/80">Cookies</span> : à compléter (si
-                  des outils de mesure d’audience sont ajoutés, préciser finalités et base légale).
+                  <span className="font-bold text-foreground/80">
+                    {t.lang === "fr" ? "Données de contact" : "Contact data"}
+                  </span>{" "}
+                  :
+                  {t.lang === "fr"
+                    ? " si vous nous écrivez, vos informations sont utilisées uniquement pour répondre à votre demande."
+                    : " if you contact us, your information is used solely to respond to your request."}
                 </p>
               </div>
             </div>
@@ -80,9 +88,11 @@ export default function LegalPage() {
             <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
               Important
             </div>
+
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              Les contenus produits décrivent des approches et indicateurs destinés à aider au
-              suivi. Ils ne constituent pas un diagnostic et ne remplacent pas un avis médical.
+              {t.lang === "fr"
+                ? "Les contenus décrivent des indicateurs destinés à aider au suivi. Ils ne constituent pas un diagnostic et ne remplacent pas un avis médical."
+                : "The content describes indicators intended to support monitoring. They do not constitute a diagnosis and do not replace medical advice."}
             </p>
           </div>
         </Container>

@@ -39,6 +39,7 @@ export type ProductPartnerLogo = {
   src: string;
   alt: string;
   href?: string;
+  placeImage?: string;
 };
 
 export type ProductMission = {
@@ -145,10 +146,12 @@ export const products: Product[] = [
         {
           src: "/legacy/partners/clinique-jules-verne.png",
           alt: "Clinique Jules Verne (Groupe VYV)",
+          placeImage: "/legacy/digiskin-legacy/cliniques_images/clinique-jules-verne.jpg"
         },
         {
           src: "/legacy/partners/la-tourmaline.png",
           alt: "La Tourmaline — Centre de Réadaptation et de Rééducation Fonctionnelle",
+          placeImage: "/legacy/digiskin-legacy/cliniques_images/pole-tourmaline-maubreuil.jpg"
         },
       ],
     },
@@ -248,7 +251,7 @@ export const products: Product[] = [
           name: "Gabriel ELEUTERIO",
           role: "CEO & cofondateur",
           qualifications:
-            "Ingénieur en Biotechnologie (Sup'Biotech) • ESME - Mastère Spécialisé en Numérique et Biotechnologie (Robotique) • Inventeur de la technologie de restitution sensorielle : Digi'Skin",
+            "Ingénieur en Biotechnologie (Sup'Biotech) • ESME - Mastère Spécialisé en Numérique et Biotechnologie (Robotique) • Inventeur de la technologie ",
           image: {
             src: "/legacy/digiskin-legacy/team/gabriel-eleuterio.png",
             alt: "Portrait de Gabriel ELEUTERIO",
@@ -258,7 +261,7 @@ export const products: Product[] = [
           name: "Manon Frajman",
           role: "COO & cofondatrice",
           qualifications:
-            "Ingénieure en Biotechnologie (Sup'Biotech) • Product Manager et Clinical Project Manager dans des startups de dispositifs médicaux • Auto-entrepreneur : rédaction de dossiers de financement",
+            " Product Manager et Clinical Project Manager dans des startups de dispositifs médicaux",
           image: {
             src: "/legacy/digiskin-legacy/team/manon-frajman.png",
             alt: "Portrait de Manon Frajman",
@@ -268,7 +271,7 @@ export const products: Product[] = [
           name: "Edward De Keating - Hart",
           role: "Chirurgien Orthopédiste & cofondateur",
           qualifications:
-            "Chirurgien Orthopédiste • Membre de la Société Française de Chirurgie Orthopédique et Traumatologique (SOFCOT) • Membre associé de la Société Française de Chirurgie de la Main (SFCM)",
+            "Chirurgien Orthopédiste • Membre de la Société Française de Chirurgie Orthopédique et Traumatologique (SOFCOT) • Membre associé de la Société Française de Chirurgie de la Main (SFCM) • Expert des prothèses bioniques",
           image: {
             src: "/legacy/digiskin-legacy/team/edward-de-keating-hart.png",
             alt: "Portrait de Edward De Keating - Hart",
