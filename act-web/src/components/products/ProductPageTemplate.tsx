@@ -268,7 +268,7 @@ export function ProductPageTemplate({ product }: { product: Product }) {
         <Reveal>
           <ProductFAQ
             title="Questions fréquentes"
-            description="Réponses courtes, précises et prudentes."
+            description=""
             items={product.faq}
           />
         </Reveal>

@@ -572,12 +572,12 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
               </h2>
               <div className="flex flex-wrap items-center gap-8">
                 {partnerLogos.map((logo) => (
-                  <div key={logo.src} className="relative h-10 w-32">
+                  <div key={logo.src} className="relative h-14 w-40">
                     <Image
                       src={logo.src}
                       alt={logo.alt}
                       fill
-                      className="object-contain brightness-0 invert opacity-60 transition hover:opacity-100"
+                      className="object-contain opacity-70 transition hover:opacity-100"
                       sizes="128px"
                     />
                   </div>
@@ -602,12 +602,12 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
               </p>
               <div className="flex flex-wrap items-center gap-6">
                 {ecosystemLogos.map((logo) => (
-                  <div key={logo.src} className="relative h-9 w-28">
+                  <div key={logo.src} className="relative h-12 w-36">
                     <Image
                       src={logo.src}
                       alt={logo.alt}
                       fill
-                      className="object-contain brightness-0 invert opacity-50 transition hover:opacity-90"
+                      className="object-contain opacity-70 transition hover:opacity-100"
                       sizes="112px"
                     />
                   </div>
@@ -629,9 +629,6 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
                   <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
                     {st.faqTitle}
                   </h2>
-                  <p className="mt-4 text-sm text-white/40 leading-relaxed">
-                    {st.faqSubtitle}
-                  </p>
                 </div>
                 <div className="md:col-span-8">
                   <DarkFAQ items={localFaq} />

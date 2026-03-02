@@ -656,9 +656,6 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
                   <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">
                     {st.faqTitle}
                   </h2>
-                  <p className="mt-4 text-sm text-white/40 leading-relaxed">
-                    {st.faqSubtitle}
-                  </p>
                 </div>
                 <div className="md:col-span-8">
                   <DarkFAQ items={localFaq} />

@@ -101,10 +101,10 @@ export function RessourcesContent() {
                     {r.demo}
                   </Link>
                   <a
-                    href="mailto:contact@advancedcaretechnologies.fr"
+                    href="mailto:gabriel.eleuterio@digiskin-act.fr"
                     className="inline-flex h-11 items-center justify-center rounded-full border bg-background px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted hover:text-foreground"
                   >
-                    contact@advancedcaretechnologies.fr
+                    gabriel.eleuterio@digiskin-act.fr
                   </a>
                 </div>
               </div>

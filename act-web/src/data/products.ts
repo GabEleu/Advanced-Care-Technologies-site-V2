@@ -1,4 +1,4 @@
-export type ProductSlug = "digi-skin" | "digi-feet";
+﻿export type ProductSlug = "digi-skin" | "digi-feet";
 
 export type ProductCTA = {
   label: string;
@@ -150,10 +150,6 @@ export const products: Product[] = [
           src: "/legacy/partners/la-tourmaline.png",
           alt: "La Tourmaline — Centre de Réadaptation et de Rééducation Fonctionnelle",
         },
-        {
-          src: "/legacy/partners/wilco.png",
-          alt: "WILCO",
-        },
       ],
     },
     benefits: [
@@ -282,6 +278,10 @@ export const products: Product[] = [
       collaborations: {
         title: "Écosystème, partenariats et soutiens",
         logos: [
+          {
+            src: "/legacy/partners/wilco.png",
+            alt: "WILCO",
+          },
           {
             src: "/legacy/digiskin-legacy/ecosystem/supbiotech.png",
             alt: "Sup’Biotech",
