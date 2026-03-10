@@ -9,6 +9,10 @@ export const translations = {
     nav: {
       home: "Accueil",
       products: "Produits",
+      profiles: "Profils",
+      patients: "Patients",
+      professionnels: "Professionnels de santé",
+      investisseurs: "Investisseurs",
       technology: "Technologie",
       evidence: "Preuves",
       resources: "Ressources",
@@ -133,9 +137,32 @@ export const translations = {
       /* CTA final */
       ctaTitle: "Repoussons ensemble les frontières de la technologie médicale.",
       ctaDesc:
-        "Vous partagez notre conviction que la technologie peut rendre sa dignité à chaque personne ? Rejoignez-nous — que vous soyez clinicien, partenaire industriel ou investisseur.",
+        "Vous partagez notre conviction que la technologie peut rendre sa dignité à chaque personne ? Rejoignez-nous, que vous soyez clinicien, partenaire industriel, investisseur, curieux ou concerné par l'usage de nos dispositifs.",
       ctaJoin: "Nous rejoindre",
       ctaSecondary: "Voir nos produits",
+      /* Navigation par profils */
+      profileNavigation: {
+        eyebrow: "Votre profil",
+        title: "Explorez selon votre situation.",
+        desc: "Que vous soyez patient, professionnel de santé ou investisseur, découvrez comment nos solutions s'adaptent à votre contexte.",
+      },
+      profileCards: [
+        {
+          title: "Patients",
+          desc: "Des dispositifs conçus pour améliorer votre quotidien et soutenir votre autonomie, dans un cadre d'accompagnement adapté.",
+          href: "/patients",
+        },
+        {
+          title: "Professionnels de santé",
+          desc: "Des outils de suivi et d'aide à la décision pour intégrer dans vos parcours de soins, sans promesse de diagnostic.",
+          href: "/professionnels",
+        },
+        {
+          title: "Investisseurs",
+          desc: "Une vision medtech orientée impact humain, validation clinique et intégration terrain. Découvrez notre approche.",
+          href: "/investisseurs",
+        },
+      ],
       /* Clés conservées pour compatibilité avec d'autres pages */
       techLink: "Technologie →",
       proofLink: "Preuves & validation →",
@@ -149,7 +176,7 @@ export const translations = {
       see: "Voir",
       demo: "Demander une démo",
       comparatifEyebrow: "Vue d'ensemble",
-      comparatifTitle: "Comparatif léger.",
+      comparatifTitle: "Comparatif",
       comparatifDesc:
         "Un résumé scannable pour comprendre l'usage et les briques, sans détails sensibles.",
       colProduct: "Produit",
@@ -185,8 +212,7 @@ export const translations = {
       ],
       proofEyebrow: "Preuves",
       proofTitle: "Notre démarche de validation.",
-      proofDesc:
-        "Méthodologie, partenariats et transparence. Voir notre page dédiée pour les détails.",
+      proofDesc: "Méthodologie, partenariats et transparence.",
       seeEvidence: "Voir l'approche clinique →",
     },
     technology: {
@@ -238,7 +264,7 @@ export const translations = {
     evidence: {
       badge: "Preuves",
       title: "Une approche prudente, orientée preuve.",
-      desc: "Nous concevons et évaluons nos solutions avec une attention portée à la méthodologie, à l'intégration terrain et à la transparence. Cette page décrit notre démarche sans inventer de résultats ni promettre un diagnostic.",
+      desc: "Nous concevons et évaluons nos solutions avec une attention portée à la méthodologie, à l'intégration terrain et à la transparence.",
       seeProducts: "Découvrir les produits",
       demo: "Demander une démo",
       methodEyebrow: "Méthodologie",
@@ -253,6 +279,7 @@ export const translations = {
       ],
       disclaimer:
         "Les indicateurs présentés visent à soutenir le suivi. Ils ne constituent pas un résultat clinique validé et ne remplacent pas une évaluation professionnelle.",
+      ecoEyebrow: "Écosystème",
       partnersEyebrow: "Partenaires",
       partnersTitle: "Terrains cliniques & soutiens.",
       partnersDesc:
@@ -265,10 +292,6 @@ export const translations = {
           desc: "nos indicateurs sont des aides au suivi, pas des diagnostics.",
         },
         {
-          label: "Formulation prudente",
-          desc: "chaque texte est relu pour éviter toute allégation médicale .",
-        },
-        {
           label: "Données",
           desc: "minimisation, confidentialité et traçabilité au cœur de la conception.",
         },
@@ -277,7 +300,7 @@ export const translations = {
     about: {
       badge: "À propos",
       title: "Concevoir des produits utiles, avec exigence.",
-      desc: "Advanced Care Technologies développe des solutions medtech combinant capteurs, logiciel et visualisations claires. Notre priorité : une information compréhensible et exploitable, sans sur-promettre.",
+      desc: "Advanced Care Technologies développe des solutions non invasives qui s'intègrent dans la vie quotidienne pour restituer les sensations que la maladie ou le handicap ont altéré.",
       seeProducts: "Découvrir les produits",
       contact: "Nous contacter",
       valuesCards: [
@@ -356,7 +379,7 @@ export const translations = {
       contactEyebrow: "Contact",
       contactTitle: "Parlons de votre contexte",
       contactDesc:
-        "Décrivez votre besoin et nous organiserons une démonstration adaptée — parcours, contraintes, objectifs.",
+        "Décrivez votre besoin et nous organiserons une démonstration adaptée : parcours, contraintes, objectifs.",
       howEyebrow: "Fonctionnement",
       howTitle: "Comment ça marche",
       step: "Étape",
@@ -376,7 +399,7 @@ export const translations = {
         "L'absence de sensations au niveau d'une prothèse peut compliquer certains gestes du quotidien.",
       b02Bullets: [
         "Perte du sens du toucher après amputation",
-        "Risques de blessures sans retour sensitif",
+        "Utilisation peu naturelle de la prothèse",
         "Impact sur l'autonomie et la qualité de vie",
         "Besoin d'une solution non invasive, adaptée à l'usage quotidien",
       ],
@@ -384,8 +407,8 @@ export const translations = {
       b08Subtitle: "Un écosystème au service de l'autonomie.",
       b08Bullets: [
         "Restaurer des sensations",
-        "Retrouver l'équilibre",
-        "Éviter douleurs et blessures",
+        "Améliorer l'appropriation des prothèses",
+        "Diminuer les douleurs fantômes",
       ],
       forWho: "Pour qui ?",
     },
@@ -395,7 +418,7 @@ export const translations = {
         "LE DÉFI",
         "CAPTEURS EMBARQUÉS",
         "DONNÉES UNIFIÉES",
-        "SCORE IA DE SANTÉ",
+        "DONNÉES UNIFIÉES & SCORE IA",
         "EN CHIFFRES",
         "CONÇU POUR VOUS",
         "AU-DELÀ DU PIED",
@@ -486,6 +509,190 @@ export const translations = {
         },
       ],
     },
+    profiles: {
+      patients: {
+        badge: "Patients",
+        heroImageAlt: "Patient retrouvant le sens du toucher grâce à Digi'Skin",
+        title: "Des solutions conçues pour vous.",
+        desc: "Que vous soyez concerné par Digi'Skin (amputation) ou Digi'Feet (diabète), nos dispositifs visent à améliorer votre quotidien et soutenir votre autonomie, dans un cadre d'accompagnement adapté.",
+        ctaPrimary: "Demander une démo",
+        ctaSecondary: "Voir nos produits",
+        presentationEyebrow: "Pour vous",
+        presentationTitle: "Une technologie au service de votre autonomie.",
+        presentationDesc: "Nos dispositifs sont conçus pour s'intégrer dans votre vie quotidienne. Ils ne remplacent pas l'accompagnement médical mais le complètent, avec des indicateurs lisibles et une approche prudente.",
+        benefitsEyebrow: "Bénéfices",
+        benefitsTitle: "Ce que vous pouvez en retirer.",
+        benefits: [
+          {
+            eyebrow: "Autonomie",
+            title: "Mieux comprendre votre évolution",
+            desc: "Des indicateurs clairs pour suivre votre situation dans le temps, en lien avec votre équipe soignante.",
+          },
+          {
+            eyebrow: "Usage quotidien",
+            title: "Des dispositifs adaptés",
+            desc: "Conçus pour être portés au quotidien, avec une continuité de mesure et une intégration discrète.",
+          },
+          {
+            eyebrow: "Accompagnement",
+            title: "Dans un cadre structuré",
+            desc: "Nos solutions s'inscrivent dans un parcours de soins, sans promesse de diagnostic ni substitution au suivi clinique.",
+          },
+        ],
+        faqTitle: "Questions fréquentes",
+        faqItems: [
+          {
+            question: "Comment demander une démo ?",
+            answer: "Rendez-vous sur notre page Contact pour décrire votre contexte. Nous organiserons une démonstration adaptée à votre situation.",
+          },
+          {
+            question: "Les dispositifs sont-ils remboursés ?",
+            answer: "Nos produits sont en phase de développement. Les conditions de remboursement seront précisées lors de la commercialisation.",
+          },
+          {
+            question: "Puis-je essayer Digi'Skin ou Digi'Feet ?",
+            answer: "Nous organisons des démonstrations sur demande. Contactez-nous pour en savoir plus sur les modalités.",
+          },
+        ],
+        ctaTitle: "Prêt à en savoir plus ?",
+        ctaDesc: "Décrivez votre contexte et nous organiserons une démonstration adaptée à votre situation.",
+        priseEnMainSection: {
+          eyebrow: "Prise en main",
+          title: "15 à 30 minutes pour apprendre.",
+          description:
+            "Le temps nécessaire pour prendre en main le dispositif Digi'Skin et commencer à en bénéficier au quotidien.",
+        },
+        videoSection: {
+          eyebrow: "Témoignage",
+          title: "Retour d'un patient ayant essayé Digi'Skin",
+          transcriptLabel: "Transcription",
+          transcript:
+            "Témoignage vidéo d'un patient ayant testé Digi'Skin. Le dispositif de retour haptique permet de retrouver des sensations au niveau de la prothèse.",
+        },
+      },
+      professionnels: {
+        badge: "Professionnels de santé",
+        heroImageAlt: "Professionnel de santé expliquant les données à un patient",
+        title: "Des outils pour vos parcours de soins.",
+        desc: "Digi'Skin et Digi'Feet s'intègrent dans vos protocoles de suivi. Indicateurs lisibles, aide à la décision sans diagnostic, et approche prudente au cœur de notre conception.",
+        ctaPrimary: "Demander une démo",
+        ctaSecondary: "Voir nos produits",
+        presentationEyebrow: "Pour vous",
+        presentationTitle: "Intégration dans vos parcours.",
+        presentationDesc: "Nos dispositifs fournissent des données structurées et des indicateurs exploitables pour soutenir le dialogue avec vos patients. Ils ne remplacent pas l'évaluation clinique mais l'accompagnent.",
+        benefitsEyebrow: "Bénéfices",
+        benefitsTitle: "Ce que nos solutions apportent.",
+        benefits: [
+          {
+            eyebrow: "Suivi structuré",
+            title: "Données et indicateurs",
+            desc: "Visualisations claires, historique et tendances pour faciliter le suivi dans le temps.",
+          },
+          {
+            eyebrow: "Intégration",
+            title: "Dans vos protocoles",
+            desc: "Conçus pour s'adapter aux parcours existants, sans bouleverser vos pratiques.",
+          },
+          {
+            eyebrow: "Prudence",
+            title: "Sans promesse de diagnostic",
+            desc: "Nos indicateurs sont des aides au suivi. Nous communiquons avec transparence sur leurs limites.",
+          },
+        ],
+        faqTitle: "Questions fréquentes",
+        faqItems: [
+          {
+            question: "Comment intégrer vos dispositifs dans notre structure ?",
+            answer: "Contactez-nous pour organiser une démonstration et discuter des modalités d'intégration adaptées à votre contexte.",
+          },
+          {
+            question: "Les données sont-elles conformes RGPD ?",
+            answer: "Nous concevons nos produits avec une attention particulière à la confidentialité et à la minimisation des données.",
+          },
+          {
+            question: "Proposez-vous des formations ?",
+            answer: "Nous accompagnons les équipes lors du déploiement. Renseignez-vous via notre page Contact.",
+          },
+        ],
+        ctaTitle: "Envie d'en savoir plus ?",
+        ctaDesc: "Décrivez votre contexte et nous organiserons une présentation adaptée à votre équipe.",
+        precliniqueSection: {
+          eyebrow: "Résultats précliniques",
+          title: "200% de force en moins pour saisir un objet.",
+          description:
+            "Cette réduction de force témoigne d'une meilleure perception de l'objet et d'une aisance d'utilisation accrue grâce au retour haptique. Étude réalisée avec patient aveuglé, prothèse équipée de Digi'Skin vs sans dispositif.",
+        },
+      },
+      investisseurs: {
+        badge: "Investisseurs",
+        heroImageAlt: "Partenariat et collaboration business",
+        title: "Une vision medtech orientée impact.",
+        desc: "Advanced Care Technologies développe des solutions de suivi et d'aide à la décision. Validation clinique, intégration terrain et approche prudente guident notre développement.",
+        ctaPrimary: "Nous contacter",
+        ctaSecondary: "Voir nos produits",
+        presentationEyebrow: "Notre approche",
+        presentationTitle: "Technologie et validation.",
+        presentationDesc: "Nous privilégions une démarche rigoureuse : partenariats cliniques, méthodologie de validation documentée, et communication prudente. Nos produits visent le suivi, pas le diagnostic.",
+        benefitsEyebrow: "Points clés",
+        benefitsTitle: "Pourquoi nous rejoindre.",
+        benefits: [
+          {
+            eyebrow: "Marché",
+            title: "Des besoins non couverts",
+            desc: "Amputation et pied diabétique : des populations importantes avec des besoins de suivi structuré.",
+          },
+          {
+            eyebrow: "Validation",
+            title: "Approche orientée preuve",
+            desc: "Partenariats cliniques, itérations terrain et transparence sur les limites de nos indicateurs.",
+          },
+          {
+            eyebrow: "Équipe",
+            title: "Pluridisciplinaire",
+            desc: "Ingénierie, design, clinique et stratégie réunis pour concevoir des produits crédibles et utiles.",
+          },
+        ],
+        faqTitle: "Questions fréquentes",
+        faqItems: [
+          {
+            question: "À quel stade sont vos produits ?",
+            answer: "Digi'Skin est en prototype avancé. Digi'Feet est en développement. Nous pouvons détailler notre roadmap lors d'un échange.",
+          },
+          {
+            question: "Comment vous contacter pour un échange ?",
+            answer: "Utilisez notre page Contact pour décrire votre contexte. Nous reviendrons vers vous pour organiser une présentation.",
+          },
+          {
+            question: "Quels sont vos partenaires cliniques ?",
+            answer: "Nous travaillons avec des structures et praticiens partenaires. Les détails peuvent être partagés dans le cadre d'échanges confidentiels.",
+          },
+        ],
+        ctaTitle: "Intéressé par notre vision ?",
+        ctaDesc: "Contactez-nous pour organiser un échange et découvrir notre approche en détail.",
+        statsSection: {
+          eyebrow: "En chiffres",
+          title: "Le diabète et le pied : des chiffres qui parlent.",
+          subtitle: "Des enjeux réels, à l'échelle mondiale.",
+          stats: [
+            {
+              value: "537M",
+              line1: "personnes diabétiques",
+              line2: "dans le monde (IDF 2021)",
+            },
+            {
+              value: "25%",
+              line1: "des diabétiques développent",
+              line2: "une plaie du pied au cours de leur vie",
+            },
+            {
+              value: "85%",
+              line1: "des amputations du pied",
+              line2: "sont précédées d'une plaie évitable",
+            },
+          ],
+        },
+      },
+    },
   },
 
   en: {
@@ -493,6 +700,10 @@ export const translations = {
     nav: {
       home: "Home",
       products: "Products",
+      profiles: "Profiles",
+      patients: "Patients",
+      professionnels: "Healthcare professionals",
+      investisseurs: "Investors",
       technology: "Technology",
       evidence: "Evidence",
       resources: "Resources",
@@ -620,6 +831,29 @@ export const translations = {
         "Do you share our belief that technology can restore dignity to every person? Join us — whether you are a clinician, industrial partner, or investor.",
       ctaJoin: "Join us",
       ctaSecondary: "See our products",
+      /* Profile navigation */
+      profileNavigation: {
+        eyebrow: "Your profile",
+        title: "Explore according to your situation.",
+        desc: "Whether you are a patient, healthcare professional or investor, discover how our solutions adapt to your context.",
+      },
+      profileCards: [
+        {
+          title: "Patients",
+          desc: "Devices designed to improve your daily life and support your autonomy, within an adapted care framework.",
+          href: "/patients",
+        },
+        {
+          title: "Healthcare professionals",
+          desc: "Monitoring and decision-support tools to integrate into your care pathways, without diagnostic promises.",
+          href: "/professionnels",
+        },
+        {
+          title: "Investors",
+          desc: "A medtech vision focused on human impact, clinical validation and field integration. Discover our approach.",
+          href: "/investisseurs",
+        },
+      ],
       /* Keys kept for compatibility with other pages */
       techLink: "Technology →",
       proofLink: "Evidence & validation →",
@@ -670,7 +904,7 @@ export const translations = {
       proofEyebrow: "Evidence",
       proofTitle: "Our validation approach.",
       proofDesc:
-        "Methodology, partnerships and transparency. See our dedicated page for details.",
+        "Methodology, partnerships and transparency.",
       seeEvidence: "View clinical approach →",
     },
     technology: {
@@ -722,7 +956,7 @@ export const translations = {
     evidence: {
       badge: "Evidence",
       title: "A cautious, evidence-oriented approach.",
-      desc: "We design and evaluate our solutions with careful attention to methodology, field integration and transparency. This page describes our approach without fabricating results or promising a diagnosis.",
+      desc: "We design and evaluate our solutions with careful attention to methodology, field integration and transparency.",
       seeProducts: "Discover products",
       demo: "Request a Demo",
       methodEyebrow: "Methodology",
@@ -737,6 +971,7 @@ export const translations = {
       ],
       disclaimer:
         "The indicators presented aim to support monitoring. They do not constitute a validated clinical result and do not replace a professional evaluation.",
+      ecoEyebrow: "Ecosystem",
       partnersEyebrow: "Partners",
       partnersTitle: "Clinical sites & supporters.",
       partnersDesc:
@@ -749,10 +984,6 @@ export const translations = {
           desc: "our indicators are monitoring aids, not diagnoses.",
         },
         {
-          label: "Cautious wording",
-          desc: "every text is reviewed to avoid any unproven medical claim.",
-        },
-        {
           label: "Data",
           desc: "minimization, confidentiality and traceability at the heart of the design.",
         },
@@ -761,7 +992,7 @@ export const translations = {
     about: {
       badge: "About",
       title: "Designing useful products, with high standards.",
-      desc: "Advanced Care Technologies develops medtech solutions combining sensors, software and clear visualizations. Our priority: understandable and actionable information, without over-promising.",
+      desc: "Advanced Care Technologies develops non-invasive solutions that integrate into daily life to restore the sensations altered by illness or disability.",
       seeProducts: "Discover products",
       contact: "Contact us",
       valuesCards: [
@@ -860,7 +1091,7 @@ export const translations = {
         "The absence of sensation at the prosthesis level can complicate everyday interactions.",
       b02Bullets: [
         "Loss of the sense of touch following amputation",
-        "Risk of injury without sensory feedback",
+        "Unnatural use of the prosthesis",
         "Impact on autonomy and quality of life",
         "Need for a non-invasive solution adapted to everyday use",
       ],
@@ -868,8 +1099,8 @@ export const translations = {
       b08Subtitle: "An ecosystem in the service of autonomy.",
       b08Bullets: [
         "Restore sensations",
-        "Regain balance",
-        "Avoid pain and injuries",
+        "Improve prosthesis appropriation",
+        "Reduce phantom limb pain",
       ],
       forWho: "For whom?",
     },
@@ -879,7 +1110,7 @@ export const translations = {
         "THE CHALLENGE",
         "EMBEDDED SENSORS",
         "UNIFIED DATA",
-        "AI HEALTH SCORE",
+        "UNIFIED DATA & AI SCORE",
         "BY THE NUMBERS",
         "DESIGNED FOR YOU",
         "BEYOND THE FOOT",
@@ -971,9 +1202,190 @@ export const translations = {
         },
       ],
     },
-
-   
-
+    profiles: {
+      patients: {
+        badge: "Patients",
+        heroImageAlt: "Patient regaining the sense of touch with Digi'Skin",
+        title: "Solutions designed for you.",
+        desc: "Whether you are interested in Digi'Skin (amputation) or Digi'Feet (diabetes), our devices aim to improve your daily life and support your autonomy, within an adapted care framework.",
+        ctaPrimary: "Request a Demo",
+        ctaSecondary: "View our products",
+        presentationEyebrow: "For you",
+        presentationTitle: "Technology at the service of your autonomy.",
+        presentationDesc: "Our devices are designed to integrate into your daily life. They do not replace medical support but complement it, with readable indicators and a cautious approach.",
+        benefitsEyebrow: "Benefits",
+        benefitsTitle: "What you can gain.",
+        benefits: [
+          {
+            eyebrow: "Autonomy",
+            title: "Better understand your progress",
+            desc: "Clear indicators to track your situation over time, in connection with your care team.",
+          },
+          {
+            eyebrow: "Daily use",
+            title: "Adapted devices",
+            desc: "Designed to be worn daily, with continuous measurement and discreet integration.",
+          },
+          {
+            eyebrow: "Support",
+            title: "Within a structured framework",
+            desc: "Our solutions fit into a care pathway, without diagnostic promises or replacement of clinical follow-up.",
+          },
+        ],
+        faqTitle: "Frequently asked questions",
+        faqItems: [
+          {
+            question: "How do I request a demo?",
+            answer: "Go to our Contact page to describe your context. We will organize a demonstration adapted to your situation.",
+          },
+          {
+            question: "Are the devices reimbursed?",
+            answer: "Our products are in development. Reimbursement conditions will be specified at the time of commercialization.",
+          },
+          {
+            question: "Can I try Digi'Skin or Digi'Feet?",
+            answer: "We organize demonstrations on request. Contact us to find out more about the modalities.",
+          },
+        ],
+        ctaTitle: "Ready to learn more?",
+        ctaDesc: "Describe your context and we will organize a demonstration adapted to your situation.",
+        priseEnMainSection: {
+          eyebrow: "Getting started",
+          title: "15 to 30 minutes to learn.",
+          description:
+            "The time needed to get to grips with the Digi'Skin device and start benefiting from it in everyday life.",
+        },
+        videoSection: {
+          eyebrow: "Testimonial",
+          title: "Feedback from a patient who tried Digi'Skin",
+          transcriptLabel: "Transcript",
+          transcript:
+            "Video testimonial from a patient who tested Digi'Skin. The haptic feedback device helps restore sensation at the prosthesis level.",
+        },
+      },
+      professionnels: {
+        badge: "Healthcare professionals",
+        heroImageAlt: "Healthcare professional explaining data to a patient",
+        title: "Tools for your care pathways.",
+        desc: "Digi'Skin and Digi'Feet integrate into your monitoring protocols. Readable indicators, decision support without diagnosis, and a cautious approach at the heart of our design.",
+        ctaPrimary: "Request a Demo",
+        ctaSecondary: "View our products",
+        presentationEyebrow: "For you",
+        presentationTitle: "Integration into your pathways.",
+        presentationDesc: "Our devices provide structured data and actionable indicators to support dialogue with your patients. They do not replace clinical evaluation but complement it.",
+        benefitsEyebrow: "Benefits",
+        benefitsTitle: "What our solutions bring.",
+        benefits: [
+          {
+            eyebrow: "Structured monitoring",
+            title: "Data and indicators",
+            desc: "Clear visualizations, history and trends to facilitate monitoring over time.",
+          },
+          {
+            eyebrow: "Integration",
+            title: "Into your protocols",
+            desc: "Designed to adapt to existing pathways, without disrupting your practices.",
+          },
+          {
+            eyebrow: "Caution",
+            title: "Without diagnostic promises",
+            desc: "Our indicators are monitoring aids. We communicate transparently about their limitations.",
+          },
+        ],
+        faqTitle: "Frequently asked questions",
+        faqItems: [
+          {
+            question: "How do I integrate your devices into our structure?",
+            answer: "Contact us to organize a demonstration and discuss integration modalities adapted to your context.",
+          },
+          {
+            question: "Is the data GDPR compliant?",
+            answer: "We design our products with particular attention to confidentiality and data minimization.",
+          },
+          {
+            question: "Do you offer training?",
+            answer: "We support teams during deployment. Reach out via our Contact page.",
+          },
+        ],
+        ctaTitle: "Want to learn more?",
+        ctaDesc: "Describe your context and we will organize a presentation adapted to your team.",
+        precliniqueSection: {
+          eyebrow: "Preclinical results",
+          title: "200% less force to grasp an object.",
+          description:
+            "This force reduction indicates better object perception and increased ease of use thanks to haptic feedback. Study conducted with blinded patient, prosthesis equipped with Digi'Skin vs without device.",
+        },
+      },
+      investisseurs: {
+        badge: "Investors",
+        heroImageAlt: "Business partnership and collaboration",
+        title: "A medtech vision focused on impact.",
+        desc: "Advanced Care Technologies develops monitoring and decision-support solutions. Clinical validation, field integration and a cautious approach guide our development.",
+        ctaPrimary: "Contact us",
+        ctaSecondary: "View our products",
+        presentationEyebrow: "Our approach",
+        presentationTitle: "Technology and validation.",
+        presentationDesc: "We favour a rigorous approach: clinical partnerships, documented validation methodology, and cautious communication. Our products aim for monitoring, not diagnosis.",
+        benefitsEyebrow: "Key points",
+        benefitsTitle: "Why join us.",
+        benefits: [
+          {
+            eyebrow: "Market",
+            title: "Unmet needs",
+            desc: "Amputation and diabetic foot: significant populations with structured monitoring needs.",
+          },
+          {
+            eyebrow: "Validation",
+            title: "Evidence-oriented approach",
+            desc: "Clinical partnerships, field iterations and transparency about the limits of our indicators.",
+          },
+          {
+            eyebrow: "Team",
+            title: "Multidisciplinary",
+            desc: "Engineering, design, clinical and strategy united to design credible and useful products.",
+          },
+        ],
+        faqTitle: "Frequently asked questions",
+        faqItems: [
+          {
+            question: "How advanced are your products?",
+            answer: "Digi'Skin is a mature prototype. Digi'Feet is in development. We can detail our roadmap during an exchange.",
+          },
+          {
+            question: "How do I contact you for a discussion?",
+            answer: "Use our Contact page to describe your context. We will get back to you to organize a presentation.",
+          },
+          {
+            question: "Who are your clinical partners?",
+            answer: "We work with partner structures and practitioners. Details can be shared in the context of confidential exchanges.",
+          },
+        ],
+        ctaTitle: "Interested in our vision?",
+        ctaDesc: "Contact us to organize an exchange and discover our approach in detail.",
+        statsSection: {
+          eyebrow: "By the numbers",
+          title: "Diabetes and the foot: numbers that speak.",
+          subtitle: "Real challenges, on a global scale.",
+          stats: [
+            {
+              value: "537M",
+              line1: "people with diabetes",
+              line2: "worldwide (IDF 2021)",
+            },
+            {
+              value: "25%",
+              line1: "of diabetics develop",
+              line2: "a foot wound during their lifetime",
+            },
+            {
+              value: "85%",
+              line1: "of lower limb amputations",
+              line2: "are preceded by an avoidable wound",
+            },
+          ],
+        },
+      },
+    },
   },
 } as const;
 
@@ -1005,15 +1417,15 @@ export const productTranslationsEn: Record<string, ProductLang> = {
       "Advanced Care Technologies is developing a non-invasive haptic feedback device to help amputees regain the sense of touch at their prosthesis: Digi'Skin. By restoring the sense of touch, Digi'Skin aims to help patients interact with their environment again.",
     benefits: [
       "Restore touch sensation",
-      "Regain balance",
-      "Avoid pain and injuries",
+      "Improve prosthesis appropriation",
+      "Reduce phantom limb pain",
       "Non-invasive haptic feedback, designed for daily use",
       "Real-time processing and synchronized feedback",
     ],
     mission: {
       title: "Our mission is to improve the quality of life and autonomy of patients",
       subtitle: "With Digi'Skin, we aim to:",
-      cards: ["Restore sensations", "Regain balance", "Avoid pain and injuries"],
+      cards: ["Restore sensations", "Improve prosthesis appropriation", "Reduce phantom limb pain"],
     },
     numbers: {
       title: "By the numbers",
@@ -1052,14 +1464,14 @@ export const productTranslationsEn: Record<string, ProductLang> = {
       {
         title: "Stimulation armband",
         description:
-          "Multi-zone vibro-tactile feedback synchronized with sensors, to support sensory restitution.",
+          "Multi-zone vibro-tactile feedback synchronized with sensors, enabling sensory feedback.",
       },
     ],
     audiences: [
       {
         title: "Amputee patients",
         description:
-          "To achieve a better sensation when using a prosthesis, within a care support framework.",
+          "To feel again, through one's prosthesis.",
       },
       {
         title: "Clinicians & rehabilitation teams",

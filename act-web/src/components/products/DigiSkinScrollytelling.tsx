@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import type { Product } from "@/data/products";
 import { cn } from "@/lib/cn";
@@ -10,13 +10,24 @@ import { useLanguage } from "@/context/LanguageContext";
 import { productTranslationsEn } from "@/lib/i18n/translations";
 
 /* ─────────────────────────────────────────────
-   Frame sequence
+   Beat images (one per beat)
 ───────────────────────────────────────────── */
-const FRAME_COUNT = 240;
 const SCROLL_HEIGHT = 1200; // vh
-function frameSrc(n: number) {
-  return `/sequence/prosthesis_${String(n).padStart(3, "0")}.jpg`;
-}
+const BEAT_COUNT = 8;
+const WHEEL_THRESHOLD = 40;
+
+const BEAT_IMAGES = [
+  "/images/digi-skin/beat-05-tactile.jpeg",
+  "/images/digi-skin/beat-02-the-challenge.jpeg",
+  "/images/digi-skin/beat-03-sensors.jpeg",
+  "/images/digi-skin/beat-04-ia-processing.jpeg",
+  null, // beat 05 — vidéo
+  "/images/digi-skin/beat-06-numbers.jpeg",
+  "/images/digi-skin/beat-07-designed-for-you.jpeg",
+  "/images/digi-skin/beat-08-beyond-limb.jpeg",
+];
+const BEAT_VIDEO_INDEX = 4;
+const BEAT_VIDEO_SRC = "/images/digi-skin/beat-05-tactile.mp4";
 
 /* ─────────────────────────────────────────────
    Scroll-triggered slot counter
@@ -123,7 +134,7 @@ function buildBeats(
       title: titles[0] ?? "SENSORY FEEDBACK",
       subtitle: tagline,
       variant: "default",
-      bullets: [pitch.slice(0, 140) + "…"],
+      bullets: [pitch.split(".")[0] + "."],
     },
     {
       range: [0.12, 0.23],
@@ -204,9 +215,14 @@ function BeatOverlay({
         "pointer-events-none absolute inset-0 flex items-end pb-14 pl-8 pr-8 transition-all duration-700 md:pb-20 md:pl-20",
         active ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0",
       )}
+      style={{ zIndex: 4 }}
     >
-      <div className="max-w-2xl">
-        <p className="mb-4 text-[10px] font-bold tracking-[0.4em] text-white/35 uppercase">
+      <div className="relative max-w-2xl">
+        {/* Frosted backdrop — wraps only the text block */}
+        <div className="absolute -inset-x-5 -inset-y-4 rounded-2xl bg-primary-dark/30" />
+
+        <div className="relative z-10">
+        <p className="mb-4 text-[10px] font-bold tracking-[0.4em] text-white/50 uppercase">
           {beat.label}
         </p>
         <h2
@@ -255,13 +271,14 @@ function BeatOverlay({
         {beat.variant === "audiences" && beat.audiences?.length ? (
           <div className="grid gap-3 sm:grid-cols-3">
             {beat.audiences.map((a) => (
-              <div key={a.title} className="rounded-xl border border-white/10 bg-white/5 p-4">
-                <div className="mb-2 text-sm font-bold text-white">{a.title}</div>
-                <div className="text-xs text-white/55 leading-relaxed">{a.description}</div>
+              <div key={a.title} className="flex flex-col rounded-xl border border-white/10 bg-white/5 p-4">
+                <div className="mb-2 min-h-[2.5rem] text-sm font-bold text-white">{a.title}</div>
+                <div className="text-xs leading-relaxed text-white/55">{a.description}</div>
               </div>
             ))}
           </div>
         ) : null}
+        </div>
       </div>
     </div>
   );
@@ -309,17 +326,9 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
   const ds = t.digiSkinBeats;
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const frameRef = useRef(0);
-  const targetFrameRef = useRef(0);
-  const rafRef = useRef<number>(0);
 
-  const [loadedCount, setLoadedCount] = useState(0);
-  const [progress, setProgress] = useState(0);
-
-  const isLoaded = loadedCount >= FRAME_COUNT;
-  const loadPct = Math.round((loadedCount / FRAME_COUNT) * 100);
+  const [beatIndex, setBeatIndex] = useState(0);
+  const [activationKeys, setActivationKeys] = useState<number[]>(() => Array(BEAT_COUNT).fill(0));
 
   const enData = lang === "en" ? productTranslationsEn["digi-skin"] : null;
   const localSecurity = enData?.security ?? product.security;
@@ -339,104 +348,83 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
     ds.forWho,
   );
 
-  /* ── draw one frame (cover-fit) ── */
-  const drawFrame = useCallback((index: number) => {
-    const canvas = canvasRef.current;
-    const img = imagesRef.current[index];
-    if (!canvas || !img?.complete || img.naturalWidth === 0) return;
+  /* ── activationKeys: restart Ken Burns when beat becomes active ── */
+  useEffect(() => {
+    setActivationKeys((prev) => {
+      const next = [...prev];
+      next[beatIndex] = prev[beatIndex] + 1;
+      return next;
+    });
+  }, [beatIndex]);
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+  const isWheelControlledRef = useRef(false);
+  const beatIndexRef = useRef(0);
 
-    const cw = canvas.width;
-    const ch = canvas.height;
-    const iw = img.naturalWidth;
-    const ih = img.naturalHeight;
-    const canvasAspect = cw / ch;
-    const imgAspect = iw / ih;
+  /* ── keep beatIndexRef in sync ── */
+  useEffect(() => {
+    beatIndexRef.current = beatIndex;
+  }, [beatIndex]);
 
-    let sx = 0, sy = 0, sw = iw, sh = ih;
-    if (canvasAspect > imgAspect) {
-      sh = iw / canvasAspect;
-      sy = (ih - sh) / 2;
-    } else {
-      sw = ih * canvasAspect;
-      sx = (iw - sw) / 2;
-    }
-    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
+  /* ── wheel: discrete steps ── */
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onWheel = (e: WheelEvent) => {
+      const rect = container.getBoundingClientRect();
+      const inZone = rect.top <= 0 && rect.bottom >= window.innerHeight;
+      if (!inZone) return;
+
+      if (Math.abs(e.deltaY) < WHEEL_THRESHOLD) return;
+
+      // At last beat scrolling down, or first beat scrolling up → let native scroll take over
+      if (e.deltaY > 0 && beatIndexRef.current === BEAT_COUNT - 1) return;
+      if (e.deltaY < 0 && beatIndexRef.current === 0) return;
+
+      e.preventDefault();
+      isWheelControlledRef.current = true;
+
+      if (e.deltaY > 0) {
+        setBeatIndex((i) => Math.min(i + 1, BEAT_COUNT - 1));
+      } else {
+        setBeatIndex((i) => Math.max(i - 1, 0));
+      }
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: false });
+    return () => window.removeEventListener("wheel", onWheel);
   }, []);
 
-  /* ── preload ── */
+  /* ── sync scroll position when beatIndex changes (from wheel) ── */
   useEffect(() => {
-    const images: HTMLImageElement[] = new Array(FRAME_COUNT);
-    let count = 0;
-    for (let i = 0; i < FRAME_COUNT; i++) {
-      const img = new window.Image();
-      const onEvent = () => {
-        count++;
-        if (count % 10 === 0 || count === FRAME_COUNT) setLoadedCount(count);
-        if (count === 1) drawFrame(0);
-      };
-      img.onload = onEvent;
-      img.onerror = onEvent;
-      img.src = frameSrc(i + 1);
-      images[i] = img;
-    }
-    imagesRef.current = images;
-    return () => {
-      images.forEach((img) => { img.onload = null; img.onerror = null; });
-    };
-  }, [drawFrame]);
+    if (!isWheelControlledRef.current) return;
+    const container = containerRef.current;
+    if (!container) return;
+    const total = container.offsetHeight - window.innerHeight;
+    if (total <= 0) return;
+    const scrollTarget = container.offsetTop + (beatIndex / (BEAT_COUNT - 1)) * total;
+    window.scrollTo({ top: scrollTarget, behavior: "smooth" });
+    isWheelControlledRef.current = false;
+  }, [beatIndex]);
 
-  /* ── canvas resize ── */
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      drawFrame(frameRef.current);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
-  }, [drawFrame]);
-
-  /* ── scroll → target frame ── */
+  /* ── scroll listener: sync beatIndex from native scroll (touch, trackpad) ── */
   useEffect(() => {
     const onScroll = () => {
       const container = containerRef.current;
       if (!container) return;
       const rect = container.getBoundingClientRect();
-      const scrolled = -rect.top;
       const total = container.offsetHeight - window.innerHeight;
+      if (total <= 0) return;
+      const scrolled = -rect.top;
       const p = Math.max(0, Math.min(1, scrolled / total));
-      setProgress(p);
-      targetFrameRef.current = Math.round(p * (FRAME_COUNT - 1));
+      const index = Math.round(p * (BEAT_COUNT - 1));
+      setBeatIndex(index);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* ── RAF spring loop ── */
-  useEffect(() => {
-    const animate = () => {
-      const target = targetFrameRef.current;
-      const current = frameRef.current;
-      const diff = target - current;
-      if (Math.abs(diff) >= 0.5) {
-        const next = Math.round(current + diff * 0.14);
-        if (next !== current) { frameRef.current = next; drawFrame(next); }
-      }
-      rafRef.current = requestAnimationFrame(animate);
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [drawFrame]);
-
-  const activeBeat = beats.findIndex(
-    (b) => progress >= b.range[0] && progress <= b.range[1],
-  );
+  const activeBeat = beatIndex;
 
   const gallery = product.media?.gallery ?? [];
   const partnerLogos = product.media?.partnerLogos ?? [];
@@ -447,35 +435,60 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
     <div className="-mt-16">
 
       {/* ══════════════════════════════════════
-          PART 1 — Sticky canvas scrollytelling
+          PART 1 — Sticky image scrollytelling
       ══════════════════════════════════════ */}
       <div
         ref={containerRef}
         style={{ height: `${SCROLL_HEIGHT}vh` }}
         className="relative"
       >
-        <div className="sticky top-0 h-screen overflow-hidden bg-[#050505]">
+        <div className="sticky top-0 h-screen overflow-hidden bg-primary-dark">
 
-          {/* Canvas */}
-          <canvas ref={canvasRef} className="absolute inset-0" />
+          {/* Beat images/video with cross-dissolve + Ken Burns */}
+          {BEAT_IMAGES.map((src, i) => {
+            const isActive = activeBeat === i;
+            const isVideo = i === BEAT_VIDEO_INDEX;
+            return (
+              <div
+                key={i}
+                className="absolute inset-0"
+                style={{
+                  opacity: isActive ? 1 : 0,
+                  transition: "opacity 700ms ease-out",
+                  zIndex: isActive ? 1 : 0,
+                }}
+              >
+                {isVideo ? (
+                  <video
+                    src={BEAT_VIDEO_SRC}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                ) : (
+                  <div
+                    key={activationKeys[i]}
+                    className="absolute inset-0"
+                    style={isActive ? { animation: "kenBurns 10s ease-out forwards" } : undefined}
+                  >
+                    <Image
+                      src={src!}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      priority={i === 0}
+                      sizes="100vw"
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          })}
 
           {/* Top fade gradient (hides nav boundary) */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#050505] to-transparent" />
-
-          {/* Loading bar */}
-          {!isLoaded && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 bg-[#050505]">
-              <div className="h-px w-56 overflow-hidden bg-white/10">
-                <div
-                  className="h-full bg-white/60 transition-all duration-200"
-                  style={{ width: `${loadPct}%` }}
-                />
-              </div>
-              <span className="font-mono text-[10px] tracking-[0.4em] text-white/30">
-                {loadPct} %
-              </span>
-            </div>
-          )}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-primary-dark to-transparent" style={{ zIndex: 3 }} />
 
           {/* Beat overlays */}
           {beats.map((beat, i) => (
@@ -488,7 +501,7 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
           ))}
 
           {/* Vertical beat dots */}
-          <div className="absolute right-6 top-1/2 flex -translate-y-1/2 flex-col items-center gap-3 md:right-10">
+          <div className="absolute right-6 top-1/2 flex -translate-y-1/2 flex-col items-center gap-3 md:right-10" style={{ zIndex: 5 }}>
             {beats.map((_, i) => (
               <div
                 key={i}
@@ -501,8 +514,8 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
           </div>
 
           {/* Scroll cue */}
-          {progress < 0.02 && (
-            <div className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 animate-bounce flex-col items-center gap-2">
+          {beatIndex === 0 && (
+            <div className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 animate-bounce flex-col items-center gap-2" style={{ zIndex: 5 }}>
               <span className="text-[9px] font-bold tracking-[0.4em] text-white/25 uppercase">
                 {st.scroll}
               </span>
@@ -511,7 +524,7 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
           )}
 
           {/* Progress fraction */}
-          <div className="absolute right-6 bottom-8 text-[10px] font-mono tracking-widest text-white/20 md:right-10">
+          <div className="absolute right-6 bottom-8 text-[10px] font-mono tracking-widest text-white/20 md:right-10" style={{ zIndex: 5 }}>
             {String(Math.min(activeBeat + 1, beats.length)).padStart(2, "0")} / {String(beats.length).padStart(2, "0")}
           </div>
         </div>
@@ -520,11 +533,11 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
       {/* ══════════════════════════════════════
           PART 2 — Dark sections (normal scroll)
       ══════════════════════════════════════ */}
-      <div className="bg-[#050505] text-white">
+      <div className="bg-primary-dark text-white">
 
         {/* ── Gallery ── */}
         {gallery.length > 0 && (
-          <section className="border-t border-white/8 py-20">
+          <section className="border-t border-white/8 py-12 md:py-16">
             <div className="mx-auto max-w-6xl px-6 md:px-8">
               <p className="mb-2 text-[10px] font-bold tracking-[0.4em] text-white/30 uppercase">
                 {st.gallery}
@@ -549,7 +562,7 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
                         className="object-cover transition duration-500 group-hover:scale-[1.03]"
                         sizes="(min-width: 1024px) 45vw, (min-width: 640px) 45vw, 92vw"
                       />
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-4 pb-3 pt-10">
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary-dark/70 to-transparent px-4 pb-3 pt-10">
                         <p className="text-sm font-semibold text-white">{img.alt}</p>
                       </div>
                     </div>
@@ -560,66 +573,10 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
           </section>
         )}
 
-        {/* ── Clinical partners ── */}
-        {partnerLogos.length > 0 && (
-          <section className="border-t border-white/8 py-20">
-            <div className="mx-auto max-w-6xl px-6 md:px-8">
-              <p className="mb-2 text-[10px] font-bold tracking-[0.4em] text-white/30 uppercase">
-                {st.clinicalEyebrow}
-              </p>
-              <h2 className="mb-12 text-3xl font-extrabold tracking-tight md:text-4xl">
-                {st.clinicalTitle}
-              </h2>
-              <div className="flex flex-wrap items-center gap-8">
-                {partnerLogos.map((logo) => (
-                  <div key={logo.src} className="relative h-14 w-40">
-                    <Image
-                      src={logo.src}
-                      alt={logo.alt}
-                      fill
-                      className="object-contain opacity-70 transition hover:opacity-100"
-                      sizes="128px"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* ── Ecosystem ── */}
-        {ecosystemLogos.length > 0 && (
-          <section className="border-t border-white/8 py-20">
-            <div className="mx-auto max-w-6xl px-6 md:px-8">
-              <p className="mb-2 text-[10px] font-bold tracking-[0.4em] text-white/30 uppercase">
-                {st.ecoEyebrow}
-              </p>
-              <h2 className="mb-4 text-3xl font-extrabold tracking-tight md:text-4xl">
-                {product.team?.collaborations?.title ?? "Soutiens & réseaux"}
-              </h2>
-              <p className="mb-12 text-sm text-white/40 max-w-xl">
-                {product.team?.collaborations?.note}
-              </p>
-              <div className="flex flex-wrap items-center gap-6">
-                {ecosystemLogos.map((logo) => (
-                  <div key={logo.src} className="relative h-12 w-36">
-                    <Image
-                      src={logo.src}
-                      alt={logo.alt}
-                      fill
-                      className="object-contain opacity-70 transition hover:opacity-100"
-                      sizes="112px"
-                    />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* ── FAQ ── */}
         {localFaq?.length ? (
-          <section className="border-t border-white/8 py-20">
+          <section className="border-t border-white/8 py-12 md:py-16">
             <div className="mx-auto max-w-6xl px-6 md:px-8">
               <div className="grid gap-12 md:grid-cols-12">
                 <div className="md:col-span-4">
@@ -639,7 +596,7 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
         ) : null}
 
         {/* ── Security note ── */}
-        <section className="border-t border-white/8 py-12">
+        <section className="border-t border-white/8 py-12 md:py-16">
           <div className="mx-auto max-w-6xl px-6 md:px-8">
             <div className="rounded-2xl border border-white/8 bg-white/4 p-6">
               <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-2">
@@ -653,7 +610,7 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
         </section>
 
         {/* ── CTA ── */}
-        <section className="border-t border-white/8 py-28">
+        <section className="border-t border-white/8 py-14 md:py-20">
           <div className="mx-auto max-w-6xl px-6 text-center md:px-8">
             <p className="mb-4 text-[10px] font-bold tracking-[0.4em] text-white/30 uppercase">
               {st.contactEyebrow}
@@ -667,7 +624,7 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
                 href={product.primaryCta.href}
-                className="inline-flex h-12 items-center rounded-full bg-white px-8 text-sm font-bold text-[#050505] transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="inline-flex h-12 items-center rounded-full bg-white px-8 text-sm font-bold text-primary-dark transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 {localPrimaryCta.label}
               </Link>
@@ -684,7 +641,7 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
         </section>
 
         {/* ── Bottom gradient transition back to site ── */}
-        <div className="h-16 bg-gradient-to-b from-[#050505] to-background" />
+        <div className="h-16 bg-gradient-to-b from-primary-dark to-background" />
       </div>
     </div>
   );

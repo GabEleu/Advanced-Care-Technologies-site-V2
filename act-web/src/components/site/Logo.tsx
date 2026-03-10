@@ -13,19 +13,14 @@ export function Logo({ className }: { className?: string }) {
       )}
       aria-label="Advanced Care Technologies"
     >
-      <span className="relative size-8 shrink-0 overflow-hidden rounded-md bg-card shadow-sm">
-        <Image
-          src="/legacy/brand/act-logo.png"
-          alt=""
-          fill
-          className="object-contain"
-          priority
-          sizes="32px"
-        />
-      </span>
-      <span className="hidden text-sm font-semibold text-muted-foreground md:inline">
-        Advanced Care Technologies
-      </span>
+      <Image
+        src="/images/act-logo.svg"
+        alt="Advanced Care Technologies"
+        width={150}
+        height={50}
+        className="h-12 w-auto"
+        priority
+      />
     </Link>
   );
 }

@@ -16,7 +16,7 @@ export function AProposContent() {
   return (
     <div>
       <section className="border-b">
-        <Container className="py-16 md:py-20">
+        <Container className="py-12 md:py-16">
           <div className="max-w-3xl">
             <div className="inline-flex w-fit items-center rounded-full border bg-card px-3 py-1 text-xs font-extrabold text-foreground/80 shadow-sm">
               {ab.badge}
@@ -43,16 +43,16 @@ export function AProposContent() {
         </Container>
       </section>
 
-      <section className="py-16 md:py-20">
+      <section className="py-12 md:py-16">
         <Container>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3">
             {ab.valuesCards.map((card) => (
-              <div key={card.title} className="rounded-3xl border bg-card p-7 shadow-sm">
+              <div key={card.title} className="flex h-full flex-col rounded-3xl border bg-card p-7 shadow-sm">
                 <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
                   {card.eyebrow}
                 </div>
                 <div className="mt-3 text-lg font-extrabold tracking-tight">{card.title}</div>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{card.desc}</p>
+                <p className="mt-3 min-h-0 flex-1 text-sm leading-relaxed text-muted-foreground">{card.desc}</p>
               </div>
             ))}
           </div>
@@ -60,7 +60,7 @@ export function AProposContent() {
       </section>
 
       {team && (
-        <section className="border-t py-16 md:py-20">
+        <section className="border-t py-12 md:py-16">
           <Container>
             <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
               {ab.teamEyebrow}
@@ -68,11 +68,12 @@ export function AProposContent() {
             <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
               {ab.teamTitle}
             </h2>
-            <div className="mt-10">
+            <div className="mt-6">
               <ProductTeam
                 title={team.title}
                 members={team.members}
                 collaborations={team.collaborations}
+                compact
               />
             </div>
           </Container>

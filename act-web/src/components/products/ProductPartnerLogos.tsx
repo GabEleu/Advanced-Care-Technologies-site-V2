@@ -16,10 +16,10 @@ export function ProductPartnerLogos({
   if (logos.length === 0) return null;
 
   return (
-    <section className="border-y bg-secondary py-16 md:py-20">
+    <section className="border-y bg-secondary py-12 md:py-16">
       <ProductSectionHeader eyebrow="Écosystème" title={title} description={description} />
-      <Container className="mt-10">
-        <div className="grid gap-4 rounded-3xl border bg-card p-6 shadow-sm md:grid-cols-3 md:gap-6 md:p-8">
+      <Container className="mt-8">
+        <div className="grid gap-4 rounded-3xl border bg-card p-6 shadow-sm md:grid-cols-3 md:gap-5 md:p-8">
           {logos.map((logo) => {
             const content = (
               <div className="relative mx-auto h-16 w-full max-w-[280px]">

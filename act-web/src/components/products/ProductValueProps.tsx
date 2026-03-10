@@ -16,7 +16,7 @@ export function ProductValueProps({
   if (!items.length) return null;
 
   return (
-    <section id={id} className="scroll-mt-28 bg-background/75 py-16 md:py-20">
+    <section id={id} className="scroll-mt-28 bg-background/75 py-12 md:py-16">
       <Container>
         <div className="grid gap-10 md:grid-cols-12 md:items-start">
           <div className="md:col-span-5">
@@ -35,9 +35,9 @@ export function ProductValueProps({
           <div className="md:col-span-7">
             <div className="grid gap-4 sm:grid-cols-2">
               {items.map((it) => (
-                <div key={it} className="rounded-3xl border bg-card p-7 shadow-sm">
+                <div key={it} className="flex h-full flex-col rounded-3xl border bg-card p-7 shadow-sm">
                   <div className="text-xl font-bold tracking-tight">{it}</div>
-                  <div className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                  <div className="mt-3 min-h-0 flex-1 text-xs leading-relaxed text-muted-foreground">
                     Présentation informative, à contextualiser selon l’usage et l’accompagnement.
                   </div>
                 </div>

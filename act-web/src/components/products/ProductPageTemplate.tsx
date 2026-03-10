@@ -119,7 +119,7 @@ export function ProductPageTemplate({ product }: { product: Product }) {
       </Reveal>
 
       {product.mission || product.numbers ? (
-        <section className="scroll-mt-28 border-y bg-secondary/70 py-16 backdrop-blur-[1px] md:py-20">
+        <section className="scroll-mt-28 border-y bg-secondary/70 py-12 backdrop-blur-[1px] md:py-16">
           <Container>
             <div className="grid gap-10 md:grid-cols-12 md:items-start">
               {product.mission ? (

@@ -17,14 +17,14 @@ export function ProductNumbers({
   note?: string;
 }) {
   return (
-    <section className="border-y bg-secondary py-16 md:py-20">
+    <section className="border-y bg-secondary py-12 md:py-16">
       <ProductSectionHeader eyebrow="Contexte" title={title} />
-      <Container className="mt-10">
-        <div className="grid gap-6 md:grid-cols-3">
+      <Container className="mt-8">
+        <div className="grid gap-5 md:grid-cols-3">
           {stats.map((s) => (
             <div
               key={`${s.value || ""}-${s.line1}-${s.line2 || ""}`}
-              className="rounded-3xl border bg-card p-7 shadow-sm"
+              className="flex h-full flex-col rounded-3xl border bg-card p-7 shadow-sm"
             >
               {s.value ? (
                 <div className="text-3xl font-extrabold tracking-tight md:text-4xl">

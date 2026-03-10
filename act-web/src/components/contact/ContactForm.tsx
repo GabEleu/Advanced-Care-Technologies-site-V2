@@ -37,7 +37,7 @@ export function ContactForm() {
     >
       <div className="grid gap-4 md:grid-cols-2">
         <label className="space-y-2 text-sm font-bold">
-          <span>{f.name}</span>
+          <span className="px-3">{f.name}</span>
           <input
             className="h-11 w-full rounded-2xl border bg-background px-4 text-sm outline-none ring-ring focus:ring-2"
             value={fullName}
@@ -46,7 +46,7 @@ export function ContactForm() {
           />
         </label>
         <label className="space-y-2 text-sm font-bold">
-          <span>{f.email}</span>
+          <span className="px-3">{f.email}</span>
           <input
             className="h-11 w-full rounded-2xl border bg-background px-4 text-sm outline-none ring-ring focus:ring-2"
             value={email}
@@ -58,18 +58,18 @@ export function ContactForm() {
         </label>
       </div>
       <label className="space-y-2 text-sm font-bold">
-        <span>{f.organization}</span>
+        <span className="px-3">{f.organization}</span>
         <input
-          className="h-11 w-full rounded-2xl border bg-background px-4 text-sm outline-none ring-ring focus:ring-2"
+          className="h-11 w-full rounded-2xl border bg-background px-4 text-sm outline-none ring-ring focus:ring-2 mb-4"
           value={organization}
           onChange={(e) => setOrganization(e.target.value)}
           autoComplete="organization"
         />
       </label>
       <label className="space-y-2 text-sm font-bold">
-        <span>{f.message}</span>
+        <span className="px-3">{f.message}</span>
         <textarea
-          className="min-h-32 w-full rounded-2xl border bg-background px-4 py-3 text-sm outline-none ring-ring focus:ring-2"
+          className="min-h-32 w-full rounded-2xl border bg-background px-4 py-3 text-sm outline-none ring-ring focus:ring-2 mb-4"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           required

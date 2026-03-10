@@ -16,7 +16,7 @@ export function ProductProblem({
   note?: string;
 }) {
   return (
-    <section id={id} className="scroll-mt-28 py-16 md:py-20">
+    <section id={id} className="scroll-mt-28 py-12 md:py-16">
       <Container>
         <div className="grid gap-10 md:grid-cols-12 md:items-start">
           <div className="md:col-span-5">

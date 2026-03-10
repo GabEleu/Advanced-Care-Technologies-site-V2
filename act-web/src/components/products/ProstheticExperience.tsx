@@ -173,7 +173,7 @@ export function ProstheticExperience() {
   return (
     <div ref={containerRef} style={{ height: "500vh" }} className="relative">
       {/* ── Sticky viewport ── */}
-      <div className="sticky top-0 h-screen overflow-hidden bg-[#050505]">
+      <div className="sticky top-0 h-screen overflow-hidden bg-primary-dark">
 
         {/* Canvas */}
         <canvas ref={canvasRef} className="absolute inset-0" />

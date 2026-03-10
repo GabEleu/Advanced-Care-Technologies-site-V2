@@ -24,24 +24,26 @@ export function ProductTeam({
   title,
   members,
   collaborations,
+  compact = false,
 }: {
   title: string;
   members: TeamMember[];
   collaborations?: { title: string; logos: CollaborationLogo[]; note?: string };
+  compact?: boolean;
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const container = scrollRef.current;
     if (!container) return;
-  
+
     let interval: NodeJS.Timeout;
-  
+
     const startAutoScroll = () => {
       interval = setInterval(() => {
         if (!container) return;
         container.scrollBy({ left: 240, behavior: "smooth" });
-  
+
         // reset si fin atteinte
         if (
           container.scrollLeft + container.clientWidth >=
@@ -51,27 +53,26 @@ export function ProductTeam({
         }
       }, 3000);
     };
-  
+
     const stopAutoScroll = () => clearInterval(interval);
-  
+
     startAutoScroll();
-  
+
     container.addEventListener("mouseenter", stopAutoScroll);
     container.addEventListener("mouseleave", startAutoScroll);
-  
+
     return () => {
       stopAutoScroll();
       container.removeEventListener("mouseenter", stopAutoScroll);
       container.removeEventListener("mouseleave", startAutoScroll);
     };
   }, []);
-  return (
-    <section className="py-16 md:py-20">
-      <ProductSectionHeader eyebrow="Équipe" title={title} />
-      <Container className="mt-10">
-        <div className="grid gap-6 md:grid-cols-3">
+
+  const content = (
+    <>
+      <div className="grid gap-5 md:grid-cols-3">
           {members.map((m) => (
-            <div key={m.name} className="rounded-3xl border bg-card p-7 shadow-sm">
+            <div key={m.name} className="flex h-full flex-col rounded-3xl border bg-card p-7 shadow-sm">
               <div className="flex items-center gap-4">
                 {m.image ? (
                   <div className="relative size-14 overflow-hidden rounded-2xl border bg-muted">
@@ -130,7 +131,7 @@ export function ProductTeam({
   {/* Carousel */}
 <div
   ref={scrollRef}
-  className="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none"
+  className="flex gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory scrollbar-none"
 >
   {collaborations.logos.map((logo) => (
     <div
@@ -160,14 +161,19 @@ export function ProductTeam({
     ›
   </button>
 </div>
-            {collaborations.note ? (
-              <div className="mt-6 text-xs leading-relaxed text-muted-foreground">
-                {collaborations.note}
-              </div>
-            ) : null}
           </div>
         ) : null}
-      </Container>
+    </>
+  );
+
+  if (compact) {
+    return content;
+  }
+
+  return (
+    <section className="py-12 md:py-16">
+      <ProductSectionHeader eyebrow="Équipe" title={title} />
+      <Container className="mt-8">{content}</Container>
     </section>
   );
 }

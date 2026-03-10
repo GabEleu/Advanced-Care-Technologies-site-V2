@@ -9,7 +9,7 @@ export function ProductHero({ product }: { product: Product }) {
   return (
     <section className="relative overflow-hidden border-b">
       <div className="absolute inset-0 -z-10 [background:radial-gradient(60%_60%_at_50%_10%,hsl(var(--accent)/0.22),transparent_60%),conic-gradient(from_180deg_at_50%_50%,hsl(var(--brand-purple)/0.16),transparent_35%,hsl(var(--accent)/0.12),transparent_65%,hsl(var(--primary)/0.16),transparent_85%)]" />
-      <Container className="py-16 md:py-20">
+      <Container className="py-12 md:py-16">
         <div className="grid items-start gap-10 md:grid-cols-12">
           <div className="md:col-span-7">
             <div className="inline-flex w-fit items-center rounded-full border bg-card px-3 py-1 text-xs font-extrabold text-foreground/80 shadow-sm">

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import type { Product } from "@/data/products";
 import { cn } from "@/lib/cn";
@@ -10,13 +10,20 @@ import { useLanguage } from "@/context/LanguageContext";
 import { productTranslationsEn } from "@/lib/i18n/translations";
 
 /* ─────────────────────────────────────────────
-   Frame sequence
+   Beat images (one per beat)
 ───────────────────────────────────────────── */
-const FRAME_COUNT = 240;
 const SCROLL_HEIGHT = 1000; // vh
-function frameSrc(n: number) {
-  return `/sequence-feet/insole_${String(n).padStart(3, "0")}.jpg`;
-}
+const BEAT_COUNT = 6;
+const WHEEL_THRESHOLD = 40;
+
+const BEAT_IMAGES = [
+  "/images/digi-feet/beat-01.jpeg",
+  "/images/digi-feet/beat-02.jpeg",
+  "/images/digi-feet/beat-03.jpeg",
+  "/images/digi-feet/beat-04-score-ia.png", // beat 04 fusionné → Données unifiées & Score IA
+  "/images/digi-feet/beat-05-bis.jpeg", // beat 05 → En chiffre bis
+  "/images/digi-feet/beat-07.jpeg",
+];
 
 /* ─────────────────────────────────────────────
    Scroll-triggered slot counter
@@ -105,7 +112,6 @@ function buildBeats(
   titles: readonly string[],
   b02: { subtitle: string; bullets: string[] },
   b06: { subtitle: string; stats: { value: string; line1: string; line2?: string }[] },
-  b08: { subtitle: string; bullets: string[] },
   forWho: string,
 ): Beat[] {
   const en = lang === "en" ? productTranslationsEn["digi-feet"] : null;
@@ -116,68 +122,56 @@ function buildBeats(
 
   return [
     {
-      range: [0, 0.1],
-      label: "01 / 08",
+      range: [0, 0.16],
+      label: "01 / 06",
       title: titles[0] ?? "SMART INSOLE",
       subtitle: tagline,
       variant: "default",
-      bullets: [pitch.slice(0, 140) + "…"],
+      bullets: [pitch.split(".")[0] + "."],
     },
     {
-      range: [0.12, 0.23],
-      label: "02 / 08",
+      range: [0.17, 0.33],
+      label: "02 / 06",
       title: titles[1] ?? "THE CHALLENGE",
       subtitle: b02.subtitle,
       variant: "bullets",
       bullets: b02.bullets,
     },
     {
-      range: [0.25, 0.36],
-      label: "03 / 08",
+      range: [0.34, 0.50],
+      label: "03 / 06",
       title: titles[2] ?? "EMBEDDED SENSORS",
       subtitle: features[0]?.title ?? "Capteurs embarqués",
       variant: "default",
       bullets: [features[0]?.description ?? ""],
     },
     {
-      range: [0.38, 0.5],
-      label: "04 / 08",
-      title: titles[3] ?? "UNIFIED DATA",
-      subtitle: features[1]?.title ?? "Application & dashboard",
-      variant: "default",
-      bullets: [features[1]?.description ?? ""],
-    },
-    {
-      range: [0.52, 0.63],
-      label: "05 / 08",
-      title: titles[4] ?? "AI HEALTH SCORE",
+      range: [0.51, 0.67],
+      label: "04 / 06",
+      title: titles[4] ?? "DONNÉES UNIFIÉES & SCORE IA",
       subtitle: features[2]?.title ?? "Score IA interne",
-      variant: "default",
-      bullets: [features[2]?.description ?? ""],
+      variant: "bullets",
+      bullets: [
+        features[3]?.description ?? "",
+        features[1]?.description ?? "",
+        features[2]?.description ?? "",
+      ],
     },
     {
-      range: [0.65, 0.75],
-      label: "06 / 08",
+      range: [0.68, 0.83],
+      label: "05 / 06",
       title: titles[5] ?? "BY THE NUMBERS",
       subtitle: b06.subtitle,
       variant: "stats",
       stats: b06.stats,
     },
     {
-      range: [0.77, 0.87],
-      label: "07 / 08",
+      range: [0.84, 1.0],
+      label: "06 / 06",
       title: titles[6] ?? "DESIGNED FOR YOU",
       subtitle: forWho,
       variant: "audiences",
       audiences: audiences,
-    },
-    {
-      range: [0.89, 1.0],
-      label: "08 / 08",
-      title: titles[7] ?? "BEYOND THE FOOT",
-      subtitle: b08.subtitle,
-      variant: "bullets",
-      bullets: b08.bullets,
     },
   ];
 }
@@ -199,10 +193,11 @@ function BeatOverlay({
         "pointer-events-none absolute inset-0 flex items-end pb-14 pl-8 pr-8 transition-all duration-700 md:pb-20 md:pl-20",
         active ? "translate-y-0 opacity-100" : "translate-y-5 opacity-0",
       )}
+      style={{ zIndex: 4 }}
     >
       {/* Frosted backdrop — wraps only the text block */}
       <div className="relative max-w-2xl">
-        <div className="absolute -inset-x-5 -inset-y-4 rounded-2xl bg-black/30" />
+        <div className="absolute -inset-x-5 -inset-y-4 rounded-2xl bg-primary-dark/30" />
 
         <div className="relative z-10">
           <p className="mb-4 text-[10px] font-bold tracking-[0.4em] text-white/50 uppercase">
@@ -254,9 +249,9 @@ function BeatOverlay({
           {beat.variant === "audiences" && beat.audiences?.length ? (
             <div className="grid gap-3 sm:grid-cols-3">
               {beat.audiences.map((a) => (
-                <div key={a.title} className="rounded-xl border border-white/10 bg-white/5 p-4">
-                  <div className="mb-2 text-sm font-bold text-white">{a.title}</div>
-                  <div className="text-xs text-white/60 leading-relaxed">{a.description}</div>
+                <div key={a.title} className="flex flex-col rounded-xl border border-white/10 bg-white/5 p-4">
+                  <div className="mb-2 min-h-[2.5rem] text-sm font-bold text-white">{a.title}</div>
+                  <div className="text-xs leading-relaxed text-white/60">{a.description}</div>
                 </div>
               ))}
             </div>
@@ -310,17 +305,9 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
   const df = t.digiFeetBeats;
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const frameRef = useRef(0);
-  const targetFrameRef = useRef(0);
-  const rafRef = useRef<number>(0);
 
-  const [loadedCount, setLoadedCount] = useState(0);
-  const [progress, setProgress] = useState(0);
-
-  const isLoaded = loadedCount >= FRAME_COUNT;
-  const loadPct = Math.round((loadedCount / FRAME_COUNT) * 100);
+  const [beatIndex, setBeatIndex] = useState(0);
+  const [activationKeys, setActivationKeys] = useState<number[]>(() => Array(BEAT_COUNT).fill(0));
 
   const enData = lang === "en" ? productTranslationsEn["digi-feet"] : null;
   const localSecurity = enData?.security ?? product.security;
@@ -337,108 +324,85 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
     df.titles,
     { subtitle: df.b02Subtitle, bullets: [...df.b02Bullets] },
     { subtitle: df.b06Subtitle, stats: [...df.b06Stats] },
-    { subtitle: df.b08Subtitle, bullets: [...df.b08Bullets] },
     df.forWho,
   );
 
-  /* ── draw one frame (cover-fit) + sample bg luminance ── */
-  const drawFrame = useCallback((index: number) => {
-    const canvas = canvasRef.current;
-    const img = imagesRef.current[index];
-    if (!canvas || !img?.complete || img.naturalWidth === 0) return;
+  /* ── activationKeys: restart Ken Burns when beat becomes active ── */
+  useEffect(() => {
+    setActivationKeys((prev) => {
+      const next = [...prev];
+      next[beatIndex] = prev[beatIndex] + 1;
+      return next;
+    });
+  }, [beatIndex]);
 
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+  const isWheelControlledRef = useRef(false);
+  const beatIndexRef = useRef(0);
 
-    const cw = canvas.width;
-    const ch = canvas.height;
-    const iw = img.naturalWidth;
-    const ih = img.naturalHeight;
-    const canvasAspect = cw / ch;
-    const imgAspect = iw / ih;
+  /* ── keep beatIndexRef in sync ── */
+  useEffect(() => {
+    beatIndexRef.current = beatIndex;
+  }, [beatIndex]);
 
-    let sx = 0, sy = 0, sw = iw, sh = ih;
-    if (canvasAspect > imgAspect) {
-      sh = iw / canvasAspect;
-      sy = (ih - sh) / 2;
-    } else {
-      sw = ih * canvasAspect;
-      sx = (iw - sw) / 2;
-    }
-    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
+  /* ── wheel: discrete steps ── */
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const onWheel = (e: WheelEvent) => {
+      const rect = container.getBoundingClientRect();
+      const inZone = rect.top <= 0 && rect.bottom >= window.innerHeight;
+      if (!inZone) return;
+
+      if (Math.abs(e.deltaY) < WHEEL_THRESHOLD) return;
+
+      if (e.deltaY > 0 && beatIndexRef.current === BEAT_COUNT - 1) return;
+      if (e.deltaY < 0 && beatIndexRef.current === 0) return;
+
+      e.preventDefault();
+      isWheelControlledRef.current = true;
+
+      if (e.deltaY > 0) {
+        setBeatIndex((i) => Math.min(i + 1, BEAT_COUNT - 1));
+      } else {
+        setBeatIndex((i) => Math.max(i - 1, 0));
+      }
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: false });
+    return () => window.removeEventListener("wheel", onWheel);
   }, []);
 
-  /* ── preload ── */
+  /* ── sync scroll position when beatIndex changes (from wheel) ── */
   useEffect(() => {
-    const images: HTMLImageElement[] = new Array(FRAME_COUNT);
-    let count = 0;
-    for (let i = 0; i < FRAME_COUNT; i++) {
-      const img = new window.Image();
-      const onEvent = () => {
-        count++;
-        if (count % 10 === 0 || count === FRAME_COUNT) setLoadedCount(count);
-        if (count === 1) drawFrame(0);
-      };
-      img.onload = onEvent;
-      img.onerror = onEvent;
-      img.src = frameSrc(i + 1);
-      images[i] = img;
-    }
-    imagesRef.current = images;
-    return () => {
-      images.forEach((img) => { img.onload = null; img.onerror = null; });
-    };
-  }, [drawFrame]);
+    if (!isWheelControlledRef.current) return;
+    const container = containerRef.current;
+    if (!container) return;
+    const total = container.offsetHeight - window.innerHeight;
+    if (total <= 0) return;
+    const scrollTarget = container.offsetTop + (beatIndex / (BEAT_COUNT - 1)) * total;
+    window.scrollTo({ top: scrollTarget, behavior: "smooth" });
+    isWheelControlledRef.current = false;
+  }, [beatIndex]);
 
-  /* ── canvas resize ── */
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      drawFrame(frameRef.current);
-    };
-    resize();
-    window.addEventListener("resize", resize);
-    return () => window.removeEventListener("resize", resize);
-  }, [drawFrame]);
-
-  /* ── scroll → target frame ── */
+  /* ── scroll listener: sync beatIndex from native scroll (touch, trackpad) ── */
   useEffect(() => {
     const onScroll = () => {
       const container = containerRef.current;
       if (!container) return;
       const rect = container.getBoundingClientRect();
-      const scrolled = -rect.top;
       const total = container.offsetHeight - window.innerHeight;
+      if (total <= 0) return;
+      const scrolled = -rect.top;
       const p = Math.max(0, Math.min(1, scrolled / total));
-      setProgress(p);
-      targetFrameRef.current = Math.round(p * (FRAME_COUNT - 1));
+      const index = Math.round(p * (BEAT_COUNT - 1));
+      setBeatIndex(index);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* ── RAF spring loop ── */
-  useEffect(() => {
-    const animate = () => {
-      const target = targetFrameRef.current;
-      const current = frameRef.current;
-      const diff = target - current;
-      if (Math.abs(diff) >= 0.5) {
-        const next = Math.round(current + diff * 0.14);
-        if (next !== current) { frameRef.current = next; drawFrame(next); }
-      }
-      rafRef.current = requestAnimationFrame(animate);
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [drawFrame]);
-
-  const activeBeat = beats.findIndex(
-    (b) => progress >= b.range[0] && progress <= b.range[1],
-  );
+  const activeBeat = beatIndex;
 
   const gallery = product.media?.gallery ?? [];
   const partnerLogos = product.media?.partnerLogos ?? [];
@@ -456,28 +420,41 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
         style={{ height: `${SCROLL_HEIGHT}vh` }}
         className="relative"
       >
-        <div className="sticky top-0 h-screen overflow-hidden bg-[#050505]">
+        <div className="sticky top-0 h-screen overflow-hidden bg-primary-dark">
 
-          {/* Canvas */}
-          <canvas ref={canvasRef} className="absolute inset-0" />
+          {/* Beat images with cross-dissolve + Ken Burns */}
+          {BEAT_IMAGES.map((src, i) => {
+            const isActive = activeBeat === i;
+            return (
+              <div
+                key={i}
+                className="absolute inset-0"
+                style={{
+                  opacity: isActive ? 1 : 0,
+                  transition: "opacity 700ms ease-out",
+                  zIndex: isActive ? 1 : 0,
+                }}
+              >
+                <div
+                  key={activationKeys[i]}
+                  className="absolute inset-0"
+                  style={isActive ? { animation: "kenBurns 10s ease-out forwards" } : undefined}
+                >
+                  <Image
+                    src={src}
+                    alt=""
+                    fill
+                    className="object-cover object-top"
+                    priority={i === 0}
+                    sizes="100vw"
+                  />
+                </div>
+              </div>
+            );
+          })}
 
           {/* Top fade gradient (hides nav boundary) */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-[#050505] to-transparent" />
-
-          {/* Loading bar */}
-          {!isLoaded && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-5 bg-[#050505]">
-              <div className="h-px w-56 overflow-hidden bg-white/10">
-                <div
-                  className="h-full bg-white/60 transition-all duration-200"
-                  style={{ width: `${loadPct}%` }}
-                />
-              </div>
-              <span className="font-mono text-[10px] tracking-[0.4em] text-white/30">
-                {loadPct} %
-              </span>
-            </div>
-          )}
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-primary-dark to-transparent" style={{ zIndex: 3 }} />
 
           {/* Beat overlays */}
           {beats.map((beat, i) => (
@@ -490,7 +467,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
           ))}
 
           {/* Vertical beat dots */}
-          <div className="absolute right-6 top-1/2 flex -translate-y-1/2 flex-col items-center gap-3 md:right-10">
+          <div className="absolute right-6 top-1/2 flex -translate-y-1/2 flex-col items-center gap-3 md:right-10" style={{ zIndex: 5 }}>
             {beats.map((_, i) => (
               <div
                 key={i}
@@ -503,8 +480,8 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
           </div>
 
           {/* Scroll cue */}
-          {progress < 0.02 && (
-            <div className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 animate-bounce flex-col items-center gap-2">
+          {beatIndex === 0 && (
+            <div className="pointer-events-none absolute bottom-8 left-1/2 flex -translate-x-1/2 animate-bounce flex-col items-center gap-2" style={{ zIndex: 5 }}>
               <span className="text-[9px] font-bold tracking-[0.4em] text-primary/40 uppercase">
                 {st.scroll}
               </span>
@@ -513,7 +490,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
           )}
 
           {/* Progress fraction */}
-          <div className="absolute right-6 bottom-8 text-[10px] font-mono tracking-widest text-primary/30 md:right-10">
+          <div className="absolute right-6 bottom-8 text-[10px] font-mono tracking-widest text-primary/30 md:right-10" style={{ zIndex: 5 }}>
             {String(Math.min(activeBeat + 1, beats.length)).padStart(2, "0")} / {String(beats.length).padStart(2, "0")}
           </div>
         </div>
@@ -522,11 +499,11 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
       {/* ══════════════════════════════════════
           PART 2 — Dark sections (normal scroll)
       ══════════════════════════════════════ */}
-      <div className="bg-[#050505] text-white">
+      <div className="bg-primary-dark text-white">
 
         {/* ── Gallery ── */}
         {gallery.length > 0 && (
-          <section className="border-t border-white/8 py-20">
+          <section className="border-t border-white/8 py-12 md:py-16">
             <div className="mx-auto max-w-6xl px-6 md:px-8">
               <p className="mb-2 text-[10px] font-bold tracking-[0.4em] text-white/30 uppercase">
                 {st.gallery}
@@ -551,7 +528,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
                         className="object-cover transition duration-500 group-hover:scale-[1.03]"
                         sizes="(min-width: 1024px) 45vw, (min-width: 640px) 45vw, 92vw"
                       />
-                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-4 pb-3 pt-10">
+                      <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary-dark/70 to-transparent px-4 pb-3 pt-10">
                         <p className="text-sm font-semibold text-white">{img.alt}</p>
                       </div>
                     </div>
@@ -564,7 +541,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
 
         {/* ── Clinical partners ── */}
         {partnerLogos.length > 0 && (
-          <section className="border-t border-white/8 py-20">
+          <section className="border-t border-white/8 py-12 md:py-16">
             <div className="mx-auto max-w-6xl px-6 md:px-8">
               <p className="mb-2 text-[10px] font-bold tracking-[0.4em] text-white/30 uppercase">
                 {st.clinicalEyebrow}
@@ -591,7 +568,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
 
         {/* ── Ecosystem ── */}
         {ecosystemLogos.length > 0 && (
-          <section className="border-t border-white/8 py-20">
+          <section className="border-t border-white/8 py-12 md:py-16">
             <div className="mx-auto max-w-6xl px-6 md:px-8">
               <p className="mb-2 text-[10px] font-bold tracking-[0.4em] text-white/30 uppercase">
                 {st.ecoEyebrow}
@@ -602,7 +579,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
               <p className="mb-12 text-sm text-white/40 max-w-xl">
                 {product.team?.collaborations?.note}
               </p>
-              <div className="flex flex-wrap items-center gap-6">
+              <div className="flex flex-wrap items-center gap-5">
                 {ecosystemLogos.map((logo) => (
                   <div key={logo.src} className="relative h-9 w-28">
                     <Image
@@ -621,7 +598,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
 
         {/* ── How it works ── */}
         {localHowItWorks?.length ? (
-          <section className="border-t border-white/8 py-20">
+          <section className="border-t border-white/8 py-12 md:py-16">
             <div className="mx-auto max-w-6xl px-6 md:px-8">
               <p className="mb-2 text-[10px] font-bold tracking-[0.4em] text-white/30 uppercase">
                 {st.howEyebrow}
@@ -646,7 +623,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
 
         {/* ── FAQ ── */}
         {localFaq?.length ? (
-          <section className="border-t border-white/8 py-20">
+          <section className="border-t border-white/8 py-12 md:py-16">
             <div className="mx-auto max-w-6xl px-6 md:px-8">
               <div className="grid gap-12 md:grid-cols-12">
                 <div className="md:col-span-4">
@@ -666,7 +643,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
         ) : null}
 
         {/* ── Security note ── */}
-        <section className="border-t border-white/8 py-12">
+        <section className="border-t border-white/8 py-12 md:py-16">
           <div className="mx-auto max-w-6xl px-6 md:px-8">
             <div className="rounded-2xl border border-white/8 bg-white/4 p-6">
               <p className="text-xs font-bold uppercase tracking-widest text-white/30 mb-2">
@@ -680,7 +657,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
         </section>
 
         {/* ── CTA ── */}
-        <section className="border-t border-white/8 py-28">
+        <section className="border-t border-white/8 py-14 md:py-20">
           <div className="mx-auto max-w-6xl px-6 text-center md:px-8">
             <p className="mb-4 text-[10px] font-bold tracking-[0.4em] text-white/30 uppercase">
               {st.contactEyebrow}
@@ -694,7 +671,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
             <div className="flex flex-wrap items-center justify-center gap-4">
               <Link
                 href={product.primaryCta.href}
-                className="inline-flex h-12 items-center rounded-full bg-white px-8 text-sm font-bold text-[#050505] transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="inline-flex h-12 items-center rounded-full bg-white px-8 text-sm font-bold text-primary-dark transition hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 {localPrimaryCta.label}
               </Link>
@@ -711,7 +688,7 @@ export function DigiFeetScrollytelling({ product }: { product: Product }) {
         </section>
 
         {/* ── Bottom gradient transition back to site ── */}
-        <div className="h-16 bg-gradient-to-b from-[#050505] to-background" />
+        <div className="h-16 bg-gradient-to-b from-primary-dark to-background" />
       </div>
     </div>
   );

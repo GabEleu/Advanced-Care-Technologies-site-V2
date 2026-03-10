@@ -93,7 +93,7 @@ export function ImageCarousel({
                 className="object-cover transition duration-500 group-hover:scale-[1.02]"
                 sizes="(min-width: 768px) 45vw, 92vw"
               />
-              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent px-4 pb-3 pt-8">
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary-dark/60 to-transparent px-4 pb-3 pt-8">
                 <div className="text-sm font-semibold text-white">{img.alt}</div>
               </div>
             </div>

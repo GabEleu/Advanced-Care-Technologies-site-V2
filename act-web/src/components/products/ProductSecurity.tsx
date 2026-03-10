@@ -9,7 +9,7 @@ export function ProductSecurity({
   description: string;
 }) {
   return (
-    <section className="border-y bg-secondary py-16 md:py-20">
+    <section className="border-y bg-secondary py-12 md:py-16">
       <ProductSectionHeader eyebrow="Sécurité" title={title} description={description} />
       <Container className="mt-8">
         <div className="rounded-3xl border bg-card p-5 text-xs leading-relaxed text-muted-foreground shadow-sm">

@@ -12,7 +12,7 @@ export function TechnologieContent() {
     <div>
       <section className="relative overflow-hidden border-b">
         <div className="absolute inset-0 -z-10 [background:radial-gradient(60%_60%_at_50%_10%,hsl(var(--accent)/0.18),transparent_60%),conic-gradient(from_180deg_at_50%_50%,hsl(var(--brand-purple)/0.14),transparent_35%,hsl(var(--accent)/0.10),transparent_65%,hsl(var(--primary)/0.14),transparent_85%)]" />
-        <Container className="py-16 md:py-20">
+        <Container className="py-12 md:py-16">
           <div className="max-w-3xl">
             <div className="inline-flex w-fit items-center rounded-full border bg-card px-3 py-1 text-xs font-extrabold text-foreground/80 shadow-sm">
               {tech.badge}
@@ -41,23 +41,23 @@ export function TechnologieContent() {
         </Container>
       </section>
 
-      <section className="py-16 md:py-20">
+      <section className="py-12 md:py-16">
         <Container>
-          <div className="grid gap-6 md:grid-cols-3">
+          <div className="grid gap-5 md:grid-cols-3">
             {tech.cards.map((card) => (
-              <div key={card.title} className="rounded-3xl border bg-card p-7 shadow-sm">
+              <div key={card.title} className="flex h-full flex-col rounded-3xl border bg-card p-7 shadow-sm">
                 <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
                   {card.eyebrow}
                 </div>
                 <div className="mt-3 text-lg font-extrabold tracking-tight">{card.title}</div>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{card.desc}</p>
+                <p className="mt-3 min-h-0 flex-1 text-sm leading-relaxed text-muted-foreground">{card.desc}</p>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
-      <section className="border-y bg-secondary py-16 md:py-20">
+      <section className="border-y bg-secondary py-12 md:py-16">
         <Container>
           <div className="grid gap-10 md:grid-cols-12 md:items-start">
             <div className="md:col-span-5">
@@ -85,7 +85,7 @@ export function TechnologieContent() {
         </Container>
       </section>
 
-      <section className="py-16 md:py-20">
+      <section className="py-12 md:py-16">
         <Container>
           <div className="max-w-2xl">
             <h2 className="text-3xl font-extrabold tracking-tight md:text-4xl">{tech.ctaTitle}</h2>

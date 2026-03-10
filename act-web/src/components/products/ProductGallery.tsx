@@ -16,9 +16,9 @@ export function ProductGallery({
   if (images.length === 0) return null;
 
   return (
-    <section className="border-y bg-secondary/60 py-16 md:py-20">
+    <section className="border-y bg-secondary/60 py-12 md:py-16">
       <ProductSectionHeader eyebrow="Visuels" title={title} description={description} />
-      <Container className="mt-10">
+      <Container className="mt-8">
         <Reveal>
           <ImageCarousel images={images} label={`Carrousel visuel: ${title}`} />
         </Reveal>

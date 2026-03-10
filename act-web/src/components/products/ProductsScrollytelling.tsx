@@ -1,16 +1,8 @@
 "use client";
 
-import { useRef, useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-  useReducedMotion,
-  MotionValue,
-} from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { productTranslationsEn } from "@/lib/i18n/translations";
 import { products } from "@/data/products";
@@ -20,206 +12,95 @@ import { Reveal } from "@/components/motion/Reveal";
 import { cn } from "@/lib/cn";
 
 /* ════════════════════════════════════════════════════════════════
-   CANVAS SEQUENCE — canvas + RAF spring, same technique as product pages
+   PRODUCT ROW — text left + static image right
 ════════════════════════════════════════════════════════════════ */
 
-/**
- * Renders a product frame sequence on a <canvas> using the same
- * canvas + cover-fit + RAF spring approach as DigiSkinScrollytelling
- * and DigiFeetScrollytelling. Progress (0→1) maps to frames.
- */
-function CanvasSequence({
-  dir,
-  progress,
-  frameCount = 80,
-  className,
-  label,
-}: {
-  dir: "sequence" | "sequence-feet";
-  progress: MotionValue<number>;
-  frameCount?: number;
-  className?: string;
-  label: string;
-}) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const frameRef = useRef(0);
-  const targetFrameRef = useRef(0);
-  const rafRef = useRef(0);
-  const [loadPct, setLoadPct] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
+const HERO_IMAGES: Record<"digi-skin" | "digi-feet", string> = {
+  "digi-skin": "/images/digi-skin/hero-legende2.jpeg",
+  "digi-feet": "/images/digi-feet/DigiFeet_Legende2.jpeg",
+};
 
-  // Sparse sampling: spread frameCount frames over the full 240-frame sequence
-  const step = 240 / frameCount;
-  const getFrameSrc = useCallback(
-    (i: number) => {
-      const n = Math.min(240, Math.max(1, Math.round(1 + i * step)));
-      const padded = String(n).padStart(3, "0");
-      return dir === "sequence"
-        ? `/sequence/prosthesis_${padded}.jpg`
-        : `/sequence-feet/insole_${padded}.jpg`;
-    },
-    [dir, step],
-  );
+type ProductBeat = {
+  slug: "digi-skin" | "digi-feet";
+  badge: string;
+  name: string;
+  tagline: string;
+  pitch: string;
+  benefits: string[];
+  href: string;
+  seeLabel: string;
+  demoLabel: string;
+};
 
-  // Cover-fit draw — identical to the product page implementation
-  const drawFrame = useCallback((idx: number) => {
-    const canvas = canvasRef.current;
-    const img = imagesRef.current[Math.round(idx)];
-    if (!canvas || !img?.complete || img.naturalWidth === 0) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    const { width: cw, height: ch } = canvas;
-    const { naturalWidth: iw, naturalHeight: ih } = img;
-    const canvasAspect = cw / ch;
-    const imgAspect = iw / ih;
-    let sx = 0, sy = 0, sw = iw, sh = ih;
-    if (canvasAspect > imgAspect) { sh = iw / canvasAspect; sy = (ih - sh) / 2; }
-    else { sw = ih * canvasAspect; sx = (iw - sw) / 2; }
-    ctx.drawImage(img, sx, sy, sw, sh, 0, 0, cw, ch);
-  }, []);
-
-  // Preload frames
-  useEffect(() => {
-    let loaded = 0;
-    const images = Array.from({ length: frameCount }, (_, i) => {
-      const img = new window.Image();
-      const onEvent = () => {
-        loaded++;
-        if (loaded % 8 === 0 || loaded === frameCount) setLoadPct(Math.round((loaded / frameCount) * 100));
-        if (loaded === frameCount) setIsLoaded(true);
-        if (loaded === 1) drawFrame(0);
-      };
-      img.onload = onEvent;
-      img.onerror = onEvent;
-      img.src = getFrameSrc(i);
-      return img;
-    });
-    imagesRef.current = images;
-    return () => { images.forEach((img) => { img.onload = null; img.onerror = null; }); };
-  }, [drawFrame, getFrameSrc, frameCount]);
-
-  // Canvas resize via ResizeObserver
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      drawFrame(frameRef.current);
-    };
-    resize();
-    const ro = new ResizeObserver(resize);
-    ro.observe(canvas);
-    return () => ro.disconnect();
-  }, [drawFrame]);
-
-  // RAF spring loop — same spring constant (0.14) as product pages
-  useEffect(() => {
-    const animate = () => {
-      const target = targetFrameRef.current;
-      const current = frameRef.current;
-      const diff = target - current;
-      if (Math.abs(diff) >= 0.5) {
-        const next = current + diff * 0.14;
-        frameRef.current = next;
-        drawFrame(Math.round(next));
-      }
-      rafRef.current = requestAnimationFrame(animate);
-    };
-    rafRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [drawFrame]);
-
-  // Map scroll progress to target frame
-  useMotionValueEvent(progress, "change", (v) => {
-    targetFrameRef.current = Math.max(0, Math.min(frameCount - 1, v * (frameCount - 1)));
-  });
-
+function ProductRow({ beat, imageContain = false }: { beat: ProductBeat; imageContain?: boolean }) {
   return (
-    <div className={cn("relative overflow-hidden", className)}>
-      {!isLoaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-muted/30">
-          <div className="h-px w-24 overflow-hidden bg-foreground/10">
-            <div
-              className="h-full bg-foreground/40 transition-all duration-200"
-              style={{ width: `${loadPct}%` }}
-            />
-          </div>
-        </div>
-      )}
-      <canvas
-        ref={canvasRef}
-        aria-label={label}
-        className={cn("h-full w-full", !isLoaded && "opacity-0")}
-      />
-    </div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════════════
-   HERO DUAL PRODUCT VISUAL — fixed landscape images, no animation
-════════════════════════════════════════════════════════════════ */
-
-function HeroDualVisual() {
-  return (
-    <div className="relative flex h-full w-full flex-col gap-2 sm:flex-row">
-      {/* Digi'Skin panel */}
+    <div className="grid items-center gap-10 md:grid-cols-2">
+      {/* Text */}
       <motion.div
-        className="relative flex-1 overflow-hidden rounded-2xl"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.65, delay: 0.25 }}
+        className="space-y-5"
+        initial={{ opacity: 0, x: -16 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.55 }}
       >
-        <Image
-          src="/sequence/prosthesis_090.jpg"
-          alt="Digi'Skin — prothèse haptique"
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, 50vw"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/80 via-transparent to-transparent" />
-        <div className="absolute bottom-3 left-4 text-xs font-extrabold tracking-[0.2em] text-white/70">
-          DIGI&apos;SKIN
+        <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+          {beat.badge}
         </div>
-        <div className="absolute right-3 top-3">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            {[1, 2, 3].map((i) => (
-              <motion.circle
-                key={i}
-                cx="16" cy="16" r={i * 4}
-                stroke="hsl(var(--accent))"
-                strokeWidth="0.8"
-                fill="none"
-                animate={{ opacity: [0.7, 0, 0.7] }}
-                transition={{ duration: 1.8, repeat: Infinity, delay: i * 0.4 }}
-              />
-            ))}
-            <circle cx="16" cy="16" r="3" fill="hsl(var(--accent))" />
-          </svg>
+        <h2 className="text-4xl font-extrabold tracking-tight md:text-5xl">{beat.name}</h2>
+        <p className="text-lg font-semibold text-accent">{beat.tagline}</p>
+        <p className="text-sm leading-relaxed text-muted-foreground md:text-base">{beat.pitch}</p>
+        <ul className="space-y-2">
+          {beat.benefits.slice(0, 3).map((b) => (
+            <li key={b} className="flex gap-3 text-sm text-muted-foreground">
+              <span className="mt-2 size-1.5 shrink-0 rounded-full bg-accent" />
+              {b}
+            </li>
+          ))}
+        </ul>
+        <div className="flex flex-wrap gap-3 pt-2">
+          <Link
+            href={beat.href}
+            className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground transition hover:bg-primary/90"
+          >
+            {beat.seeLabel} {beat.name}
+          </Link>
+          <Link
+            href="/contact/"
+            className="inline-flex h-11 items-center justify-center rounded-full border bg-card px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted"
+          >
+            {beat.demoLabel}
+          </Link>
         </div>
       </motion.div>
 
-      {/* Digi'Feet panel */}
+      {/* Image */}
       <motion.div
-        className="relative flex-1 overflow-hidden rounded-2xl"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.65, delay: 0.38 }}
+        className={imageContain ? "overflow-hidden rounded-2xl" : "relative aspect-[4/3] overflow-hidden rounded-2xl"}
+        initial={{ opacity: 0, scale: 0.97 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.55, delay: 0.1 }}
       >
-        <Image
-          src="/sequence-feet/insole_090.jpg"
-          alt="Digi'Feet — semelle connectée"
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, 50vw"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/80 via-transparent to-transparent" />
-        <div className="absolute bottom-3 left-4 text-xs font-extrabold tracking-[0.2em] text-white/70">
-          DIGI&apos;FEET
-        </div>
+        {imageContain ? (
+          <Image
+            src={HERO_IMAGES[beat.slug]}
+            alt={beat.name}
+            width={800}
+            height={600}
+            style={{ width: "100%", height: "auto", transform: "scale(1.12)", transformOrigin: "center" }}
+            className="rounded-2xl"
+            sizes="(min-width: 768px) 50vw, 100vw"
+          />
+        ) : (
+          <Image
+            src={HERO_IMAGES[beat.slug]}
+            alt={beat.name}
+            fill
+            className="object-cover object-top"
+            sizes="(min-width: 768px) 50vw, 100vw"
+            priority={beat.slug === "digi-skin"}
+          />
+        )}
       </motion.div>
     </div>
   );
@@ -315,138 +196,6 @@ function TechPipelineSVG() {
 }
 
 /* ════════════════════════════════════════════════════════════════
-   STICKY PRODUCT SECTION
-════════════════════════════════════════════════════════════════ */
-
-type ProductBeat = {
-  slug: "digi-skin" | "digi-feet";
-  badge: string;
-  name: string;
-  tagline: string;
-  pitch: string;
-  benefits: string[];
-  illustrationLeft: boolean;
-  href: string;
-  seeLabel: string;
-  demoLabel: string;
-};
-
-function StickyProductSection({ beat }: { beat: ProductBeat }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
-  const progress = scrollYProgress;
-
-  const illustrationY = useTransform(progress, [0, 1], [20, -20]);
-  const illustrationOpacity = useTransform(progress, [0, 0.1, 0.9, 1], [0.5, 1, 1, 0.5]);
-
-  const isLeft = beat.illustrationLeft;
-
-  return (
-    <div ref={ref} className="relative" style={{ height: "220vh" }}>
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
-        <Container>
-          <div className={cn("grid items-center gap-12 md:grid-cols-2", isLeft ? "" : "")}>
-
-            {/* Illustration panel */}
-            <motion.div
-              className={cn(
-                "relative h-[55vw] max-h-96 overflow-hidden rounded-2xl md:h-[45vh]",
-                !isLeft && "order-last md:order-none"
-              )}
-              style={{ y: illustrationY, opacity: illustrationOpacity }}
-            >
-              <CanvasSequence
-                dir={beat.slug === "digi-skin" ? "sequence" : "sequence-feet"}
-                progress={progress}
-                frameCount={80}
-                className="absolute inset-0 h-full w-full"
-                label={beat.slug === "digi-skin" ? "Digi'Skin — prothèse haptique" : "Digi'Feet — semelle connectée"}
-              />
-            </motion.div>
-
-            {/* Text panel */}
-            <div className={cn("space-y-6", isLeft && "order-first md:order-last")}>
-              <motion.div
-                className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                {beat.badge}
-              </motion.div>
-              <motion.h2
-                className="text-4xl font-extrabold tracking-tight md:text-5xl"
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: 0.08 }}
-              >
-                {beat.name}
-              </motion.h2>
-              <motion.p
-                className="text-lg font-semibold text-accent"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.14 }}
-              >
-                {beat.tagline}
-              </motion.p>
-              <motion.p
-                className="text-sm leading-relaxed text-muted-foreground md:text-base"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                {beat.pitch}
-              </motion.p>
-              <ul className="space-y-2">
-                {beat.benefits.slice(0, 3).map((b, i) => (
-                  <motion.li
-                    key={b}
-                    className="flex gap-3 text-sm text-muted-foreground"
-                    initial={{ opacity: 0, x: -10 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.28 + i * 0.08 }}
-                  >
-                    <span className="mt-2 size-1.5 shrink-0 rounded-full bg-accent" />
-                    {b}
-                  </motion.li>
-                ))}
-              </ul>
-              <motion.div
-                className="flex flex-wrap gap-3 pt-2"
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: 0.5 }}
-              >
-                <Link
-                  href={beat.href}
-                  className="inline-flex h-11 items-center justify-center rounded-full bg-primary px-5 text-sm font-extrabold text-primary-foreground transition hover:bg-primary/90"
-                >
-                  {beat.seeLabel} {beat.name}
-                </Link>
-                <Link
-                  href="/contact/"
-                  className="inline-flex h-11 items-center justify-center rounded-full border bg-card px-5 text-sm font-extrabold text-foreground/80 transition hover:bg-muted"
-                >
-                  {beat.demoLabel}
-                </Link>
-              </motion.div>
-            </div>
-
-          </div>
-        </Container>
-      </div>
-    </div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════════════
    COMPARISON TABLE — rows revealed on scroll
 ════════════════════════════════════════════════════════════════ */
 
@@ -458,18 +207,16 @@ function ComparativeTable({
   rows: readonly (readonly string[])[];
 }) {
   return (
-    <section id="comparatif" className="scroll-mt-28 border-y bg-secondary py-20 md:py-28">
+    <section id="comparatif" className="scroll-mt-28 border-y bg-secondary py-12 md:py-16">
       <Container>
-        <div className="grid gap-12 md:grid-cols-12 md:items-start">
-          <div className="md:col-span-4">
-            <Reveal>
-              <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
-                {eyebrow}
-              </div>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{title}</h2>
-            </Reveal>
-          </div>
-          <div className="md:col-span-8">
+        <div className="space-y-8">
+          <Reveal>
+            <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+              {eyebrow}
+            </div>
+            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">{title}</h2>
+          </Reveal>
+          <div>
             <div className="overflow-hidden rounded-3xl border bg-card shadow-sm">
               {/* Header */}
               <div className="grid grid-cols-3 border-b bg-muted/40 px-5 py-3 text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
@@ -510,7 +257,7 @@ function TechSection({
   cards: readonly { eyebrow: string; title: string; desc: string }[];
 }) {
   return (
-    <section id="technologie" className="scroll-mt-28 py-20 md:py-28">
+    <section id="technologie" className="scroll-mt-28 py-12 md:py-16">
       <Container>
         <Reveal>
           <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
@@ -526,7 +273,7 @@ function TechSection({
         </div>
 
         {/* Cards */}
-        <div className="mt-10 grid gap-5 sm:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:grid-cols-3">
           {cards.map((card, i) => (
             <motion.div
               key={card.title}
@@ -579,7 +326,6 @@ export function ProductsScrollytelling() {
       tagline: digiSkin.tagline,
       pitch: digiSkin.pitch,
       benefits: digiSkin.benefits,
-      illustrationLeft: true,
       href: productPath("digi-skin"),
       seeLabel: p.see,
       demoLabel: p.demo,
@@ -591,7 +337,6 @@ export function ProductsScrollytelling() {
       tagline: digiFeet.tagline,
       pitch: digiFeet.pitch,
       benefits: digiFeet.benefits,
-      illustrationLeft: false,
       href: productPath("digi-feet"),
       seeLabel: p.see,
       demoLabel: p.demo,
@@ -601,73 +346,42 @@ export function ProductsScrollytelling() {
   return (
     <div className="relative">
 
-      {/* ── Hero dark ──────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#050505] py-24 md:py-32">
-        {/* Background texture */}
+      {/* ── Hero compact ─────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-primary-dark py-12 md:py-16">
         <div className="pointer-events-none absolute inset-0 [background:radial-gradient(60%_50%_at_50%_0%,hsl(var(--brand-purple)/0.15),transparent)]" />
         <Container>
-          <div className="grid items-center gap-12 md:grid-cols-2">
-            <div className="text-white">
-              <motion.div
-                className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-white/60"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                {p.badge}
-              </motion.div>
-              <motion.h1
-                className="mt-5 text-4xl font-extrabold leading-tight tracking-tight md:text-6xl"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.1 }}
-              >
-                {p.title}
-              </motion.h1>
-              <motion.p
-                className="mt-5 text-base leading-relaxed text-white/50 md:text-lg"
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                {p.desc}
-              </motion.p>
-              <motion.div
-                className="mt-8 flex flex-wrap gap-3"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.3 }}
-              >
-                <Link
-                  href="#digi-skin"
-                  className="inline-flex h-11 items-center rounded-full bg-white px-5 text-sm font-extrabold text-[#050505] transition hover:bg-white/90"
-                >
-                  Digi&apos;Skin
-                </Link>
-                <Link
-                  href="#digi-feet"
-                  className="inline-flex h-11 items-center rounded-full border border-white/20 px-5 text-sm font-extrabold text-white/80 transition hover:bg-white/10"
-                >
-                  Digi&apos;Feet
-                </Link>
-              </motion.div>
+          <motion.div
+            className="text-white"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+          >
+            <div className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-bold text-white/60">
+              {p.badge}
             </div>
-            <div className="h-56 w-full md:h-72">
-              <HeroDualVisual />
-            </div>
-          </div>
+            <h1 className="mt-4 text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">
+              {p.title}
+            </h1>
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-white/50">
+              {p.desc}
+            </p>
+          </motion.div>
         </Container>
       </section>
 
       {/* ── Digi'Skin ─────────────────────────────────────────────── */}
-      <div id="digi-skin" className="scroll-mt-16 border-b">
-        <StickyProductSection beat={beats[0]} />
-      </div>
+      <section id="digi-skin" className="scroll-mt-16 border-b py-12 md:py-16">
+        <Container>
+          <ProductRow beat={beats[0]} imageContain />
+        </Container>
+      </section>
 
       {/* ── Digi'Feet ─────────────────────────────────────────────── */}
-      <div id="digi-feet" className="scroll-mt-16 border-b bg-secondary">
-        <StickyProductSection beat={beats[1]} />
-      </div>
+      <section id="digi-feet" className="scroll-mt-16 border-b bg-secondary py-12 md:py-16">
+        <Container>
+          <ProductRow beat={beats[1]} imageContain />
+        </Container>
+      </section>
 
       {/* ── Comparatif ────────────────────────────────────────────── */}
       <ComparativeTable
@@ -688,7 +402,7 @@ export function ProductsScrollytelling() {
       />
 
       {/* ── CTA final ─────────────────────────────────────────────── */}
-      <section className="border-t bg-primary py-20 md:py-28">
+      <section className="border-t bg-primary py-14 md:py-20">
         <Container>
           <motion.div
             className="mx-auto max-w-xl text-center"
@@ -711,7 +425,7 @@ export function ProductsScrollytelling() {
                 {p.demo}
               </Link>
               <Link
-                href={p.seeEvidence}
+                href="/clinique-ou-validation/"
                 className="inline-flex h-11 items-center justify-center rounded-full border border-primary-foreground/30 px-6 text-sm font-extrabold text-primary-foreground transition hover:bg-primary-foreground/10"
               >
                 {p.seeEvidence}

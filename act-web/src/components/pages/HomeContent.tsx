@@ -7,63 +7,12 @@ import { ButtonLink } from "@/components/ui/Button";
 import { Reveal } from "@/components/motion/Reveal";
 import { ParallaxMedia } from "@/components/motion/ParallaxMedia";
 import { HomePrinciplesScrollytelling } from "@/components/home/HomePrinciplesScrollytelling";
+import { ProfilNavigation } from "@/components/home/ProfilNavigation";
 import { useLanguage } from "@/context/LanguageContext";
 import { productPath } from "@/lib/productPaths";
 import { ProductTeam } from "../products/ProductTeam";
 import { getProductBySlug } from "@/data/products";
 import { ProductTeamforhome } from "../products/ProductTeamforhome";
-
-/* ─── Product card ───────────────────────────────────────────────── */
-
-function ProductCard({
-  imageSrc,
-  imageAlt,
-  eyebrow,
-  title,
-  desc,
-  href,
-  discoverLabel,
-}: {
-  imageSrc: string;
-  imageAlt: string;
-  eyebrow: string;
-  title: string;
-  desc: string;
-  href: string;
-  discoverLabel: string;
-}) {
-  return (
-    <motion.div
-      className="group flex flex-col overflow-hidden rounded-3xl border bg-card shadow-sm"
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.25, ease: "easeOut" }}
-    >
-      {/* Image */}
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-        <Image
-          src={imageSrc}
-          alt={imageAlt}
-          fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-      </div>
-      {/* Content */}
-      <div className="flex flex-1 flex-col p-7">
-        <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
-          {eyebrow}
-        </div>
-        <h3 className="mt-2 text-2xl font-extrabold tracking-tight">{title}</h3>
-        <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-        <div className="mt-6">
-          <ButtonLink href={href} variant="ghost" size="sm">
-            {discoverLabel} →
-          </ButtonLink>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 /* ─── Team member card ───────────────────────────────────────────── */
 
@@ -117,7 +66,7 @@ export function HomeContent() {
         {/* Background image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/accroche.png"
+            src="/images/accroche.jpeg"
             alt={h.heroImageAlt}
             fill
             priority
@@ -130,47 +79,54 @@ export function HomeContent() {
         </div>
 
         {/* Hero text */}
-        <Container className="relative flex min-h-[90vh] flex-col justify-end pb-16 pt-32 md:justify-center md:pb-0 md:pt-0">
-          <div className="max-w-2xl space-y-5">
-            <Reveal>
-              <div className="inline-flex items-center rounded-full border border-foreground/20 bg-card/80 px-3 py-1 text-xs font-bold text-foreground/80 shadow-sm backdrop-blur-sm">
-                {h.badge}
+        <div className="absolute inset-x-0 bottom-0 flex items-end pb-6 px-8 md:pb-10 md:px-14" style={{ zIndex: 4 }}>
+          <div className="w-full">
+            <div className="rounded-2xl bg-background/70 px-8 py-6 backdrop-blur-sm">
+              <Reveal>
+                <p className="mb-3 text-[10px] font-bold tracking-[0.4em] text-foreground/50 uppercase">
+                  {h.badge}
+                </p>
+              </Reveal>
+              <div className="space-y-3">
+                <Reveal delay={0.08}>
+                  <h1 className="text-4xl font-extrabold leading-none tracking-tight md:text-6xl">
+                    {h.heroTitle}
+                  </h1>
+                </Reveal>
+                <Reveal delay={0.14}>
+                  <p className="text-lg font-semibold text-accent md:text-xl">
+                    {h.heroSubtitle}
+                  </p>
+                </Reveal>
+                <Reveal delay={0.2}>
+                  <p className="text-sm leading-relaxed text-foreground/75">
+                    {h.heroDesc}
+                  </p>
+                </Reveal>
+                <Reveal delay={0.28}>
+                  <div className="flex flex-wrap gap-3 pt-1">
+                    <ButtonLink href={productPath("digi-skin")} variant="secondary">
+                      {h.cta1}
+                    </ButtonLink>
+                    <ButtonLink href={productPath("digi-feet")} variant="secondary">
+                      {h.cta2}
+                    </ButtonLink>
+                    <ButtonLink href="/contact/" variant="primary">
+                      {h.cta3}
+                    </ButtonLink>
+                  </div>
+                </Reveal>
               </div>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <h1 className="text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">
-                {h.heroTitle}
-              </h1>
-            </Reveal>
-            <Reveal delay={0.14}>
-              <p className="text-xl font-semibold text-accent md:text-2xl">
-                {h.heroSubtitle}
-              </p>
-            </Reveal>
-            <Reveal delay={0.2}>
-              <p className="text-base leading-relaxed text-foreground/75 md:text-lg">
-                {h.heroDesc}
-              </p>
-            </Reveal>
-            <Reveal delay={0.28}>
-              <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap sm:items-center">
-                <ButtonLink href={productPath("digi-skin")} variant="primary">
-                  {h.cta1}
-                </ButtonLink>
-                <ButtonLink href={productPath("digi-feet")} variant="secondary">
-                  {h.cta2}
-                </ButtonLink>
-                <ButtonLink href="/contact/" variant="secondary">
-                  {h.cta3}
-                </ButtonLink>
-              </div>
-            </Reveal>
+            </div>
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* ── 2. Nos solutions ────────────────────────────────────── */}
-      <section id="solutions" className="scroll-mt-28 py-16 md:py-24">
+      {/* ── 2. Navigation par profils ───────────────────────────── */}
+      <ProfilNavigation />
+
+      {/* ── 3. Nos solutions ────────────────────────────────────── */}
+      <section id="solutions" className="scroll-mt-28 py-12 md:py-16">
         <Container>
           <Reveal>
             <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
@@ -184,71 +140,115 @@ export function HomeContent() {
             </p>
           </Reveal>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            <Reveal delay={0.08}>
-              <ProductCard
-                imageSrc="/sequence/prosthesis_120.jpg"
-                imageAlt="Digi'Skin — prothèse avec retour haptique"
-                eyebrow={h.digiSkinEyebrow}
-                title="Digi'Skin"
-                desc={h.digiSkinShort}
-                href={productPath("digi-skin")}
-                discoverLabel={h.discoverBtn}
+          {/* Digi'Skin row */}
+          <div className="mt-10 grid items-center gap-10 border-t pt-10 md:grid-cols-2">
+            <motion.div
+              className="space-y-4"
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55 }}
+            >
+              <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+                {h.digiSkinEyebrow}
+              </div>
+              <h3 className="text-3xl font-extrabold tracking-tight md:text-4xl">Digi&apos;Skin</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{h.digiSkinShort}</p>
+              <ButtonLink href={productPath("digi-skin")} variant="ghost" size="sm">
+                {h.discoverBtn} →
+              </ButtonLink>
+            </motion.div>
+            <motion.div
+              className="overflow-hidden rounded-2xl"
+              initial={{ opacity: 0, scale: 0.97 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+            >
+              <Image
+                src="/images/digi-skin/hero-legende2.jpeg"
+                alt="Digi'Skin — prothèse avec retour haptique"
+                width={800}
+                height={600}
+                style={{ width: "100%", height: "auto", transform: "scale(1.12)", transformOrigin: "center" }}
+                className="rounded-2xl"
+                sizes="(min-width: 768px) 50vw, 100vw"
               />
-            </Reveal>
-            <Reveal delay={0.16}>
-              <ProductCard
-                imageSrc="/sequence-feet/insole_120.jpg"
-                imageAlt="Digi'Feet — semelle connectée"
-                eyebrow={h.digiFeetEyebrow}
-                title="Digi'Feet"
-                desc={h.digiFeetShort}
-                href={productPath("digi-feet")}
-                discoverLabel={h.discoverBtn}
+            </motion.div>
+          </div>
+
+          {/* Digi'Feet row */}
+          <div className="mt-10 grid items-center gap-10 border-t pt-10 md:grid-cols-2">
+            <motion.div
+              className="space-y-4"
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55 }}
+            >
+              <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+                {h.digiFeetEyebrow}
+              </div>
+              <h3 className="text-3xl font-extrabold tracking-tight md:text-4xl">Digi&apos;Feet</h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">{h.digiFeetShort}</p>
+              <ButtonLink href={productPath("digi-feet")} variant="ghost" size="sm">
+                {h.discoverBtn} →
+              </ButtonLink>
+            </motion.div>
+            <motion.div
+              className="overflow-hidden rounded-2xl"
+              initial={{ opacity: 0, scale: 0.97 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.1 }}
+            >
+              <Image
+                src="/images/digi-feet/DigiFeet_Legende2.jpeg"
+                alt="Digi'Feet — semelle connectée"
+                width={800}
+                height={600}
+                style={{ width: "100%", height: "auto" }}
+                className="rounded-2xl"
+                sizes="(min-width: 768px) 50vw, 100vw"
               />
-            </Reveal>
+            </motion.div>
           </div>
         </Container>
       </section>
 
-      {/* ── 3. Qui nous sommes / Équipe ─────────────────────────── */}
-      <section id="equipe" className="scroll-mt-28 border-y bg-secondary py-16 md:py-24">
+      {/* ── 4. Qui nous sommes / Équipe ─────────────────────────── */}
+      <section id="equipe" className="scroll-mt-28 border-y bg-secondary py-12 md:py-16">
         <Container>
-          <div className="grid gap-12 md:grid-cols-1 md:items-center">
           {team && (
-        <section className="border-t py-16 md:py-20">
-          <Container>
-            <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
-              {h.teamEyebrow}
-            </div>
-            <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
-              {h.teamTitle}
-            </h2>
-            <div className="mt-10">
-              <ProductTeamforhome
-                title={team.title}
-                members={team.members}
-                collaborations={team.collaborations}
-              />
-            </div>
-          </Container>
-        </section>
-      )}
-            
-
-          </div>
+            <>
+              <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+                {h.teamEyebrow}
+              </div>
+              <h2 className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl">
+                {h.teamTitle}
+              </h2>
+              <div className="mt-6">
+                <ProductTeamforhome
+                  title={team.title}
+                  members={team.members}
+                  collaborations={team.collaborations}
+                  compact
+                />
+              </div>
+            </>
+          )}
         </Container>
       </section>
 
-      {/* ── 4. Principes de conception (scrollytelling) ──────────── */}
+      {/* ── 5. Principes de conception (scrollytelling) ──────────── */}
       <HomePrinciplesScrollytelling
         eyebrow={h.principlesEyebrow}
         title={h.principlesTitle}
         principles={h.principles}
       />
 
-      {/* ── 5. CTA final ────────────────────────────────────────── */}
-      <section className="bg-primary py-20 md:py-28">
+      {/* ── 6. CTA final ────────────────────────────────────────── */}
+      <section className="bg-primary py-14 md:py-20">
         <Container>
           <motion.div
             className="mx-auto max-w-2xl text-center"

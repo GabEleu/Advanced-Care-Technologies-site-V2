@@ -20,9 +20,9 @@ export function ProductDownloads({
   if (!items.length) return null;
 
   return (
-    <section className="border-y bg-secondary py-16 md:py-20">
+    <section className="border-y bg-secondary py-12 md:py-16">
       <ProductSectionHeader eyebrow="Ressources" title={title} description={description} />
-      <Container className="mt-10">
+      <Container className="mt-8">
         <div className="grid gap-4 md:grid-cols-2">
           {items.map((it) => (
             <div key={it.href} className="rounded-3xl border bg-card p-7 shadow-sm">

@@ -15,7 +15,7 @@ export function ProductCTA({
   secondary?: ProductCTAT;
 }) {
   return (
-    <section className="border-t bg-secondary py-16 md:py-20">
+    <section className="border-t bg-secondary py-12 md:py-16">
       <Container>
         <div className="rounded-3xl border bg-card p-8 shadow-sm md:p-10">
           <div className="grid gap-8 md:grid-cols-12 md:items-center">

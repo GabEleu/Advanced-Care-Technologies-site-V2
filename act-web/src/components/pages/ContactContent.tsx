@@ -11,7 +11,7 @@ export function ContactContent() {
   return (
     <div>
       <section className="border-b">
-        <Container className="py-16 md:py-20">
+        <Container className="py-12 md:py-16">
           <div className="max-w-3xl">
             <div className="inline-flex w-fit items-center rounded-full border bg-card px-3 py-1 text-xs font-extrabold text-foreground/80 shadow-sm">
               {c.badge}
@@ -22,7 +22,7 @@ export function ContactContent() {
         </Container>
       </section>
 
-      <section className="py-16 md:py-20">
+      <section className="py-12 md:py-16">
         <Container>
           <div className="grid gap-10 md:grid-cols-12 md:items-start">
             <div className="md:col-span-7">
@@ -45,7 +45,7 @@ export function ContactContent() {
                   </div>
                   <div className="text-xs leading-relaxed">{c.disclaimer}</div>
                 </div>
-                <div className="mt-6 rounded-2xl bg-muted p-4 text-xs leading-relaxed text-muted-foreground">
+                <div className="mt-6 -mx-4 rounded-2xl bg-muted px-4 py-3 text-xs leading-relaxed text-muted-foreground">
                   {c.privacyNote}
                 </div>
               </div>

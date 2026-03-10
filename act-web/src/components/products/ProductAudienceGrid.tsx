@@ -12,14 +12,14 @@ export function ProductAudienceGrid({
   audiences: ProductAudience[];
 }) {
   return (
-    <section className="py-16 md:py-20">
+    <section className="py-12 md:py-16">
       <ProductSectionHeader eyebrow="Pour qui ?" title={title} description={description} />
-      <Container className="mt-10">
-        <div className="grid gap-6 md:grid-cols-3">
+      <Container className="mt-8">
+        <div className="grid gap-5 md:grid-cols-3">
           {audiences.map((a) => (
-            <div key={a.title} className="rounded-3xl border bg-card p-7 shadow-sm">
+            <div key={a.title} className="flex h-full flex-col rounded-3xl border bg-card p-7 shadow-sm">
               <div className="text-lg font-extrabold tracking-tight">{a.title}</div>
-              <p className="mt-3 leading-relaxed text-muted-foreground">{a.description}</p>
+              <p className="mt-3 min-h-0 flex-1 leading-relaxed text-muted-foreground">{a.description}</p>
             </div>
           ))}
         </div>

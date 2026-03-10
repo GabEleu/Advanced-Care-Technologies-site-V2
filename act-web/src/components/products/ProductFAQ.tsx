@@ -12,9 +12,9 @@ export function ProductFAQ({
   items: ProductFAQItem[];
 }) {
   return (
-    <section className="py-16 md:py-20">
+    <section className="py-12 md:py-16">
       <ProductSectionHeader eyebrow="FAQ" title={title} description={description} />
-      <Container className="mt-10">
+      <Container className="mt-8">
         <div className="space-y-3">
           {items.map((item) => (
             <details

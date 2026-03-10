@@ -12,13 +12,14 @@ export function CliniqueContent() {
 
   const digiSkin = getProductBySlug("digi-skin");
   const partnerLogos = digiSkin?.media?.partnerLogos ?? [];
+  const ecosystemLogos = digiSkin?.team?.collaborations?.logos ?? [];
 
   
 
   return (
     <div>
       <section className="border-b">
-        <Container className="py-16 md:py-20">
+        <Container className="py-12 md:py-16">
           <div className="max-w-3xl">
             <div className="inline-flex w-fit items-center rounded-full border bg-card px-3 py-1 text-xs font-extrabold text-foreground/80 shadow-sm">
               {ev.badge}
@@ -45,9 +46,9 @@ export function CliniqueContent() {
         </Container>
       </section>
 
-      <section className="py-16 md:py-20">
+      <section className="py-12 md:py-16">
         <Container>
-          <div className="grid gap-6 md:grid-cols-12 md:items-start">
+          <div className="grid gap-5 md:grid-cols-12 md:items-start">
             <div className="md:col-span-5">
               <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
                 {ev.methodEyebrow}
@@ -58,7 +59,7 @@ export function CliniqueContent() {
             </div>
             <div className="md:col-span-7">
               <div className="rounded-3xl border bg-card p-8 shadow-sm">
-                <ul className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+                <ul className="space-y-3 text-sm leading-relaxed text-muted-foreground text-center">
                   {ev.methodItems.map((item) => (
                     <li key={item.label}>
                       <span className="font-bold text-foreground/80">{item.label}</span>{" "}
@@ -66,7 +67,7 @@ export function CliniqueContent() {
                     </li>
                   ))}
                 </ul>
-                <div className="mt-6 rounded-2xl border bg-background p-5 text-xs leading-relaxed text-muted-foreground">
+                <div className="mt-6 rounded-2xl border bg-background p-5 text-xs leading-relaxed text-muted-foreground text-center">
                   {ev.disclaimer}
                 </div>
               </div>
@@ -77,7 +78,7 @@ export function CliniqueContent() {
 
       
       {partnerLogos.length > 0 && (
-  <section className="border-y bg-secondary py-16 md:py-20">
+  <section className="border-y bg-secondary py-12 md:py-16">
     <Container>
       <div className="grid gap-10 md:grid-cols-12 md:items-start">
         
@@ -89,14 +90,11 @@ export function CliniqueContent() {
           <h2 className="mt-3 text-2xl font-extrabold tracking-tight md:text-3xl">
             {ev.partnersTitle}
           </h2>
-          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-            {ev.partnersDesc}
-          </p>
         </div>
 
         {/* Cards droite */}
         <div className="md:col-span-7">
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-5 sm:grid-cols-2">
             {partnerLogos.map((logo) => (
               <div
                 key={logo.src}
@@ -134,9 +132,41 @@ export function CliniqueContent() {
   </section>
 )}
 
-      <section className="py-16 md:py-20">
+      {ecosystemLogos.length > 0 && (
+        <section className="border-y bg-secondary py-12 md:py-16">
+          <Container>
+            <div className="grid gap-10 md:grid-cols-12 md:items-start">
+              <div className="md:col-span-5">
+                <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+                  {ev.ecoEyebrow}
+                </div>
+                <h2 className="mt-3 text-2xl font-extrabold tracking-tight md:text-3xl">
+                  {digiSkin?.team?.collaborations?.title ?? "Soutiens & réseaux"}
+                </h2>
+              </div>
+              <div className="md:col-span-7">
+                <div className="flex flex-wrap items-center gap-6">
+                  {ecosystemLogos.map((logo) => (
+                    <div key={logo.src} className="relative h-12 w-36">
+                      <Image
+                        src={logo.src}
+                        alt={logo.alt}
+                        fill
+                        className="object-contain opacity-70 transition hover:opacity-100"
+                        sizes="144px"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+      )}
+
+      <section className="py-12 md:py-16">
         <Container>
-          <div className="grid gap-10 md:grid-cols-12 md:items-start">
+          <div className="grid gap-8 md:grid-cols-12 md:items-start">
             <div className="md:col-span-5">
               <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
                 {ev.ethicsEyebrow}

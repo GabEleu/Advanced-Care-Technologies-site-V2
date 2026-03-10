@@ -12,14 +12,14 @@ export function ProductFeatureGrid({
   features: ProductFeature[];
 }) {
   return (
-    <section className="border-y bg-background/75 py-16 md:py-20">
+    <section className="border-y bg-background/75 py-12 md:py-16">
       <ProductSectionHeader eyebrow="Fonctionnalités" title={title} description={description} />
-      <Container className="mt-10">
-        <div className="grid gap-6 md:grid-cols-2">
+      <Container className="mt-8">
+        <div className="grid gap-5 md:grid-cols-2">
           {features.map((f) => (
-            <div key={f.title} className="rounded-3xl border bg-card p-7 shadow-sm">
+            <div key={f.title} className="flex h-full flex-col rounded-3xl border bg-card p-7 shadow-sm">
               <div className="text-xl font-bold tracking-tight">{f.title}</div>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{f.description}</p>
+              <p className="mt-3 min-h-0 flex-1 text-sm leading-relaxed text-muted-foreground">{f.description}</p>
             </div>
           ))}
         </div>

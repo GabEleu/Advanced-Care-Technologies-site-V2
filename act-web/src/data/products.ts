@@ -1,4 +1,4 @@
-﻿export type ProductSlug = "digi-skin" | "digi-feet";
+export type ProductSlug = "digi-skin" | "digi-feet";
 
 export type ProductCTA = {
   label: string;
@@ -126,20 +126,28 @@ export const products: Product[] = [
       },
       gallery: [
         {
-          src: "/legacy/digiskin-legacy/photos/prototype-main-table.png",
-          alt: "Prototype Digi’Skin posé sur table — vue d’ensemble du dispositif.",
+          src: "/images/digi-skin/beat-05-tactile.jpeg",
+          alt: "Digi'Skin — retour sensoriel haptique.",
         },
         {
-          src: "/legacy/digiskin-legacy/photos/bracelet-poignet-zoom.png",
-          alt: "Zoom sur le boîtier bracelet porté au poignet.",
+          src: "/images/digi-skin/beat-02-the-challenge.jpeg",
+          alt: "Digi'Skin — le défi de la prothèse bionique.",
         },
         {
-          src: "/legacy/digiskin-legacy/photos/capteur-bracelet-seul.png",
-          alt: "Capteur embarqué sur bracelet élastique — vue détaillée.",
+          src: "/images/digi-skin/beat-03-sensors.jpeg",
+          alt: "Digi'Skin — capteurs embarqués haute sensibilité.",
         },
         {
-          src: "/legacy/digiskin-legacy/photos/prototype-vue-laterale.png",
-          alt: "Vue latérale du prototype Digi’Skin avec capteurs de doigts.",
+          src: "/images/digi-skin/beat-04-ia-processing.jpeg",
+          alt: "Digi'Skin — traitement IA en temps réel.",
+        },
+        {
+          src: "/images/digi-skin/gallery-sensation-precises.jpeg",
+          alt: "Digi'Skin — sensations précises.",
+        },
+        {
+          src: "/images/digi-skin/beat-08-beyond-limb.jpeg",
+          alt: "Digi'Skin — au-delà du membre.",
         },
       ],
       partnerLogos: [
@@ -157,15 +165,15 @@ export const products: Product[] = [
     },
     benefits: [
       "Restaurer des sensations",
-      "Retrouver l’équilibre",
-      "Éviter douleurs et blessures",
+      "Améliorer l’appropriation des prothèses",
+      "Diminuer les douleurs fantômes",
       "Retour haptique non invasif, pensé pour l’usage quotidien",
       "Traitement temps réel et restitution synchronisée",
     ],
     mission: {
       title: "Notre mission est d’améliorer la qualité de vie et l’autonomie des patients",
       subtitle: "Avec Digi’Skin, nous visons à :",
-      cards: ["Restaurer des sensations", "Retrouver l’équilibre", "Éviter douleurs et blessures"],
+      cards: ["Restaurer des sensations", "Améliorer l’appropriation des prothèses", "Diminuer les douleurs fantômes"],
     },
     numbers: {
       title: "En chiffres",
@@ -218,7 +226,7 @@ export const products: Product[] = [
       {
         title: "Brassard de stimulation",
         description:
-          "Retour vibro-tactile multi-zones synchronisé avec les capteurs, pour soutenir la restitution.",
+          "Retour vibro-tactile multi-zones synchronisé avec les capteurs, permettant le retour sensoriel.",
       },
     ],
     downloads: [
@@ -231,12 +239,12 @@ export const products: Product[] = [
       {
         title: "Patients amputés",
         description:
-          "Pour viser un meilleur ressenti lors de l’usage d’une prothèse, dans un cadre d’accompagnement.",
+          "Pour sentir à nouveau, à travers sa prothèse."
       },
       {
         title: "Cliniciens & équipes de rééducation",
         description:
-          "Pour intégrer un dispositif de retour haptique dans des parcours et protocoles (sans promesse de diagnostic).",
+          "Pour intégrer un dispositif de retour haptique dans des parcours et protocoles.",
       },
       {
         title: "Prothésistes & partenaires",
@@ -251,7 +259,7 @@ export const products: Product[] = [
           name: "Gabriel ELEUTERIO",
           role: "CEO & cofondateur",
           qualifications:
-            "Ingénieur en Biotechnologie (Sup'Biotech) • ESME - Mastère Spécialisé en Numérique et Biotechnologie (Robotique) • Inventeur de la technologie ",
+            "<strong>Ingénieur en Biotechnologie</strong> (Sup'Biotech) • ESME - Mastère Spécialisé en Numérique et Biotechnologie (<strong>Robotique</strong>) • <strong>Inventeur</strong> de la technologie ",
           image: {
             src: "/legacy/digiskin-legacy/team/gabriel-eleuterio.png",
             alt: "Portrait de Gabriel ELEUTERIO",
@@ -261,7 +269,7 @@ export const products: Product[] = [
           name: "Manon Frajman",
           role: "COO & cofondatrice",
           qualifications:
-            " Product Manager et Clinical Project Manager dans des startups de dispositifs médicaux",
+            "<strong>Ingénieure en Biotechnologie</strong> (Sup'Biotech) • <strong>Product Manager</strong> et <strong>Clinical Project Manager</strong> dans des startups de dispositifs médicaux",
           image: {
             src: "/legacy/digiskin-legacy/team/manon-frajman.png",
             alt: "Portrait de Manon Frajman",
@@ -271,7 +279,7 @@ export const products: Product[] = [
           name: "Edward De Keating - Hart",
           role: "Chirurgien Orthopédiste & cofondateur",
           qualifications:
-            "Chirurgien Orthopédiste • Membre de la Société Française de Chirurgie Orthopédique et Traumatologique (SOFCOT) • Membre associé de la Société Française de Chirurgie de la Main (SFCM) • Expert des prothèses bioniques",
+            "<strong>Chirurgien Orthopédiste</strong> • Membre de la Société Française de Chirurgie Orthopédique et Traumatologique (<strong>SOFCOT</strong>) • Membre associé de la Société Française de Chirurgie de la Main (<strong>SFCM</strong>) • <strong>Expert des prothèses bioniques</strong>",
           image: {
             src: "/legacy/digiskin-legacy/team/edward-de-keating-hart.png",
             alt: "Portrait de Edward De Keating - Hart",
@@ -376,7 +384,7 @@ export const products: Product[] = [
     seo: {
       title: "Digi’Skin",
       description:
-        "Digi’Skin : dispositif non invasif de retour haptique visant à permettre aux personnes amputées de retrouver le sens du toucher au niveau de leur prothèse (sans promesse de diagnostic).",
+        "Digi’Skin : dispositif non invasif de retour haptique visant à permettre aux personnes amputées de retrouver le sens du toucher au niveau de leur prothèse.",
     },
   },
   {

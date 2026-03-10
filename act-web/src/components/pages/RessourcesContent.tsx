@@ -20,7 +20,7 @@ export function RessourcesContent() {
   return (
     <div>
       <section className="border-b">
-        <Container className="py-16 md:py-20">
+        <Container className="py-12 md:py-16">
           <div className="max-w-3xl">
             <div className="inline-flex w-fit items-center rounded-full border bg-card px-3 py-1 text-xs font-extrabold text-foreground/80 shadow-sm">
               {r.badge}
@@ -31,9 +31,9 @@ export function RessourcesContent() {
         </Container>
       </section>
 
-      <section className="py-16 md:py-20">
+      <section className="py-12 md:py-16">
         <Container>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-5 md:grid-cols-2">
             <div className="rounded-3xl border bg-card p-8 shadow-sm">
               <div className="text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
                 {r.productsEyebrow}
