@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -44,6 +45,7 @@ function NavLink({
 export function MainNavigation() {
   const pathname = usePathname() || "/";
   const { lang, t, toggle } = useLanguage();
+  const [menuOpen, setMenuOpen] = useState(false);
 
   function closeDetails(e: React.MouseEvent) {
     const details = (e.currentTarget as HTMLElement).closest("details");
@@ -78,7 +80,8 @@ export function MainNavigation() {
   ] as const;
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur">
+    <>
+      <header className="fixed inset-x-0 top-0 z-50 border-b bg-background/80 backdrop-blur">
       <Container className="flex h-16 items-center gap-4">
         <Logo />
           <nav className="hidden flex-1 items-center justify-center gap-1 md:flex">
@@ -181,79 +184,16 @@ export function MainNavigation() {
             <span className={lang === "en" ? "text-foreground" : "text-foreground/40"}>EN</span>
           </button>
 
-          {/* Mobile menu */}
-          <details className="relative md:hidden">
-            <summary className="list-none rounded-full border bg-card px-4 py-2 text-sm font-extrabold text-foreground/80 shadow-sm transition hover:bg-muted hover:text-foreground ">
-              {t.nav.menu}
-            </summary>
-            <div className="absolute right-0 top-full mt-2 w-[92vw] max-w-sm rounded-2xl border bg-card p-2 shadow-lg">
-              {links.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={cn(
-                    "block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted",
-                    isActive(pathname, l.href) && "bg-muted",
-                  )}
-                >
-                  {l.label}
-                </Link>
-              ))}
-
-              <div className="mt-2 border-t px-3 py-2 text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
-                {t.nav.products}
-              </div>
-              {localizedProducts.map((p) => (
-                <Link
-                  key={p.slug}
-                  href={productPath(p.slug)}
-                  className="block rounded-xl px-3 py-3 transition hover:bg-muted"
-                >
-                  <div className="text-sm font-extrabold tracking-tight">{p.name}</div>
-                  <div className="mt-1 text-xs text-muted-foreground">{p.tagline}</div>
-                </Link>
-              ))}
-
-              <div className="mt-2 border-t px-3 py-2 text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
-                {t.nav.profiles}
-              </div>
-              {profileLinks.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  className={cn(
-                    "block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted",
-                    isActive(pathname, l.href) && "bg-muted",
-                  )}
-                >
-                  {l.label}
-                </Link>
-              ))}
-
-              <div className="mt-2 border-t p-2">
-                {/* Language toggle in mobile menu */}
-                <button
-                  type="button"
-                  onClick={toggle}
-                  className="mb-2 flex h-10 w-full items-center justify-center gap-2 rounded-full border bg-card text-sm font-extrabold text-foreground/70 transition hover:bg-muted"
-                >
-                  <span className={lang === "fr" ? "text-foreground" : "text-foreground/40"}>
-                    FR
-                  </span>
-                  <span className="text-foreground/30">|</span>
-                  <span className={lang === "en" ? "text-foreground" : "text-foreground/40"}>
-                    EN
-                  </span>
-                </button>
-                <Link
-                  href="/contact/"
-                  className="inline-flex h-10 w-full items-center justify-center rounded-full bg-primary px-4 text-sm font-extrabold text-primary-foreground shadow-sm transition hover:bg-primary/90"
-                >
-                  {t.nav.demo}
-                </Link>
-              </div>
-            </div>
-          </details>
+          {/* Mobile menu button */}
+          <button
+            type="button"
+            className="rounded-full border bg-card px-4 py-2 text-sm font-extrabold text-foreground/80 shadow-sm transition hover:bg-muted hover:text-foreground md:hidden"
+            onClick={() => setMenuOpen((v) => !v)}
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          >
+            {menuOpen ? t.nav.close ?? "Fermer" : t.nav.menu}
+          </button>
 
           <Link
             href="/contact/"
@@ -263,6 +203,82 @@ export function MainNavigation() {
           </Link>
         </div>
       </Container>
-    </header>
+      </header>
+
+      {/* Overlay menu mobile — plein écran sous le header */}
+      {menuOpen && (
+        <div
+          className="fixed inset-x-0 z-40 overflow-y-auto bg-card shadow-xl md:hidden"
+          style={{ top: "64px", bottom: 0 }}
+        >
+          <div className="p-4">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setMenuOpen(false)}
+                className={cn(
+                  "block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted",
+                  isActive(pathname, l.href) && "bg-muted",
+                )}
+              >
+                {l.label}
+              </Link>
+            ))}
+
+            <div className="mt-2 border-t px-3 py-2 text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+              {t.nav.products}
+            </div>
+            {localizedProducts.map((p) => (
+              <Link
+                key={p.slug}
+                href={productPath(p.slug)}
+                onClick={() => setMenuOpen(false)}
+                className="block rounded-xl px-3 py-3 transition hover:bg-muted"
+              >
+                <div className="text-sm font-extrabold tracking-tight">{p.name}</div>
+                <div className="mt-1 text-xs text-muted-foreground">{p.tagline}</div>
+              </Link>
+            ))}
+
+            <div className="mt-2 border-t px-3 py-2 text-xs font-extrabold uppercase tracking-widest text-muted-foreground">
+              {t.nav.profiles}
+            </div>
+            {profileLinks.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={() => setMenuOpen(false)}
+                className={cn(
+                  "block rounded-xl px-3 py-3 text-sm font-extrabold transition hover:bg-muted",
+                  isActive(pathname, l.href) && "bg-muted",
+                )}
+              >
+                {l.label}
+              </Link>
+            ))}
+
+            <div className="mt-2 border-t p-2">
+              <button
+                type="button"
+                onClick={toggle}
+                className="mb-2 flex h-10 w-full items-center justify-center gap-2 rounded-full border bg-card text-sm font-extrabold text-foreground/70 transition hover:bg-muted"
+              >
+                <span className={lang === "fr" ? "text-foreground" : "text-foreground/40"}>FR</span>
+                <span className="text-foreground/30">|</span>
+                <span className={lang === "en" ? "text-foreground" : "text-foreground/40"}>EN</span>
+              </button>
+              <Link
+                href="/contact/"
+                onClick={() => setMenuOpen(false)}
+                className="inline-flex h-10 w-full items-center justify-center rounded-full bg-primary px-4 text-sm font-extrabold text-primary-foreground shadow-sm transition hover:bg-primary/90"
+              >
+                {t.nav.demo}
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
