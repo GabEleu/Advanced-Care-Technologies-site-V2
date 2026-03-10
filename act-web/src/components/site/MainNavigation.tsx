@@ -192,7 +192,7 @@ export function MainNavigation() {
             aria-expanded={menuOpen}
             aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           >
-            {menuOpen ? t.nav.close ?? "Fermer" : t.nav.menu}
+            {menuOpen ? "Fermer" : t.nav.menu}
           </button>
 
           <Link
