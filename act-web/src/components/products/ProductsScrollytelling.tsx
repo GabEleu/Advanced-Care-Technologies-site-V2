@@ -87,7 +87,7 @@ function ProductRow({ beat, imageContain = false }: { beat: ProductBeat; imageCo
             alt={beat.name}
             width={800}
             height={600}
-            style={{ width: "100%", height: "auto", transform: "scale(1.12)", transformOrigin: "center" }}
+            style={{ width: "100%", height: "auto" }}
             className="rounded-2xl"
             sizes="(min-width: 768px) 50vw, 100vw"
           />

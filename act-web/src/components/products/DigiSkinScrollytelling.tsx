@@ -442,7 +442,7 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
         style={{ height: `${SCROLL_HEIGHT}vh` }}
         className="relative"
       >
-        <div className="sticky top-0 h-screen overflow-hidden bg-primary-dark">
+        <div className="sticky top-0 h-[100dvh] overflow-hidden bg-primary-dark">
 
           {/* Beat images/video with cross-dissolve + Ken Burns */}
           {BEAT_IMAGES.map((src, i) => {
@@ -465,7 +465,7 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
                     loop
                     muted
                     playsInline
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 h-full w-full portrait:object-contain landscape:object-cover"
                   />
                 ) : (
                   <div
@@ -477,7 +477,7 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
                       src={src!}
                       alt=""
                       fill
-                      className="object-cover"
+                      className="portrait:object-contain landscape:object-cover"
                       priority={i === 0}
                       sizes="100vw"
                     />
