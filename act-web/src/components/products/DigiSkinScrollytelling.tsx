@@ -359,10 +359,23 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
 
   const isWheelControlledRef = useRef(false);
   const beatIndexRef = useRef(0);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   /* ── keep beatIndexRef in sync ── */
   useEffect(() => {
     beatIndexRef.current = beatIndex;
+  }, [beatIndex]);
+
+  /* ── contrôle explicite de la vidéo sur mobile ── */
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (beatIndex === BEAT_VIDEO_INDEX) {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    } else {
+      video.pause();
+    }
   }, [beatIndex]);
 
   /* ── wheel: discrete steps ── */
@@ -460,11 +473,12 @@ export function DigiSkinScrollytelling({ product }: { product: Product }) {
               >
                 {isVideo ? (
                   <video
+                    ref={videoRef}
                     src={BEAT_VIDEO_SRC}
-                    autoPlay
                     loop
                     muted
                     playsInline
+                    preload="auto"
                     className="absolute inset-0 h-full w-full portrait:object-contain landscape:object-cover"
                   />
                 ) : (
